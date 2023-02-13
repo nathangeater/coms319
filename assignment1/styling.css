@@ -11,4 +11,8 @@
 }
 .header{
     background-color:lightskyblue;
+    background: linear-gradient(to top, lightskyblue, rgb(135, 170, 200));
+}
+.main{
+    background-color: aquamarine;
 }
