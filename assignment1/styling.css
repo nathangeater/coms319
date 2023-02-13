@@ -1,0 +1,14 @@
+.webtitle{
+    font-size: 50px;
+    text-align: center;
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.header{
+    background-color:lightskyblue;
+}
