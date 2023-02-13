@@ -1,0 +1,39 @@
+.webtitle {
+    font-size: 50px;
+    text-align: center;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.header {
+    background-color: lightskyblue;
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179));
+    /* min-width: auto; */
+}
+
+.background {
+    background: radial-gradient(farthest-corner at 20% 30%, lightskyblue, rgb(127, 215, 212), rgb(135, 170, 200)) !important;
+}
+
+.card-border {
+    border-color: black;
+    border-width: 2px !important;
+}
+
+.footer{
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179)) !important;
+    border-style: solid;
+    border-color: black !important;
+    border-width: 0px !important;
+    border-top-width: 1px !important;
+    color: black !important;
+    text-rendering: optimizeLegibility;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
