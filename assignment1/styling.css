@@ -11,8 +11,8 @@
 }
 .header{
     background-color:lightskyblue;
-    background: linear-gradient(to top, lightskyblue, rgb(135, 170, 200));
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179));
 }
-.main{
-    background-color: aquamarine;
+.background{
+    background: radial-gradient(farthest-corner at 20% 30%, lightskyblue, rgb(127, 215, 212), rgb(135, 170, 200)) !important;
 }
