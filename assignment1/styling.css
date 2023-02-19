@@ -1,6 +1,7 @@
 .webtitle {
     font-size: 50px;
     text-align: center;
+    color: black;
 }
 
 .bd-placeholder-img {
@@ -44,8 +45,8 @@
 
 .details-imgs {
     position: relative;
-    left: 80%;
-    max-height: 500px;
+    left: 20vw;
+    max-height: 50vh;
 }
 
 .details-header-txt {
@@ -68,4 +69,36 @@
 .info-grid-text {
     text-align: center;
     border-bottom: 2px solid black;
+}
+
+#about-header {
+    position: relative;
+    top: 25vh;
+    color: aliceblue;
+}
+
+#about-subtitle {
+    position: relative;
+    top: 25vh;
+    color:black;
+}
+
+#about-background {
+    background: radial-gradient(farthest-corner at 20% 30%, lightgray, grey, slategrey);
+}
+
+#credits-header {
+    color: black;
+    position: absolute;
+    top: 33vh;
+    left: 12vw;
+}
+
+.credits-text {
+    text-align: left;
+    color: black;
+    font-size: x-large;
+    position: absolute;
+    top: 42vh;
+    left: 12vw;
 }
