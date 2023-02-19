@@ -86,3 +86,19 @@
 #about-background {
     background: radial-gradient(farthest-corner at 20% 30%, lightgray, grey, slategrey);
 }
+
+#credits-header {
+    color: black;
+    position: absolute;
+    top: 33vh;
+    left: 12vw;
+}
+
+.credits-text {
+    text-align: left;
+    color: black;
+    font-size: x-large;
+    position: absolute;
+    top: 42vh;
+    left: 12vw;
+}
