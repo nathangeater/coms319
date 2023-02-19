@@ -101,4 +101,5 @@
     position: absolute;
     top: 42vh;
     left: 12vw;
+    max-width: 75vw;
 }
