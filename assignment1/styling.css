@@ -1,6 +1,7 @@
 .webtitle {
     font-size: 50px;
     text-align: center;
+    color: black;
 }
 
 .bd-placeholder-img {
@@ -68,4 +69,20 @@
 .info-grid-text {
     text-align: center;
     border-bottom: 2px solid black;
+}
+
+#about-header {
+    position: relative;
+    top: 25vh;
+    color: aliceblue;
+}
+
+#about-subtitle {
+    position: relative;
+    top: 25vh;
+    color:black;
+}
+
+#about-background {
+    background: radial-gradient(farthest-corner at 20% 30%, lightgray, grey, slategrey);
 }
