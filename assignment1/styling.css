@@ -90,7 +90,7 @@
 #credits-header {
     color: black;
     position: absolute;
-    top: 33vh;
+    top: 25vh;
     left: 12vw;
 }
 
@@ -99,7 +99,13 @@
     color: black;
     font-size: x-large;
     position: absolute;
-    top: 42vh;
+    top: 35vh;
     left: 12vw;
     max-width: 75vw;
+}
+
+#sources-text{
+    font-family: 'Times New Roman';
+    font-size: 12pt;
+    line-height: 2;
 }
