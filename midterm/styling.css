@@ -1,0 +1,111 @@
+.webtitle {
+    font-size: 50px;
+    text-align: center;
+    color: black;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.header {
+    background-color: lightskyblue;
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179));
+}
+
+.background {
+    background: radial-gradient(farthest-corner at 20% 30%, lightskyblue, rgb(127, 215, 212), rgb(135, 170, 200)) !important;
+}
+
+.card-border {
+    border-color: black;
+    border-width: 2px !important;
+}
+
+.item-btns {
+    text-align: center;
+    min-width: 150px;
+}
+
+.footer {
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179)) !important;
+    border-style: solid;
+    border-color: black !important;
+    border-width: 0px !important;
+    border-top-width: 1px !important;
+    color: black !important;
+    text-rendering: optimizeLegibility;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+
+.details-imgs {
+    position: relative;
+    left: 20vw;
+    max-height: 50vh;
+}
+
+.details-header-txt {
+    float: right;
+    background: linear-gradient(to top, lightskyblue, rgb(117, 150, 179));
+}
+
+.info-grid {
+    margin-left: 25vw;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 50vw;
+    margin-top: 100px;
+    border: 2px solid black;
+    margin-bottom: 100px;
+    background: lightgray;
+    row-gap: 25px;
+}
+
+.info-grid-text {
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+#about-header {
+    position: relative;
+    top: 25vh;
+    color: aliceblue;
+}
+
+#about-subtitle {
+    position: relative;
+    top: 25vh;
+    color:black;
+}
+
+#about-background {
+    background: radial-gradient(farthest-corner at 20% 30%, lightgray, grey, slategrey);
+}
+
+#credits-header {
+    color: black;
+    position: absolute;
+    top: 25vh;
+    left: 12vw;
+}
+
+.credits-text {
+    text-align: left;
+    color: black;
+    font-size: x-large;
+    position: absolute;
+    top: 35vh;
+    left: 12vw;
+    max-width: 75vw;
+}
+
+#sources-text{
+    font-family: 'Times New Roman';
+    font-size: 12pt;
+    line-height: 2;
+}
