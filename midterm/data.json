@@ -2,7 +2,9 @@
     "Game": [
         {
             "title": "Celeste",
-            "image": "",
+            "page": "./games/celeste.html",
+            "image": "./images/Celeste.jpg",
+            "imageAlt": "Celeste",
             "description": "\"Help Madeline survive her inner demons on her journey to the top of Celeste Mountain, in this super-tight, hand-crafted platformer from the creators of multiplayer classic TowerFall.\"",
             "releaseDate": "Jan 25, 2018",
             "developer": "Extremely OK Games, Ltd.",
@@ -13,7 +15,9 @@
         },
         {
             "title": "Portal 2",
-            "image": "",
+            "page": "./games/portal2.html",
+            "image": "./images/Portal2.jpg",
+            "imageAlt": "Portal 2",
             "description": "\"Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned the original Portal over 70 industry accolades and created a cult following.\"",
             "releaseDate": "Apr 18, 2011",
             "developer": "Valve",
@@ -24,7 +28,9 @@
         },
         {
             "title": "Risk of Rain 2",
-            "image": "",
+            "page": "./games/ror2.html",
+            "image": "./images/Risk_of_Rain_2.jpg",
+            "imageAlt": "Risk of Rain 2",
             "description": "\"Over a dozen handcrafted locales await, each packed with challenging monsters and enormous bosses that oppose your continued existence. Fight your way to the final boss and escape or continue your run indefinitely to see just how long you can survive. A unique scaling system means both you and your foes limitlessly increase in power over the course of a game.\"",
             "releaseDate": "Aug 11, 2020",
             "developer": "Hopoo Games",
@@ -35,7 +41,9 @@
         },
         {
             "title": "Terraria",
-            "image": "",
+            "page": "./games/terraria.html",
+            "image": "./images/Terraria.jpg",
+            "imageAlt": "Terraria",
             "description": "\"Dig, Fight, Explore, Build: The very world is at your fingertips as you fight for survival, fortune, and glory. Will you delve deep into cavernous expanses in search of treasure and raw materials with which to craft ever-evolving gear, machinery, and aesthetics? Perhaps you will choose instead to seek out ever-greater foes to test your mettle in combat? Maybe you will decide to construct your own city to house the host of mysterious allies you may encounter along your travels?\"",
             "releaseDate": "May 16, 2011",
             "developer": "Re-Logc",
@@ -46,7 +54,9 @@
         },
         {
             "title": "The Binding of Isaac: Rebirth",
-            "image": "",
+            "page": "./games/isaac.html",
+            "image": "./images/The_Binding_of_Isaac_Rebirth.jpg",
+            "imageAlt": "The Binding of Isaac Rebirth",
             "description": "\"When Isaac’s mother starts hearing the voice of God demanding a sacrifice be made to prove her faith, Isaac escapes into the basement facing droves of deranged enemies, lost brothers and sisters, his fears, and eventually his mother.\"",
             "releaseDate": "Nov 4, 2014",
             "developer": "Nicalis, Inc., Edmund McMillen",
@@ -57,13 +67,28 @@
         },
         {
             "title": "The Elder Scrolls V: Skyrim Special Edition",
-            "image": "",
+            "page": "./games/skyrim.html",
+            "image": "./images/The_Elder_Scrolls_V_Skyrim.png",
+            "imageAlt": "The Elder Scrolls V: Skyrim Special Edition",
             "description": "\"Winner of more than 200 Game of the Year Awards, Skyrim Special Edition brings the epic fantasy to life in stunning detail. The Special Edition includes the critically acclaimed game and add-ons with all-new features like remastered art and effects, volumetric god rays, dynamic depth of field, screen-space reflections, and more. Skyrim Special Edition also brings the full power of mods to the PC and consoles. New quests, environments, characters, dialogue, armor, weapons and more – with Mods, there are no limits to what you can experience.\"",
             "releaseDate": "Oct 27, 2016",
             "developer": "Bethesda Games Studios",
             "publisher": "Bethesda Softworks",
             "platforms": "Windows, PlayStation 3, Xbox 360, PlayStation 4, Xbox One, Nintendo Switch, PlayStation 5, Xbox Series X/S",
             "genres": "Open World, RPG, Adventure, Singleplayer",
+            "#OfPlayers": "1"
+        },
+        {
+            "title": "Hollow Knight",
+            "page": "",
+            "image": "",
+            "imageAlt": "Hollow Knight",
+            "description": "",
+            "releaseDate": "",
+            "developer": "",
+            "publisher": "",
+            "platforms": "",
+            "genres": "",
             "#OfPlayers": "1"
         }
     ]
