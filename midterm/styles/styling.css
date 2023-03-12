@@ -55,15 +55,15 @@
 }
 
 .info-grid {
-    margin-left: 25vw;
+    margin-left: 12.5vw;
     display: grid;
     grid-template-columns: auto auto;
-    width: 50vw;
+    width: 75vw;
     margin-top: 100px;
     border: 2px solid black;
     margin-bottom: 100px;
     background: lightgray;
-    row-gap: 25px;
+    row-gap: 30px;
 }
 
 .info-grid-text {
