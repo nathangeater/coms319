@@ -10,7 +10,8 @@
             "publisher": "Matt Makes Games Inc.",
             "platforms": "Windows, Nintendo Switch, Playstation 4, Xbox One",
             "genres": "Precision Platformer, Difficult, Pixel Graphics, Indie",
-            "numOfPlayers": "1"
+            "numOfPlayers": "1",
+            "recommender": "Nathan"
         },
         {
             "title": "Portal 2",
@@ -22,7 +23,8 @@
             "publisher": "Valve",
             "platforms": "Windows, Mac OS X, Linux, Playstation 3, Xbox 360, Nintendo Switch",
             "genres": "Platformer, Puzzle, Dark Humor, First-Person",
-            "numOfPlayers": "1-2"
+            "numOfPlayers": "1-2",
+            "recommender": "Andrew"
         },
         {
             "title": "Risk of Rain 2",
@@ -34,7 +36,8 @@
             "publisher": "Gearbox Publishing",
             "platforms": "Windows, Nintendo Switch, PlayStation 4, Xbox One, Stadia",
             "genres": "Third-Person Shooter, Action Roguelike, Multiplayer",
-            "numOfPlayers": "1-4"
+            "numOfPlayers": "1-4",
+            "recommender": "Nathan"
         },
         {
             "title": "Terraria",
@@ -46,7 +49,8 @@
             "publisher": "Re-Logic",
             "platforms": "Windows, PlayStation 3, Xbox 360, PlayStation Vita, iOS, Android, Windows Phone, PlayStation 4, PlayStation 5, Xbox One, Xbox Series X/S, macOS, Linux, Nintendo 3DS, Wii U, Nintendo Switch, Stadia",
             "genres": "Open World Survival Craft, Sandbox, Survival, 2D",
-            "numOfPlayers": "1-16"
+            "numOfPlayers": "1-16",
+            "recommender": "Nathan"
         },
         {
             "title": "The Binding of Isaac: Rebirth",
@@ -58,7 +62,8 @@
             "publisher": "Nicalis, Inc.",
             "platforms": "Linux, Windows, mac OS X, New Nintendo 3DS, Wii U, Xbox One, iOS, Nintendo Switch, PlayStation 5, Xbox Series X/S",
             "genres": "Action Roguelike, Roguelike, Indie, Replay Value",
-            "numOfPlayers": "1"
+            "numOfPlayers": "1",
+            "recommender": "Nathan"
         },
         {
             "title": "The Elder Scrolls V: Skyrim Special Edition",
@@ -70,7 +75,8 @@
             "publisher": "Bethesda Softworks",
             "platforms": "Windows, PlayStation 3, Xbox 360, PlayStation 4, Xbox One, Nintendo Switch, PlayStation 5, Xbox Series X/S",
             "genres": "Open World, RPG, Adventure, Singleplayer",
-            "numOfPlayers": "1"
+            "numOfPlayers": "1",
+            "recommender": "Andrew"
         },
         {
             "title": "Hollow Knight",
@@ -82,7 +88,8 @@
             "publisher": "",
             "platforms": "",
             "genres": "",
-            "numOfPlayers": "1"
+            "numOfPlayers": "1",
+            "recommender": "Andrew"
         }
     ]
 }

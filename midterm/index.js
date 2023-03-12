@@ -85,6 +85,7 @@ function buildPage(data, name){
                 document.getElementById("platforms").textContent = game.platforms;
                 document.getElementById("genres").textContent = game.genres;
                 document.getElementById("numPlayers").textContent = game.numOfPlayers;
+                document.getElementById("recommended").textContent = game.recommender;
             }
         }
 
