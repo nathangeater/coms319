@@ -1,17 +1,24 @@
-function fetchCatalog() {
-    fetch('data.json')
+//Function to read game data from the JSON
+function fetchCatalog(file, type) {
+    fetch(file)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            buildCatalog(data);
+            //Testing which thing ot build with the data
+            if(type == 1){
+                buildCatalog(data);   
+            }
+            else{
+                buildPage(data, type);
+            }
         })
         .catch(function (err) {
             console.log('error:' + err);
         })
 }
 
-
+//Function to build the index's catalog from the gathered data
 function buildCatalog(data) {
     //Getting the catalog to put entries into it
     let catalog = document.getElementById("catalog");
@@ -32,7 +39,7 @@ function buildCatalog(data) {
             division1.className = "col";
             division2.className = "card shadow-sm card-border";
             image.src = game.image;
-            image.alt = game.imageAlt;
+            image.alt = game.title;
             division3.className = "card-body";
             paragraph.className = "card-text";
             paragraph.innerText = `${game.description}`;
@@ -53,5 +60,33 @@ function buildCatalog(data) {
             division4.appendChild(link);
             link.appendChild(button);
         }
+    }
+}
+
+function buildPage(data, name){
+
+    for (let type in data) {
+        for (let game of data[type]) {
+            //Checking for the correct game
+            if(game.title === name){
+                //Setting the image
+                let image = document.getElementById("image");
+                image.src = `.${game.image}`;
+                image.alt = game.title;
+
+                //Setting the title and description
+                document.getElementById("title").textContent = game.title;
+                document.getElementById("description").textContent = game.description;
+
+                //Setting all of the table information
+                document.getElementById("relDate").textContent = game.releaseDate;
+                document.getElementById("dev").textContent = game.developer;
+                document.getElementById("pub").textContent = game.publisher;
+                document.getElementById("platforms").textContent = game.platforms;
+                document.getElementById("genres").textContent = game.genres;
+                document.getElementById("numPlayers").textContent = game.numOfPlayers;
+            }
+        }
+
     }
 }
