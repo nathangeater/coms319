@@ -109,3 +109,8 @@
     font-size: 12pt;
     line-height: 2;
 }
+
+.gameplay-images{
+    margin: 15px;
+    max-height: 50vh;
+}

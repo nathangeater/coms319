@@ -86,6 +86,10 @@ function buildPage(data, name){
                 document.getElementById("genres").textContent = game.genres;
                 document.getElementById("numPlayers").textContent = game.numOfPlayers;
                 document.getElementById("recommended").textContent = game.recommender;
+                document.getElementById("image2").src = `.${game.image2}`;
+                document.getElementById("image2").alt = `${game.title} Gameplay`;
+                document.getElementById("image3").src = `.${game.image3}`;
+                document.getElementById("image3").alt = `${game.title} Gameplay 2`;
             }
         }
 
