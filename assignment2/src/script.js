@@ -1,19 +1,18 @@
 import logo from './logo.png';
 import './App.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Products from './products.json';
 
 export const App = () => {
   console.log("Step 1 : After reading file :");
 
-  //Defines the categories used to filtre the products
+  //All State Variables
   const Categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
-
   const [ProductsCategory, setProductsCategory] = useState(Products);
-
   const [query, setQuery] = useState('');
-
   const [showCart, setShowCart] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
 
   //Deals with handling the click functionality of the category buttons
   function handleClick(tag) {
@@ -38,9 +37,51 @@ export const App = () => {
     setShowCart(!showCart);
   }
 
+  //Counts products in the cart of the same id
+  function howManyofThis(id) {
+    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    return hmot.length;
+  }
+
+  //Adds the product to the cart
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+  };
+
+  //Removes the product from the cart
+  const removeFromCart = (el) => {
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+    setCart(hardCopy);
+  }
+
+  //Function used to list the items on the cart screen
+  const listItems = Products.map((el) => (
+    // PRODUCT
+    <div class="row border-top border-bottom" key={el.id}>
+      <div class="row main align-items-center">
+        <div class="col-2">
+          <img class="img-fluid" src={el.image} />
+        </div>
+        <div class="col">
+          <div class="row text-muted">{el.title}</div>
+          <div class="row">{el.category}</div>
+        </div>
+        <div class="col">
+          <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
+          <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+        </div>
+        <div class="col">
+          ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
+        </div>
+      </div>
+    </div>
+  ));
+
   //Returns the stuff to render
   return (
     <body>
+      {/* Product Page */}
       {!showCart && <div className="flex fixed flex-row" id='top_catalog'>
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
@@ -52,15 +93,7 @@ export const App = () => {
             <div className="py-10">
               {/* Cart Button */}
               <button className="inline-block bg-amber-600 rounded-full px-3 py-1
-               text-sm font-semibold text-gray-700 mr-2 mt-2">View Cart</button>
-
-
-              {/* Cart Button */}
-              <button className="inline-block bg-amber-600 rounded-full px-3 py-1
-               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Test</button>
-
-
-
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>View Cart</button>
               {/* Search Bar */}
               <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
@@ -80,9 +113,37 @@ export const App = () => {
           {render_products(ProductsCategory)}
         </div>
       </div>}
+      {/* Shopping Cart Page */}
       {showCart && <div id='top_cart'>
-        <p>Test</p>
-
+        <div>
+          STORE SE/ComS319
+          <div class="card">
+            <div class="row">
+              {/* HERE, IT IS THE SHOPING CART */}
+              <div class="col-md-8 cart">
+                <div class="title">
+                  <div class="row">
+                    <div class="col">
+                      <h4>
+                        <b>319 Shopping Cart</b>
+                      </h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">
+                      Products selected {cart.length}
+                    </div>
+                  </div>
+                </div>
+                <div>{listItems}</div>
+              </div>
+              <div class="float-end">
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Order total:</span>
+                  <span class="lead fw-normal">${cartTotal}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>}
     </body>
   );
