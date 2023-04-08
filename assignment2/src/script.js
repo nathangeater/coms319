@@ -13,6 +13,8 @@ export const App = () => {
 
   const [query, setQuery] = useState('');
 
+  const [showCart, setShowCart] = useState(false);
+
   //Deals with handling the click functionality of the category buttons
   function handleClick(tag) {
     let filtered = Products.filter(cat => cat.category === tag);
@@ -31,39 +33,58 @@ export const App = () => {
     setProductsCategory(results);
   }
 
+  //Hides the catalog and goes to the cart page
+  function handleShowHideCart() {
+    setShowCart(!showCart);
+  }
+
   //Returns the stuff to render
   return (
-    <div className="flex fixed flex-row">
-      <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
-        <img className="w-full" src={logo} alt="Sunset in the mountains" />
-        <div className="px-6 py-4">
-          <h1 className="text-3xl mb-2 font-bold text-white"> Product Catalog App </h1>
-          <p className="text-gray-700 text-white">
-            by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
-          </p>
-          <div className="py-10">
-            {/* Cart Button */}
-            <button className="inline-block bg-amber-600 rounded-full px-3 py-1
+    <body>
+      {!showCart && <div className="flex fixed flex-row" id='top_catalog'>
+        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
+          <img className="w-full" src={logo} alt="Sunset in the mountains" />
+          <div className="px-6 py-4">
+            <h1 className="text-3xl mb-2 font-bold text-white"> Product Catalog App </h1>
+            <p className="text-gray-700 text-white">
+              by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
+            </p>
+            <div className="py-10">
+              {/* Cart Button */}
+              <button className="inline-block bg-amber-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2">View Cart</button>
-            {/* Search Bar */}
-            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+
+
+              {/* Cart Button */}
+              <button className="inline-block bg-amber-600 rounded-full px-3 py-1
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Test</button>
+
+
+
+              {/* Search Bar */}
+              <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
             dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={query} onChange={handleChanges} />
-            {/* Category Buttons */}
-            {(Categories) ? <p className='text-white'>Tags : </p> : ''}
-            {
-              Categories.map(tag => <button key={tag} className="inline-block bg-amber-600 rounded-full px-3 py-1
+              {/* Category Buttons */}
+              {(Categories) ? <p className='text-white'>Tags : </p> : ''}
+              {
+                Categories.map(tag => <button key={tag} className="inline-block bg-amber-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => { handleClick(tag) }}>{tag}</button>)
-            }
+              }
+            </div>
           </div>
         </div>
-      </div>
-      <div className="ml-5 p-10 xl:basis-4/5">
-        {console.log("Before render :", Products.length, ProductsCategory.length)}
-        {render_products(ProductsCategory)}
-      </div>
-    </div>
+        <div className="ml-5 p-10 xl:basis-4/5">
+          {console.log("Before render :", Products.length, ProductsCategory.length)}
+          {render_products(ProductsCategory)}
+        </div>
+      </div>}
+      {showCart && <div id='top_cart'>
+        <p>Test</p>
+
+      </div>}
+    </body>
   );
 }
 
