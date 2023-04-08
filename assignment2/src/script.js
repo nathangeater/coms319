@@ -1,11 +1,13 @@
 import logo from './logo.png';
 import './App.css';
 import React, { useState } from "react";
-import { Products } from "./Products";
-import { Categories } from "./Categories";
+import Products from './products.json';
 
 export const App = () => {
   console.log("Step 1 : After reading file :");
+
+  //Defines the categories used to filtre the products
+  const Categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
 
   const [ProductsCategory, setProductsCategory] = useState(Products);
 
@@ -18,6 +20,7 @@ export const App = () => {
     console.log("Step 2: STATISTICS", Products.length, ProductsCategory.length);
   }
 
+  //Deals with handling text changes with the search bar
   const handleChanges = (e) => {
     setQuery(e.target.value);
     console.log("Step 6 : in handleChange, Target Value :", e.target.value, " Query Value :", query);
@@ -39,10 +42,15 @@ export const App = () => {
             by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
           </p>
           <div className="py-10">
+            {/* Cart Button */}
+            <button className="inline-block bg-amber-600 rounded-full px-3 py-1
+               text-sm font-semibold text-gray-700 mr-2 mt-2">View Cart</button>
+            {/* Search Bar */}
             <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
             dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={query} onChange={handleChanges} />
+            {/* Category Buttons */}
             {(Categories) ? <p className='text-white'>Tags : </p> : ''}
             {
               Categories.map(tag => <button key={tag} className="inline-block bg-amber-600 rounded-full px-3 py-1
