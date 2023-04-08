@@ -8,12 +8,24 @@ export const App = () => {
   console.log("Step 1 : After reading file :");
 
   const [ProductsCategory, setProductsCategory] = useState(Products);
-  
+
+  const [query, setQuery] = useState('');
+
   //Deals with handling the click functionality of the category buttons
   function handleClick(tag) {
     let filtered = Products.filter(cat => cat.category === tag);
     setProductsCategory(filtered);
     console.log("Step 2: STATISTICS", Products.length, ProductsCategory.length);
+  }
+
+  const handleChanges = (e) => {
+    setQuery(e.target.value);
+    console.log("Step 6 : in handleChange, Target Value :", e.target.value, " Query Value :", query);
+    const results = ProductsCategory.filter(eachProduct => {
+      if (e.target.value === "") return ProductsCategory;
+      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
+    });
+    setProductsCategory(results);
   }
 
   //Returns the stuff to render
@@ -27,10 +39,14 @@ export const App = () => {
             by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
           </p>
           <div className="py-10">
+            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+            dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={query} onChange={handleChanges} />
             {(Categories) ? <p className='text-white'>Tags : </p> : ''}
             {
               Categories.map(tag => <button key={tag} className="inline-block bg-amber-600 rounded-full px-3 py-1
-    text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => { handleClick(tag) }}>{tag}</button>)
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => { handleClick(tag) }}>{tag}</button>)
             }
           </div>
         </div>
