@@ -14,6 +14,20 @@ export const App = () => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
 
+  //Used to update the cart's total cost
+  useEffect(() =>{
+    total();
+  }, [cart]);
+
+  //Function to calculate the total value of the cart
+  const total = () => {
+    let totalVal = 0;
+    for(let i = 0; i < cart.length; i++){
+      totalVal += cart[i].price;
+    }
+    setCartTotal(totalVal);
+  };
+
   //Deals with handling the click functionality of the category buttons
   function handleClick(tag) {
     let filtered = Products.filter(cat => cat.category === tag);
@@ -88,7 +102,7 @@ export const App = () => {
           <div className="px-6 py-4">
             <h1 className="text-3xl mb-2 font-bold text-white"> Product Catalog App </h1>
             <p className="text-gray-700 text-white">
-              by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
+              by - <b style={{ color: 'orange' }}>Nathan Geater and Andrew Sand</b>
             </p>
             <div className="py-10">
               {/* Cart Button */}
@@ -149,6 +163,7 @@ export const App = () => {
   );
 }
 
+//Renders the products
 const render_products = (ProductsCategory) => {
   return <div className='category-section fixed'>
     <h2 className="text-3xl font-extrabold tracking-tight text-gray-600 category-title">Products ({ProductsCategory.length})</h2>
