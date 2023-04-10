@@ -54,7 +54,7 @@ export const App = () => {
   const handleChanges = (e) => {
     setQuery(e.target.value);
     console.log("Step 6 : in handleChange, Target Value :", e.target.value, " Query Value :", query);
-    const results = ProductsCategory.filter(eachProduct => {
+    const results = Products.filter(eachProduct => {
       if (e.target.value === "") return ProductsCategory;
       return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
     });
@@ -206,6 +206,7 @@ export const App = () => {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
+  /*
   inputCard.addEventListener('input', event => {
     if(!inputCard.value) {
       return event.preventDefault();
@@ -226,7 +227,9 @@ export const App = () => {
       inputCard.value = newVal;
     }
   });
+  */
 
+  /*
   form.addEventListener('submit', event => {
     //if (!form.checkValidity()) {
     if (!validate()) {
@@ -237,6 +240,8 @@ export const App = () => {
     event.stopPropagation()
     //form.classList.add('was-validated')
     }, false );
+    */
+
 
   //Returns the stuff to render
   return (
