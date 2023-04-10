@@ -151,8 +151,7 @@ export const App = () => {
     let email = document.getElementById('inputEmail4')
     let name = document.getElementById('inputName')
     let card = document.getElementById('inputCard')
-    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\]) | (([a - zA - Z\-0 - 9] +\.) +[a - zA - Z]{ 2,})) $ /
-    )) {
+    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\]) | (([a - zA - Z\-0 - 9] +\.) +[a - zA - Z]{ 2,})) $ /)) {
       email.setAttribute("class", "form-control is-invalid");
       val = false;
     }
@@ -245,7 +244,7 @@ export const App = () => {
 
   //Returns the stuff to render
   return (
-    <body>
+    <div>
       {/* Product Page */}
       {!showCart && <div className="flex fixed flex-row" id='top_catalog'>
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
@@ -405,7 +404,7 @@ export const App = () => {
                 <ul class="list-group list-group-flush">
 
                 </ul>
-                <a href="" onclick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
+                <a href="" onClick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
                   Return</a>
               </div>
 
@@ -424,6 +423,6 @@ export const App = () => {
           </div>
         </div>
       </div>}
-    </body>
+    </div>
   );
 }
