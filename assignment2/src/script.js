@@ -17,7 +17,7 @@ export const App = () => {
   //Declaring and Initialising Variables used with the submission form
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
   const form = document.getElementById('checkout-form');
-  const inputCard = document.querySelector('#inputCard');
+  let inputCard = document.querySelector('#inputCard');
   const alertTrigger = document.getElementById('submit-btn');
   const summaryCard = document.querySelector('.card');
   const summaryList = document.querySelector('.card > ul');
@@ -65,8 +65,8 @@ export const App = () => {
   function handleShowHideCart() {
     setShowCart(!showCart);
 
-    //Add event listeners
-    /*
+    //Add event listener for credit card formatting
+    inputCard = document.querySelector('#inputCard');
     inputCard.addEventListener('input', event => {
       if (!inputCard.value) {
         return event.preventDefault();
@@ -87,8 +87,8 @@ export const App = () => {
         inputCard.value = newVal;
       }
     });
-    */
-
+    
+    //Add event listener for checkout form validity
     document.getElementById('checkout-form').addEventListener('submit', event => {
       //if (!form.checkValidity()) {
       if (!validate()) {
