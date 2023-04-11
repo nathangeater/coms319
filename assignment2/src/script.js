@@ -64,42 +64,42 @@ export const App = () => {
   //Toggles between the catalog and cart view
   function handleShowHideCart() {
     setShowCart(!showCart);
-    
-  inputCard.addEventListener('input', event => {
-    if(!inputCard.value) {
-      return event.preventDefault();
-    }
-    else{
-      inputCard.value = inputCard.value.replace(/-/g, '');
-      let newVal = '';
-      for(var i = 0, nums = 0; i < inputCard.value.length; i++){
-        if(nums != 0 && nums % 4 == 0){
-          newVal += '-';
-        }
 
-        newVal += inputCard.value[i];
-        if(isNumeric(inputCard.value[i])){
-          nums++;
-        }
+    //Add event listeners
+    /*
+    inputCard.addEventListener('input', event => {
+      if (!inputCard.value) {
+        return event.preventDefault();
       }
-      inputCard.value = newVal;
-    }
-  });
-  
+      else {
+        inputCard.value = inputCard.value.replace(/-/g, '');
+        let newVal = '';
+        for (var i = 0, nums = 0; i < inputCard.value.length; i++) {
+          if (nums != 0 && nums % 4 == 0) {
+            newVal += '-';
+          }
 
+          newVal += inputCard.value[i];
+          if (isNumeric(inputCard.value[i])) {
+            nums++;
+          }
+        }
+        inputCard.value = newVal;
+      }
+    });
+    */
 
-
-  form.addEventListener('submit', event => {
+    document.getElementById('checkout-form').addEventListener('submit', event => {
       //if (!form.checkValidity()) {
       if (!validate()) {
-      alertPlaceholder.innerHTML = ''
-      alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
+        document.getElementById('liveAlertPlaceholder').innerHTML = ''
+        alert('<i class="bi-exclamation-circle"></i> Something went wrong!', 'danger')
       }
       event.preventDefault()
       event.stopPropagation()
       //form.classList.add('was-validated')
-  }, false );
-  
+    }, false);
+
   }
 
   //Counts products in the cart of the same id
@@ -234,57 +234,18 @@ export const App = () => {
       '</div>'
     ].join('')
 
-    alertPlaceholder.append(wrapper)
+    document.getElementById('liveAlertPlaceholder').append(wrapper);
   }
 
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
-  /*
-  inputCard.addEventListener('input', event => {
-    if(!inputCard.value) {
-      return event.preventDefault();
-    }
-    else{
-      inputCard.value = inputCard.value.replace(/-/g, '');
-      let newVal = '';
-      for(var i = 0, nums = 0; i < inputCard.value.length; i++){
-        if(nums != 0 && nums % 4 == 0){
-          newVal += '-';
-        }
-
-        newVal += inputCard.value[i];
-        if(isNumeric(inputCard.value[i])){
-          nums++;
-        }
-      }
-      inputCard.value = newVal;
-    }
-  });
-  */
-
-
-/*
-  form.addEventListener('submit', event => {
-      //if (!form.checkValidity()) {
-      if (!validate()) {
-      alertPlaceholder.innerHTML = ''
-      alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
-      }
-      event.preventDefault()
-      event.stopPropagation()
-      //form.classList.add('was-validated')
-  }, false );
-  */
-  
-
-
   //Returns the stuff to render
   return (
     <div>
       {/* Product Page */}
-      <div className="flex fixed flex-row" id='top_catalog' style={{visibility: !showCart? 'visible' : 'hidden'}}>
+      <div className="flex fixed flex-row" id='top_catalog' style={{ visibility: !showCart ? 'visible' : 'hidden' }}>
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
@@ -316,7 +277,7 @@ export const App = () => {
         </div>
       </div>
       {/* Shopping Cart Page */}
-      <div id='top_cart' style={{visibility: showCart? 'visible' : 'hidden'}}>
+      <div id='top_cart' style={{ visibility: showCart ? 'visible' : 'hidden' }}>
         <div>
           STORE SE/ComS319
           <b>
@@ -420,14 +381,6 @@ export const App = () => {
                 <div class="col-md-2">
                   <label for="inputZip" class="form-label">Zip</label>
                   <input type="text" class="form-control" id="inputZip" />
-                </div>
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" />
-                    <label class="form-check-label" for="gridCheck">
-                      Check me out
-                    </label>
-                  </div>
                 </div>
                 <div class="col-12">
                   <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Order</button>
