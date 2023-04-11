@@ -64,6 +64,42 @@ export const App = () => {
   //Toggles between the catalog and cart view
   function handleShowHideCart() {
     setShowCart(!showCart);
+    
+  inputCard.addEventListener('input', event => {
+    if(!inputCard.value) {
+      return event.preventDefault();
+    }
+    else{
+      inputCard.value = inputCard.value.replace(/-/g, '');
+      let newVal = '';
+      for(var i = 0, nums = 0; i < inputCard.value.length; i++){
+        if(nums != 0 && nums % 4 == 0){
+          newVal += '-';
+        }
+
+        newVal += inputCard.value[i];
+        if(isNumeric(inputCard.value[i])){
+          nums++;
+        }
+      }
+      inputCard.value = newVal;
+    }
+  });
+  
+
+
+
+  form.addEventListener('submit', event => {
+      //if (!form.checkValidity()) {
+      if (!validate()) {
+      alertPlaceholder.innerHTML = ''
+      alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
+      }
+      event.preventDefault()
+      event.stopPropagation()
+      //form.classList.add('was-validated')
+  }, false );
+  
   }
 
   //Counts products in the cart of the same id
@@ -229,7 +265,7 @@ export const App = () => {
   */
 
 
-
+/*
   form.addEventListener('submit', event => {
       //if (!form.checkValidity()) {
       if (!validate()) {
@@ -240,6 +276,7 @@ export const App = () => {
       event.stopPropagation()
       //form.classList.add('was-validated')
   }, false );
+  */
   
 
 
