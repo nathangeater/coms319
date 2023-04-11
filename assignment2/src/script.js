@@ -61,7 +61,7 @@ export const App = () => {
     setProductsCategory(results);
   }
 
-  //Hides the catalog and goes to the cart page
+  //Toggles between the catalog and cart view
   function handleShowHideCart() {
     setShowCart(!showCart);
   }
@@ -201,7 +201,7 @@ export const App = () => {
     alertPlaceholder.append(wrapper)
   }
 
-  function isNumeric (n) {
+  function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
@@ -228,25 +228,26 @@ export const App = () => {
   });
   */
 
-  /*
+
+
   form.addEventListener('submit', event => {
-    //if (!form.checkValidity()) {
-    if (!validate()) {
-    alertPlaceholder.innerHTML = ''
-    alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
-    }
-    event.preventDefault()
-    event.stopPropagation()
-    //form.classList.add('was-validated')
-    }, false );
-    */
+      //if (!form.checkValidity()) {
+      if (!validate()) {
+      alertPlaceholder.innerHTML = ''
+      alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
+      }
+      event.preventDefault()
+      event.stopPropagation()
+      //form.classList.add('was-validated')
+  }, false );
+  
 
 
   //Returns the stuff to render
   return (
     <div>
       {/* Product Page */}
-      {!showCart && <div className="flex fixed flex-row" id='top_catalog'>
+      <div className="flex fixed flex-row" id='top_catalog' style={{visibility: !showCart? 'visible' : 'hidden'}}>
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
@@ -276,9 +277,9 @@ export const App = () => {
           {console.log("Before render :", Products.length, ProductsCategory.length)}
           {render_products(ProductsCategory)}
         </div>
-      </div>}
+      </div>
       {/* Shopping Cart Page */}
-      {showCart && <div id='top_cart'>
+      <div id='top_cart' style={{visibility: showCart? 'visible' : 'hidden'}}>
         <div>
           STORE SE/ComS319
           <b>
@@ -408,21 +409,11 @@ export const App = () => {
                   Return</a>
               </div>
 
-              <footer class="bd-footer py-4 py-md-5 mt-5 bg-light">
-                <div class="container py-4 py-md-5 px-4 px-md-3">
-                  <div class="row">
-                    <div class="col-lg-12 mb-3">
-                      <b>SE/Com-S 319</b> Javascript form validation.
-                    </div>
-
-                  </div>
-                </div>
-              </footer>
             </div>
             <div class="col-2"></div>
           </div>
         </div>
-      </div>}
+      </div>
     </div>
   );
 }
