@@ -93,7 +93,7 @@ export const App = () => {
       //if (!form.checkValidity()) {
       if (!validate()) {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
-        alert('<i class="bi-exclamation-circle"></i> Something went wrong!', 'danger')
+        alert('<i class="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
       }
       event.preventDefault()
       event.stopPropagation()
@@ -211,6 +211,9 @@ export const App = () => {
       card.setAttribute("class", "form-control is-valid");
       order.card = card.value
     }
+
+
+    
     if (val) {
       form.classList.add("collapse")
       for (const [key, value] of Object.entries(order)) {
@@ -324,11 +327,8 @@ export const App = () => {
                 <div class="col-md-6">
                   <label for="inputName" class="form-label">Full Name</label>
                   <input type="text" class="form-control" id="inputName" />
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
                   <div class="invalid-feedback">
-                    Must be like, "John Doe"
+                    Invalid Name. Example: "John Doe"
                   </div>
                 </div>
 
@@ -336,11 +336,8 @@ export const App = () => {
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">Email</label>
                   <input type="email" class="form-control" id="inputEmail4" />
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
                   <div class="invalid-feedback">
-                    Must be like, "abc@xyz.efg"
+                    Invalid Email Address. Must be formatted like "abc@xyz.efg"
                   </div>
                 </div>
 
@@ -351,21 +348,21 @@ export const App = () => {
                     <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
                     <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
                       aria-label="Username" aria-describedby="basic-addon1" />
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
                     <div class="invalid-feedback">
-                      Must be like, "7777-7777-7777-7777"
+                      Invalid Credit Card Number. Must be formatted like "5555-5555-5555-5555"
                     </div>
                   </div>
                 </div>
 
                 <div class="col-12">
-                  <label for="inputAddress" class="form-label">Address</label>
+                  <label for="inputAddress" class="form-label">Shipping Address</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+                  <div class="invalid-feedback">
+                      Invalid Shipping Address. Must be formatted like "1234 Main St"
+                  </div>
                 </div>
                 <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
+                  <label for="inputAddress2" class="form-label">Secondary Address</label>
                   <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
                 </div>
                 <div class="col-md-6">
