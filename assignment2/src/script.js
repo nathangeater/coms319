@@ -227,8 +227,8 @@ export const App = () => {
             </div>
             <div className='add-buttons'>
               <input id={index} type="text" className="form-control" defaultValue={1} placeholder="Quantity"/>
-              <button type="button" onClick={() => removeFromCart(product, document.getElementById(index).value)} > - </button>{" "}
-              <button type="button" onClick={() => addToCart(product, document.getElementById(index).value)}> + </button>
+              <button type="button" className='bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded' onClick={() => removeFromCart(product, document.getElementById(index).value)} > - </button>{" "}
+              <button type="button" className='bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded' onClick={() => addToCart(product, document.getElementById(index).value)}> + </button>
             </div>
           </div>
         ))}
@@ -371,6 +371,9 @@ export const App = () => {
             <p className="text-gray-700 text-white">
               By: <b style={{ color: 'limegreen' }}>Nathan Geater and Andrew Sand</b>
             </p>
+
+            <button className="inline-block bg-lime-600 rounded-full px-3 py-1
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={window.alert}>About</button>
             {/* Cart Button */}
             <button className="inline-block bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>View Cart and Checkout</button>
@@ -403,6 +406,7 @@ export const App = () => {
             <button className="bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return and Continue Shopping</button>
           </b>
+          <div className="py-1"></div>
           <div className="card">
             <div className="row">
               {/* HERE, IT IS THE SHOPING CART */}
@@ -411,7 +415,7 @@ export const App = () => {
                   <div className="row">
                     <div className="col">
                       <h4>
-                        <b>319 Shopping Cart</b>
+                        <b>Fake Game Store Shopping Card</b>
                       </h4>
                     </div>
                     <div className="col align-self-center text-right text-muted">
