@@ -32,26 +32,19 @@ export const App = () => {
   const [showConfirm, setShowConfirm] = useState(false);
 
   //Declaring and Initialising Variables used with the submission form
-  const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-  const form = document.getElementById('checkout-form');
   let inputCard = document.querySelector('#inputCard');
-  const alertTrigger = document.getElementById('submit-btn');
-  const summaryCard = document.querySelector('.card');
-  const summaryList = document.querySelector('.card > ul');
 
   //Used to update the cart's total cost
   useEffect(() => {
-    total();
+    //Function to calculate the total value of the cart
+    {
+      let totalVal = 0;
+      for (let i = 0; i < cart.length; i++) {
+        totalVal += cart[i].price;
+      }
+      setCartTotal(totalVal);
+    };
   }, [cart]);
-
-  //Function to calculate the total value of the cart
-  const total = () => {
-    let totalVal = 0;
-    for (let i = 0; i < cart.length; i++) {
-      totalVal += cart[i].price;
-    }
-    setCartTotal(totalVal);
-  };
 
   //Deals with handling the click functionality of the category buttons
   function handleClick(tag) {
@@ -96,7 +89,7 @@ export const App = () => {
         inputCard.value = inputCard.value.replace(/-/g, '');
         let newVal = '';
         for (var i = 0, nums = 0; i < inputCard.value.length; i++) {
-          if (nums != 0 && nums % 4 == 0) {
+          if (nums !== 0 && nums % 4 === 0) {
             newVal += '-';
           }
 
@@ -131,8 +124,8 @@ export const App = () => {
 
   //Adds the product to the cart
   const addToCart = (el, v) => {
-    
-    for(let i = 0; i < v; i++){
+
+    for (let i = 0; i < v; i++) {
       let ev = structuredClone(el);
       setCart(cart => ([...cart, ev]));
     }
@@ -153,7 +146,7 @@ export const App = () => {
     <div className="row border-top border-bottom" key={el.id}>
       <div className="row main align-items-center">
         <div className="col-2">
-          <img className="img-fluid" src={el.image} />
+          <img className="img-fluid" src={el.image} alt={el.title} />
         </div>
         <div className="col">
           <div className="row">{el.title}</div>
@@ -175,7 +168,7 @@ export const App = () => {
     <div className="row border-top border-bottom" key={el.id}>
       <div className="row main align-items-center">
         <div className="col-2">
-          <img className="img-fluid" src={el.image} />
+          <img className="img-fluid" src={el.image} alt={el.title} />
         </div>
         <div className="col">
           <div className="row">{el.title}</div>
@@ -198,11 +191,11 @@ export const App = () => {
       }}>
         {/* Loop Products */}
         {ProductsCategory.map((product, index) => (
-          <div>
+          <div key={index}>
             <div key={index} className="group relative shadow-lg" >
               <div className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
                 <img
-                  alt="Product Image"
+                  alt={product.title}
                   src={product.image}
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
@@ -243,7 +236,7 @@ export const App = () => {
     let state = document.getElementById('inputState');
     let address2 = document.getElementById('inputAddress2');
     //Check Email Address
-    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       email.setAttribute("class", "form-control is-invalid");
       val = false;
     }
@@ -252,7 +245,7 @@ export const App = () => {
       order.Email = email.value
     }
     //Check Name
-    if (name.value.length == 0) {
+    if (name.value.length === 0) {
       name.setAttribute("class", "form-control is-invalid")
       val = false
     }
@@ -261,7 +254,7 @@ export const App = () => {
       order.Name = name.value
     }
     //Check Credit Card
-    if (!card.value.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
+    if (!card.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
       card.setAttribute("class", "form-control is-invalid")
       val = false
     }
@@ -270,7 +263,7 @@ export const App = () => {
       order.Card = card.value
     }
     //Check City
-    if (city.value.length == 0) {
+    if (city.value.length === 0) {
       city.setAttribute("class", "form-control is-invalid")
       val = false
     }
@@ -279,7 +272,7 @@ export const App = () => {
       order.City = city.value
     }
     //Check Address
-    if (address.value.length == 0) {
+    if (address.value.length === 0) {
       address.setAttribute("class", "form-control is-invalid")
       val = false
     }
@@ -288,7 +281,7 @@ export const App = () => {
       order.Address = address.value
     }
     //Zip Code
-    if (zip.value.length == 5 && !isNaN(zip.value)) {
+    if (zip.value.length === 5 && !isNaN(zip.value)) {
       zip.setAttribute("class", "form-control is-valid");
       order.Zip = zip.value
     }
@@ -297,7 +290,7 @@ export const App = () => {
       val = false
     }
     //Check State
-    if (state.options[state.selectedIndex].text == 'Choose...') {
+    if (state.options[state.selectedIndex].text === 'Choose...') {
       state.setAttribute("class", "form-control is-invalid")
       val = false
     }
@@ -330,16 +323,14 @@ export const App = () => {
     if (test) {
       document.querySelector('.card').classList.remove("collapse");
 
-      for (let item in cart) {
-        console.log(item);
-      }
-
-      for (const [key, value] of Object.entries(order)) {
+      for (let i = 0; i < 8; i++) {
         document.querySelector('.card > ul').innerHTML = '';
       }
 
       for (const [key, value] of Object.entries(order)) {
+        // eslint-disable-next-line
         document.querySelector('.card > ul').innerHTML += '<li className="list-group-item"> <b>' + `${key}` +
+          // eslint-disable-next-line
           ': </b>' + `${value}` + '</li>'
       }
     }
@@ -613,8 +604,7 @@ export const App = () => {
             <ul className="list-group list-group-flush">
 
             </ul>
-            <a href="" className="btn btn-secondary"> <i className="bi-arrow-left-circle"></i>
-              Confirm and Place Order</a>
+            <button className="btn btn-secondary" onClick={window.location.reload.bind(window.location)}>Confirm and Place Order</button>
           </div>
         </div>
       </div>
