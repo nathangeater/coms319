@@ -76,7 +76,14 @@ export const App = () => {
   function handleShowHideCart() {
     setShowCart(!showCart);
 
-    if(showConfirm){
+    if(!showCart){
+      document.body.style["overflow-y"] = 'visible';
+    }
+    else{
+      document.body.style["overflow-y"] = 'hidden';
+    }
+
+    if (showConfirm) {
       setShowConfirm(false);
     }
 
@@ -271,7 +278,7 @@ export const App = () => {
       order.State = state.value
     }
     //Checking Secondary Address
-    if(address2.value.length > 0){
+    if (address2.value.length > 0) {
       order.Secondary_Address = address2.value
     }
 
@@ -295,8 +302,8 @@ export const App = () => {
 
       //document.getElementById('checkout-form').classList.add("collapse")
       document.querySelector('.card').classList.remove("collapse");
-      
-      
+
+
 
       for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
@@ -329,8 +336,8 @@ export const App = () => {
     <div>
       {/* Product Page */}
       <div className="flex fixed flex-row" id='top_catalog' style={{ visibility: !showCart && !showConfirm ? 'visible' : 'hidden' }}>
-        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
-          <img className="w-full" src={logo} alt="Sunset in the mountains" />
+        <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '40%' }}>
+          <img className="w-full" src={logo} alt="Logo" />
           <div className="px-6 py-4">
             <h1 className="text-3xl mb-2 font-bold text-white"> Fake Game Store: Product Catalog App </h1>
             <p className="text-gray-700 text-white">
@@ -340,7 +347,7 @@ export const App = () => {
             <button className="inline-block bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>View Cart and Checkout</button>
             <div className="py-10">
-              
+
               {/* Search Bar */}
               <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
@@ -363,7 +370,7 @@ export const App = () => {
       {/* Shopping Cart Page */}
       <div id='top_cart' style={{ visibility: showCart ? 'visible' : 'hidden' }}>
         <div>
-          STORE SE/ComS319
+          <img src={logo} alt="Logo" style={{ maxWidth: '10%' }} />
           <b>
             {/* Return Button */}
             <button className="bg-lime-600 rounded-full px-3 py-1
