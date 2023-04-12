@@ -129,66 +129,80 @@ export const App = () => {
       let ev = structuredClone(el);
       setCart(cart => ([...cart, ev]));
     }
-    
+
   };
 
   //Removes the product from the cart
   const removeFromCart = (el, v) => {
-    
+
     let hardCopy = [...cart];
 
-    for(let i = 0; i < v; i++){
-      for(let j = hardCopy.length - 1; j >= 0; --j){
-        if(hardCopy[j].title === el.title){
+    for (let i = 0; i < v; i++) {
+      for (let j = hardCopy.length - 1; j >= 0; --j) {
+        if (hardCopy[j].title === el.title) {
           hardCopy.splice(j, 1);
           break;
         }
       }
     }
 
-    
+
     //hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
     setCart(hardCopy);
+  }
+
+  //Function used to check if at least one of a product is in the cart
+  const checkCart = (product) => {
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].title === product.title) {
+        return true;
+      }
+    }
+    return false;
   }
 
   //Function used to list the items on the cart screen
   const listItems = Products.map((el) => (
     // PRODUCT
-    <div className="row border-top border-bottom" key={el.id}>
-      <div className="row main align-items-center">
-        <div className="col-2">
-          <img className="img-fluid" src={el.image} alt={el.title} />
+    <div>
+      {checkCart(el) && <div className="row border-top border-bottom" key={el.id}>
+        <div className="row main align-items-center">
+          <div className="col-2">
+            <img className="img-fluid" src={el.image} alt={el.title} />
+          </div>
+          <div className="col">
+            <div className="row">{el.title}</div>
+            <div className="row text-muted">{el.category}</div>
+          </div>
+          <div className="col">
+            <button className="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el, 1)} > - </button>{" "}
+            <button className="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
+          </div>
+          <div className="col">
+            ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
+          </div>
         </div>
-        <div className="col">
-          <div className="row">{el.title}</div>
-          <div className="row text-muted">{el.category}</div>
-        </div>
-        <div className="col">
-          <button className="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el, 1)} > - </button>{" "}
-          <button className="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
-        </div>
-        <div className="col">
-          ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
-        </div>
-      </div>
+      </div>}
     </div>
   ));
 
   const confirmItems = Products.map((el) => (
     // PRODUCT
-    <div className="row border-top border-bottom" key={el.id}>
-      <div className="row main align-items-center">
-        <div className="col-2">
-          <img className="img-fluid" src={el.image} alt={el.title} />
+    <div>
+      {checkCart(el) && <div className="row border-top border-bottom" key={el.id}>
+        <div className="row main align-items-center">
+          <div className="col-2">
+            <img className="img-fluid" src={el.image} alt={el.title} />
+          </div>
+          <div className="col">
+            <div className="row">{el.title}</div>
+            <div className="row text-muted">{el.category}</div>
+          </div>
+          <div className="col">
+            ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
+          </div>
         </div>
-        <div className="col">
-          <div className="row">{el.title}</div>
-          <div className="row text-muted">{el.category}</div>
-        </div>
-        <div className="col">
-          ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
-        </div>
-      </div>
+      </div>}
     </div>
   ));
 
@@ -226,7 +240,7 @@ export const App = () => {
               </div>
             </div>
             <div className='add-buttons'>
-              <input id={index} type="text" className="form-control" defaultValue={1} placeholder="Quantity"/>
+              <input id={index} type="text" className="form-control" defaultValue={1} placeholder="Quantity" />
               <button type="button" className='bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded' onClick={() => removeFromCart(product, document.getElementById(index).value)} > - </button>{" "}
               <button type="button" className='bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded' onClick={() => addToCart(product, document.getElementById(index).value)}> + </button>
             </div>
@@ -359,7 +373,7 @@ export const App = () => {
     document.getElementById('liveAlertPlaceholder').append(wrapper);
   }
 
-  function handleShowAbout(){
+  function handleShowAbout() {
     window.alert("Made by Team 49, which consists of Nathan Geater (nkgeater@iastate.edu) and Andrew Sand (asand@iastate.edu). \n\nThis website was created for Assignment02 for Iowa State University's SE/ComS 319 Course, Spring 2023. \n\nThe project was made exclusively for educational purposes.");
   }
 
