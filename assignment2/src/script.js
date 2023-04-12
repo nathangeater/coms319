@@ -554,8 +554,8 @@ export const App = () => {
             <ul class="list-group list-group-flush">
 
             </ul>
-            <a href="" onClick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
-              Return</a>
+            <a href="" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
+              Confirm and Place Order</a>
           </div>
         </div>
       </div>
