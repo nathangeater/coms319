@@ -359,6 +359,10 @@ export const App = () => {
     document.getElementById('liveAlertPlaceholder').append(wrapper);
   }
 
+  function handleShowAbout(){
+    window.alert("Made by Team 49, which consists of Nathan Geater (nkgeater@iastate.edu) and Andrew Sand (asand@iastate.edu). \n\nThis website was created for Assignment02 for Iowa State University's SE/ComS 319 Course, Spring 2023. \n\nThe project was made exclusively for educational purposes.");
+  }
+
   //Returns the stuff to render
   return (
     <div>
@@ -373,7 +377,7 @@ export const App = () => {
             </p>
 
             <button className="inline-block bg-lime-600 rounded-full px-3 py-1
-               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={window.alert}>About</button>
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowAbout}>About</button>
             {/* Cart Button */}
             <button className="inline-block bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>View Cart and Checkout</button>
