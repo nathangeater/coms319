@@ -130,8 +130,14 @@ export const App = () => {
   }
 
   //Adds the product to the cart
-  const addToCart = (el) => {
-    setCart([...cart, el]);
+  const addToCart = (el, v) => {
+    
+    for(let i = 0; i < v; i++){
+      let ev = structuredClone(el);
+      setCart(cart => ([...cart, ev]));
+    }
+
+    console.log(cart);
   };
 
   //Removes the product from the cart
@@ -155,7 +161,7 @@ export const App = () => {
         </div>
         <div class="col">
           <button class="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el)} > - </button>{" "}
-          <button class="btn btn-outline-secondary" type="button" onClick={() => addToCart(el)}> + </button>
+          <button class="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
         </div>
         <div class="col">
           ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
@@ -181,10 +187,6 @@ export const App = () => {
       </div>
     </div>
   ));
-
-  function temp() {
-
-  }
 
   //Renders the products
   const render_products = (ProductsCategory) => {
@@ -222,7 +224,7 @@ export const App = () => {
             <div className='add-buttons'>
               <input type="text" class="form-control" defaultValue={1} placeholder="Quantity" />
               <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
-              <button type="button" onClick={() => addToCart(product)}> + </button>
+              <button type="button" onClick={() => addToCart(product, 5)}> + </button>
             </div>
           </div>
         ))}
