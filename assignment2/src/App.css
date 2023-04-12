@@ -57,3 +57,8 @@ code {
     transform: rotate(360deg);
   }
 }
+
+#top_confirm{
+  position: absolute;
+  top: 0;
+}

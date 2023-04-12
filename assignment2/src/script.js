@@ -315,6 +315,8 @@ export const App = () => {
     setShowCart(!test);
     setShowConfirm(test);
 
+    window.scrollTo(0, 0);
+
     if (test) {
 
       //document.getElementById('checkout-form').classList.add("collapse")
@@ -575,7 +577,7 @@ export const App = () => {
       {/* Checkout Confirmation Page */}
       <div id='top_confirm' style={{ visibility: showConfirm ? 'visible' : 'hidden' }}>
         <div>
-          STORE SE/ComS319
+        <img src={logo} alt="Logo" style={{ maxWidth: '30%' }} />
           <b>
             {/* Return Button */}
             <button className="bg-lime-600 rounded-full px-3 py-1
@@ -589,6 +591,20 @@ export const App = () => {
               <p class="card-text">Here is a summary of your order.</p>
             </div>
             <div>{confirmItems}</div>
+            <div class="float-end">
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Cost of Cart:</span>
+                  <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
+                </p>
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Tax:</span>
+                  <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
+                </p>
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Order Total:</span>
+                  <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
+                </p>
+              </div>
             <ul class="list-group list-group-flush">
 
             </ul>
