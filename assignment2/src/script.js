@@ -1,4 +1,4 @@
-import logo from './logo.png';
+import logo from './img/logo.png';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Products from './products.json';
@@ -183,7 +183,7 @@ export const App = () => {
                     <span aria-hidden="true" className="absolute inset-0" />
                     <span style={{ fontSize: '16px', fontWeight: '600' }}>{product.title}</span>
                   </a>
-                  <p>Tag - {product.category}</p>
+                  <p>Genre - {product.category}</p>
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">Rating: {product.rating.rate}</p>
               </div>
