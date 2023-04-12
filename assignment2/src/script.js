@@ -164,8 +164,8 @@ export const App = () => {
   //Function used to list the items on the cart screen
   const listItems = Products.map((el) => (
     // PRODUCT
-    <div>
-      {checkCart(el) && <div className="row border-top border-bottom" key={el.id}>
+    <div  key={el.id}>
+      {checkCart(el) && <div className="row border-top border-bottom">
         <div className="row main align-items-center">
           <div className="col-2">
             <img className="img-fluid" src={el.image} alt={el.title} />
@@ -188,8 +188,8 @@ export const App = () => {
 
   const confirmItems = Products.map((el) => (
     // PRODUCT
-    <div>
-      {checkCart(el) && <div className="row border-top border-bottom" key={el.id}>
+    <div  key={el.id}>
+      {checkCart(el) && <div className="row border-top border-bottom">
         <div className="row main align-items-center">
           <div className="col-2">
             <img className="img-fluid" src={el.image} alt={el.title} />
