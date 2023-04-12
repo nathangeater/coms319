@@ -3,7 +3,7 @@
         "id": 1,
         "title": "The Binding of Isaac Rebirth",
         "price": 14.99,
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "description": "",
         "category": "Roguelike",
         "image": "./img/The_Binding_of_Isaac_Rebirth.jpg",
         "rating": {
@@ -15,7 +15,7 @@
         "id": 2,
         "title": "Celeste",
         "price": 19.99,
-        "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        "description": "",
         "category": "2D Platformer",
         "image": "./img/Celeste.jpg",
         "rating": {
@@ -27,7 +27,7 @@
         "id": 3,
         "title": "The Elder Scrolls V: Skyrim Special Edition",
         "price": 39.99,
-        "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+        "description": "",
         "category": "RPG",
         "image": "./img/The_Elder_Scrolls_V_Skyrim.jpg",
         "rating": {
@@ -39,7 +39,7 @@
         "id": 4,
         "title": "Hollow Knight",
         "price": 14.99,
-        "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+        "description": "",
         "category": "Metroidvania",
         "image": "./img/hollow_knight.PNG",
         "rating": {
@@ -51,7 +51,7 @@
         "id": 5,
         "title": "Portal 2",
         "price": 9.99,
-        "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        "description": "",
         "category": "Puzzle",
         "image": "./img/Portal2.jpg",
         "rating": {
@@ -63,7 +63,7 @@
         "id": 6,
         "title": "Risk of Rain 2",
         "price": 24.99,
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "description": "",
         "category": "Roguelike",
         "image": "./img/Risk_of_Rain_2.jpg",
         "rating": {
@@ -75,7 +75,7 @@
         "id": 7,
         "title": "Terraria",
         "price": 9.99,
-        "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
+        "description": "",
         "category": "Sandbox",
         "image": "./img/Terraria.jpg",
         "rating": {
