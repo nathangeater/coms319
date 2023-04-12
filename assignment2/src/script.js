@@ -201,7 +201,7 @@ export const App = () => {
     let zip = document.getElementById('inputZip');
     let state = document.getElementById('inputState');
     //Check Email Address
-    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\]) | (([a - zA - Z\-0 - 9] +\.) +[a - zA - Z]{ 2,})) $ /)) {
+    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
       email.setAttribute("class", "form-control is-invalid");
       val = false;
     }
@@ -218,7 +218,7 @@ export const App = () => {
       name.setAttribute("class", "form-control is-valid");
       order.name = name.value
     }
-    //Check Credti Card
+    //Check Credit Card
     if (!card.value.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
       card.setAttribute("class", "form-control is-invalid")
       val = false
@@ -263,7 +263,7 @@ export const App = () => {
       state.setAttribute("class", "form-control is-valid");
       order.state = state.value
     }
-    
+
     if (val) {
       form.classList.add("collapse")
       for (const [key, value] of Object.entries(order)) {
