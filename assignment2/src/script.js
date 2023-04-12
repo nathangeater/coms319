@@ -104,14 +104,12 @@ export const App = () => {
 
     //Add event listener for checkout form validity
     document.getElementById('checkout-form').addEventListener('submit', event => {
-      //if (!form.checkValidity()) {
       if (!validate()) {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
         alert('<i className="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
       }
       event.preventDefault()
       event.stopPropagation()
-      //form.classList.add('was-validated')
     }, false);
 
   }
@@ -328,9 +326,6 @@ export const App = () => {
       order.Secondary_Address = address2.value
     }
 
-    //DEBUG! Remove later!
-    val = true;
-
     if (val) {
       handleShowHideConfirm(true);
     }
@@ -374,7 +369,7 @@ export const App = () => {
   }
 
   function handleShowAbout() {
-    window.alert("Made by Team 49, which consists of Nathan Geater (nkgeater@iastate.edu) and Andrew Sand (asand@iastate.edu). \n\nThis website was created for Assignment02 for Iowa State University's SE/ComS 319 Course, Spring 2023. \n\nThe project was made exclusively for educational purposes.");
+    window.alert("Made by Team 49, which consists of Nathan Geater (nkgeater@iastate.edu) and Andrew Sand (asand@iastate.edu). \n\nThis website was created for Assignment02 for Iowa State University's SE/ComS 319 Course, Spring 2023. \n\nThe project was made exclusively for educational purposes. \n\nNothing on this website is actually for sale! Inputting user data and placing an \"order\" will NOT actually do anything!");
   }
 
   //Returns the stuff to render
