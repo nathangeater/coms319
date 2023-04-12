@@ -324,6 +324,10 @@ export const App = () => {
       }
 
       for (const [key, value] of Object.entries(order)) {
+        document.querySelector('.card > ul').innerHTML = '';
+      }
+
+      for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
