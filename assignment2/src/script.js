@@ -295,6 +295,9 @@ export const App = () => {
 
       //document.getElementById('checkout-form').classList.add("collapse")
       document.querySelector('.card').classList.remove("collapse");
+      
+      
+
       for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
@@ -329,23 +332,24 @@ export const App = () => {
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
-            <h1 className="text-3xl mb-2 font-bold text-white"> Product Catalog App </h1>
+            <h1 className="text-3xl mb-2 font-bold text-white"> Fake Gamestore: Product Catalog App </h1>
             <p className="text-gray-700 text-white">
-              by - <b style={{ color: 'orange' }}>Nathan Geater and Andrew Sand</b>
+              By: <b style={{ color: 'limegreen' }}>Nathan Geater and Andrew Sand</b>
             </p>
-            <div className="py-10">
-              {/* Cart Button */}
-              <button className="inline-block bg-amber-600 rounded-full px-3 py-1
+            {/* Cart Button */}
+            <button className="inline-block bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>View Cart and Checkout</button>
+            <div className="py-10">
+              
               {/* Search Bar */}
               <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-            dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={query} onChange={handleChanges} />
+            dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={query} onChange={handleChanges} placeholder="Search" />
               {/* Category Buttons */}
-              {(Categories) ? <p className='text-white'>Tags : </p> : ''}
+              {(Categories) ? <p className='text-white'>Genres : </p> : ''}
               {
-                Categories.map(tag => <button key={tag} className="inline-block bg-amber-600 rounded-full px-3 py-1
+                Categories.map(tag => <button key={tag} className="inline-block bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => { handleClick(tag) }}>{tag}</button>)
               }
             </div>
@@ -362,7 +366,7 @@ export const App = () => {
           STORE SE/ComS319
           <b>
             {/* Return Button */}
-            <button className="bg-amber-600 rounded-full px-3 py-1
+            <button className="bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return and Continue Shopping</button>
           </b>
           <div class="card">
@@ -541,7 +545,7 @@ export const App = () => {
           STORE SE/ComS319
           <b>
             {/* Return Button */}
-            <button className="bg-amber-600 rounded-full px-3 py-1
+            <button className="bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return to Cart</button>
           </b>
 
