@@ -30,13 +30,14 @@ export const App = () => {
 
   //Declaring and Initialising the order object for submitting the order
   var order = {
-    name: '',
-    email: '',
-    card: '',
-    city: '',
-    address: '',
-    zip: '',
-    state: ''
+    Name: '',
+    Email: '',
+    Card: '',
+    City: '',
+    Address: '',
+    Secondary_Address: '',
+    Zip: '',
+    State: ''
   }
 
   //Used to update the cart's total cost
@@ -205,6 +206,7 @@ export const App = () => {
     let address = document.getElementById('inputAddress');
     let zip = document.getElementById('inputZip');
     let state = document.getElementById('inputState');
+    let address2 = document.getElementById('inputAddress2');
     //Check Email Address
     if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       email.setAttribute("class", "form-control is-invalid");
@@ -212,7 +214,7 @@ export const App = () => {
     }
     else {
       email.setAttribute("class", "form-control is-valid");
-      order.email = email.value
+      order.Email = email.value
     }
     //Check Name
     if (name.value.length == 0) {
@@ -221,7 +223,7 @@ export const App = () => {
     }
     else {
       name.setAttribute("class", "form-control is-valid");
-      order.name = name.value
+      order.Name = name.value
     }
     //Check Credit Card
     if (!card.value.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
@@ -230,7 +232,7 @@ export const App = () => {
     }
     else {
       card.setAttribute("class", "form-control is-valid");
-      order.card = card.value
+      order.Card = card.value
     }
     //Check City
     if (city.value.length == 0) {
@@ -239,7 +241,7 @@ export const App = () => {
     }
     else {
       city.setAttribute("class", "form-control is-valid");
-      order.city = city.value
+      order.City = city.value
     }
     //Check Address
     if (address.value.length == 0) {
@@ -248,12 +250,12 @@ export const App = () => {
     }
     else {
       address.setAttribute("class", "form-control is-valid");
-      order.address = address.value
+      order.Address = address.value
     }
     //Zip Code
     if (zip.value.length == 5 && !isNaN(zip.value)) {
       zip.setAttribute("class", "form-control is-valid");
-      order.zip = zip.value
+      order.Zip = zip.value
     }
     else {
       zip.setAttribute("class", "form-control is-invalid")
@@ -266,7 +268,11 @@ export const App = () => {
     }
     else {
       state.setAttribute("class", "form-control is-valid");
-      order.state = state.value
+      order.State = state.value
+    }
+    //Checking Secondary Address
+    if(address2.value.length > 0){
+      order.Secondary_Address = address2.value
     }
 
 
@@ -281,25 +287,20 @@ export const App = () => {
   }
 
   //Toggles between the catalog and cart view
-  function handleShowHideConfirm(value) {
-    setShowCart(!value);
-    setShowConfirm(value);
+  function handleShowHideConfirm(test) {
+    setShowCart(!test);
+    setShowConfirm(test);
 
-    
+    if (test) {
 
-    if (showConfirm) {
-
-      /*
-      document.getElementById('checkout-form').classList.add("collapse")
+      //document.getElementById('checkout-form').classList.add("collapse")
       document.querySelector('.card').classList.remove("collapse");
       for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
 
-      console.log(order);
-
-      
+      /*
       document.querySelector('.card').classList.remove("collapse")
       document.getElementById('liveAlertPlaceholder').innerHTML = ""
       alert('<i class="bi-cart-check-fill"></i> You have made an order!',
