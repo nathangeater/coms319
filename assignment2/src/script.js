@@ -30,7 +30,6 @@ export const App = () => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [addNum, setAddNum] = useState(1);
 
   //Declaring and Initialising Variables used with the submission form
   let inputCard = document.querySelector('#inputCard');
@@ -134,9 +133,21 @@ export const App = () => {
   };
 
   //Removes the product from the cart
-  const removeFromCart = (el) => {
+  const removeFromCart = (el, v) => {
+    
     let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+
+    for(let i = 0; i < v; i++){
+      for(let j = hardCopy.length - 1; j >= 0; --j){
+        if(hardCopy[j].title === el.title){
+          hardCopy.splice(j, 1);
+          break;
+        }
+      }
+    }
+
+    
+    //hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
     setCart(hardCopy);
   }
 
@@ -153,7 +164,7 @@ export const App = () => {
           <div className="row text-muted">{el.category}</div>
         </div>
         <div className="col">
-          <button className="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el)} > - </button>{" "}
+          <button className="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el, 1)} > - </button>{" "}
           <button className="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
         </div>
         <div className="col">
@@ -216,7 +227,7 @@ export const App = () => {
             </div>
             <div className='add-buttons'>
               <input id={index} type="text" className="form-control" defaultValue={1} placeholder="Quantity"/>
-              <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
+              <button type="button" onClick={() => removeFromCart(product, document.getElementById(index).value)} > - </button>{" "}
               <button type="button" onClick={() => addToCart(product, document.getElementById(index).value)}> + </button>
             </div>
           </div>
