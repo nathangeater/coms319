@@ -18,6 +18,7 @@ export const App = () => {
   const [showCart, setShowCart] = useState(false);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   //Declaring and Initialising Variables used with the submission form
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -73,6 +74,10 @@ export const App = () => {
   //Toggles between the catalog and cart view
   function handleShowHideCart() {
     setShowCart(!showCart);
+
+    if(showConfirm){
+      setShowConfirm(false);
+    }
 
     //Add event listener for credit card formatting
     inputCard = document.querySelector('#inputCard');
@@ -201,7 +206,7 @@ export const App = () => {
     let zip = document.getElementById('inputZip');
     let state = document.getElementById('inputState');
     //Check Email Address
-    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       email.setAttribute("class", "form-control is-invalid");
       val = false;
     }
@@ -264,18 +269,43 @@ export const App = () => {
       order.state = state.value
     }
 
+
+    //DEBUG! Remove later!
+    val = true;
+
     if (val) {
+      handleShowHideConfirm(true);
+    }
+
+    return val;
+  }
+
+  //Toggles between the catalog and cart view
+  function handleShowHideConfirm(value) {
+    setShowCart(!value);
+    setShowConfirm(value);
+
+    
+
+    if (showConfirm) {
+
+      /*
       document.getElementById('checkout-form').classList.add("collapse")
+      document.querySelector('.card').classList.remove("collapse");
       for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
+
+      console.log(order);
+
+      
       document.querySelector('.card').classList.remove("collapse")
       document.getElementById('liveAlertPlaceholder').innerHTML = ""
       alert('<i class="bi-cart-check-fill"></i> You have made an order!',
         'success')
+    */
     }
-    return val;
   }
 
   const alert = (message, type) => {
@@ -294,7 +324,7 @@ export const App = () => {
   return (
     <div>
       {/* Product Page */}
-      <div className="flex fixed flex-row" id='top_catalog' style={{ visibility: !showCart ? 'visible' : 'hidden' }}>
+      <div className="flex fixed flex-row" id='top_catalog' style={{ visibility: !showCart && !showConfirm ? 'visible' : 'hidden' }}>
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
@@ -330,7 +360,7 @@ export const App = () => {
         <div>
           STORE SE/ComS319
           <b>
-            {/* Cart Button */}
+            {/* Return Button */}
             <button className="bg-amber-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return and Continue Shopping</button>
           </b>
@@ -499,21 +529,32 @@ export const App = () => {
                   <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Proceed to Confirmation</button>
                 </div>
               </form>
-
-              <div class="card collapse" style={{ width: '18rem' }}>
-                <div class="card-body">
-                  <h5 class="card-title">Order summary</h5>
-                  <p class="card-text">Here is a summary of your order.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-
-                </ul>
-                <a href="" onClick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
-                  Return</a>
-              </div>
-
             </div>
             <div class="col-2"></div>
+          </div>
+        </div>
+      </div>
+      {/* Checkout Confirmation Page */}
+      <div id='top_confirm' style={{ visibility: showConfirm ? 'visible' : 'hidden' }}>
+        <div>
+          STORE SE/ComS319
+          <b>
+            {/* Return Button */}
+            <button className="bg-amber-600 rounded-full px-3 py-1
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return to Cart</button>
+          </b>
+
+
+          <div class="card" style={{ width: '18rem' }}>
+            <div class="card-body">
+              <h5 class="card-title">Order summary</h5>
+              <p class="card-text">Here is a summary of your order.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+
+            </ul>
+            <a href="" onClick="location.reload()" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
+              Return</a>
           </div>
         </div>
       </div>
