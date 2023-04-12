@@ -265,13 +265,13 @@ export const App = () => {
     }
 
     if (val) {
-      form.classList.add("collapse")
+      document.getElementById('checkout-form').classList.add("collapse")
       for (const [key, value] of Object.entries(order)) {
-        summaryList.innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
+        document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
-      summaryCard.classList.remove("collapse")
-      alertPlaceholder.innerHTML = ""
+      document.querySelector('.card').classList.remove("collapse")
+      document.getElementById('liveAlertPlaceholder').innerHTML = ""
       alert('<i class="bi-cart-check-fill"></i> You have made an order!',
         'success')
     }
