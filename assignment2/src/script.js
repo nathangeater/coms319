@@ -365,13 +365,13 @@ export const App = () => {
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-              <h1>Order Form</h1>
+              <h1>Order Checkout Form</h1>
               <div id="liveAlertPlaceholder"></div>
               <form class="row g-3" id="checkout-form">
 
                 {/* Full Name */}
                 <div class="col-md-6">
-                  <label for="inputName" class="form-label">Full Name</label>
+                  <label for="inputName" class="form-label">Name</label>
                   <input type="text" class="form-control" id="inputName" />
                   <div class="invalid-feedback">
                     Invalid Name. Example: "John Doe"
@@ -389,7 +389,7 @@ export const App = () => {
 
                 {/* Credit Card */}
                 <div class="col-12">
-                  <label for="inputCard" class="form-label">Card</label>
+                  <label for="inputCard" class="form-label">Credit Card</label>
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
                     <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -429,7 +429,56 @@ export const App = () => {
                   <label for="inputState" class="form-label">State</label>
                   <select id="inputState" class="form-select">
                     <option selected>Choose...</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
                     <option>Iowa</option>
+                    <option>Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option>Maryland</option>
+                    <option>Massachusetts</option>
+                    <option>Michigan</option>
+                    <option>Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New Hampshire</option>
+                    <option>New Jersey</option>
+                    <option>New Mexico</option>
+                    <option>New York</option>
+                    <option>North Carolina</option>
+                    <option>North Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode Island</option>
+                    <option>South Carolina</option>
+                    <option>South Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option>Washington</option>
+                    <option>West Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
                   </select>
                   <div class="invalid-feedback">
                     Invalid State. Something other than the default must be chosen.
@@ -447,7 +496,7 @@ export const App = () => {
 
                 {/* Order Button */}
                 <div class="col-12">
-                  <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Order</button>
+                  <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Proceed to Confirmation</button>
                 </div>
               </form>
 
