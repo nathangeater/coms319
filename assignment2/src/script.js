@@ -3,6 +3,11 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import Products from './products.json';
 
+//Tests if the input is numeric
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 export const App = () => {
   console.log("Step 1 : After reading file :");
 
@@ -26,7 +31,11 @@ export const App = () => {
   var order = {
     name: '',
     email: '',
-    card: ''
+    card: '',
+    city: '',
+    address: '',
+    zip: '',
+    state: ''
   }
 
   //Used to update the cart's total cost
@@ -87,7 +96,7 @@ export const App = () => {
         inputCard.value = newVal;
       }
     });
-    
+
     //Add event listener for checkout form validity
     document.getElementById('checkout-form').addEventListener('submit', event => {
       //if (!form.checkValidity()) {
@@ -187,6 +196,11 @@ export const App = () => {
     let email = document.getElementById('inputEmail4')
     let name = document.getElementById('inputName')
     let card = document.getElementById('inputCard')
+    let city = document.getElementById('inputCity');
+    let address = document.getElementById('inputAddress');
+    let zip = document.getElementById('inputZip');
+    let state = document.getElementById('inputState');
+    //Check Email Address
     if (!email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\.[0 - 9]{ 1, 3}\]) | (([a - zA - Z\-0 - 9] +\.) +[a - zA - Z]{ 2,})) $ /)) {
       email.setAttribute("class", "form-control is-invalid");
       val = false;
@@ -195,6 +209,7 @@ export const App = () => {
       email.setAttribute("class", "form-control is-valid");
       order.email = email.value
     }
+    //Check Name
     if (name.value.length == 0) {
       name.setAttribute("class", "form-control is-invalid")
       val = false
@@ -203,6 +218,7 @@ export const App = () => {
       name.setAttribute("class", "form-control is-valid");
       order.name = name.value
     }
+    //Check Credti Card
     if (!card.value.match(/^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/)) {
       card.setAttribute("class", "form-control is-invalid")
       val = false
@@ -211,8 +227,42 @@ export const App = () => {
       card.setAttribute("class", "form-control is-valid");
       order.card = card.value
     }
-
-
+    //Check City
+    if (city.value.length == 0) {
+      city.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      city.setAttribute("class", "form-control is-valid");
+      order.city = city.value
+    }
+    //Check Address
+    if (address.value.length == 0) {
+      address.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      address.setAttribute("class", "form-control is-valid");
+      order.address = address.value
+    }
+    //Zip Code
+    if (zip.value.length == 5 && !isNaN(zip.value)) {
+      zip.setAttribute("class", "form-control is-valid");
+      order.zip = zip.value
+    }
+    else {
+      zip.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    //Check State
+    if (state.options[state.selectedIndex].text == 'Choose...') {
+      state.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      state.setAttribute("class", "form-control is-valid");
+      order.state = state.value
+    }
     
     if (val) {
       form.classList.add("collapse")
@@ -238,10 +288,6 @@ export const App = () => {
     ].join('')
 
     document.getElementById('liveAlertPlaceholder').append(wrapper);
-  }
-
-  function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   //Returns the stuff to render
@@ -354,31 +400,52 @@ export const App = () => {
                   </div>
                 </div>
 
+                {/* Shipping Address */}
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Shipping Address</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
                   <div class="invalid-feedback">
-                      Invalid Shipping Address. Must be formatted like "1234 Main St"
+                    Invalid Shipping Address. Must be formatted like "1234 Main St"
                   </div>
                 </div>
+
+                {/* Secondary Address */}
                 <div class="col-12">
                   <label for="inputAddress2" class="form-label">Secondary Address</label>
                   <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
                 </div>
+
+                {/* City */}
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">City</label>
                   <input type="text" class="form-control" id="inputCity" />
+                  <div class="invalid-feedback">
+                    Invalid City. Must be formatted like "Berlin"
+                  </div>
                 </div>
+
+                {/* State */}
                 <div class="col-md-4">
                   <label for="inputState" class="form-label">State</label>
                   <select id="inputState" class="form-select">
                     <option selected>Choose...</option>
+                    <option>Iowa</option>
                   </select>
+                  <div class="invalid-feedback">
+                    Invalid State. Something other than the default must be chosen.
+                  </div>
                 </div>
+
+                {/* Zip Code */}
                 <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
+                  <label for="inputZip" class="form-label">Zip Code</label>
                   <input type="text" class="form-control" id="inputZip" />
+                  <div class="invalid-feedback">
+                    Invalid Zip Code. Must be formatted like "55555"
+                  </div>
                 </div>
+
+                {/* Order Button */}
                 <div class="col-12">
                   <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Order</button>
                 </div>
