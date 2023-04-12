@@ -332,7 +332,7 @@ export const App = () => {
         <div className="h-screen bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
           <img className="w-full" src={logo} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
-            <h1 className="text-3xl mb-2 font-bold text-white"> Fake Gamestore: Product Catalog App </h1>
+            <h1 className="text-3xl mb-2 font-bold text-white"> Fake Game Store: Product Catalog App </h1>
             <p className="text-gray-700 text-white">
               By: <b style={{ color: 'limegreen' }}>Nathan Geater and Andrew Sand</b>
             </p>
@@ -389,8 +389,16 @@ export const App = () => {
               </div>
               <div class="float-end">
                 <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Order total:</span>
-                  <span class="lead fw-normal">${cartTotal}</span>
+                  <span class="small text-muted me-2">Cost of Cart:</span>
+                  <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
+                </p>
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Tax:</span>
+                  <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
+                </p>
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Order Total:</span>
+                  <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
                 </p>
               </div>
             </div>
