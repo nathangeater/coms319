@@ -23,7 +23,7 @@ function isNumeric(n) {
 export const App = () => {
 
   //All State Variables
-  const Categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
+  const Categories = ["Roguelike", "2D Platformer", "RPG", "Puzzle", "Sandbox"];
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState('');
   const [showCart, setShowCart] = useState(false);
@@ -299,7 +299,6 @@ export const App = () => {
       order.Secondary_Address = address2.value
     }
 
-
     //DEBUG! Remove later!
     val = true;
 
@@ -318,8 +317,6 @@ export const App = () => {
     window.scrollTo(0, 0);
 
     if (test) {
-
-      //document.getElementById('checkout-form').classList.add("collapse")
       document.querySelector('.card').classList.remove("collapse");
 
       for(let item in cart){
@@ -330,13 +327,6 @@ export const App = () => {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
-
-      /*
-      document.querySelector('.card').classList.remove("collapse")
-      document.getElementById('liveAlertPlaceholder').innerHTML = ""
-      alert('<i class="bi-cart-check-fill"></i> You have made an order!',
-        'success')
-    */
     }
   }
 
