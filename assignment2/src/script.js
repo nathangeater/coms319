@@ -114,7 +114,7 @@ export const App = () => {
       //if (!form.checkValidity()) {
       if (!validate()) {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
-        alert('<i class="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
+        alert('<i className="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
       }
       event.preventDefault()
       event.stopPropagation()
@@ -150,21 +150,21 @@ export const App = () => {
   //Function used to list the items on the cart screen
   const listItems = Products.map((el) => (
     // PRODUCT
-    <div class="row border-top border-bottom" key={el.id}>
-      <div class="row main align-items-center">
-        <div class="col-2">
-          <img class="img-fluid" src={el.image} />
+    <div className="row border-top border-bottom" key={el.id}>
+      <div className="row main align-items-center">
+        <div className="col-2">
+          <img className="img-fluid" src={el.image} />
         </div>
-        <div class="col">
-          <div class="row">{el.title}</div>
-          <div class="row text-muted">{el.category}</div>
+        <div className="col">
+          <div className="row">{el.title}</div>
+          <div className="row text-muted">{el.category}</div>
         </div>
-        <div class="col">
-          <button class="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el)} > - </button>{" "}
-          <button class="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
+        <div className="col">
+          <button className="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el)} > - </button>{" "}
+          <button className="btn btn-outline-secondary" type="button" onClick={() => addToCart(el, 1)}> + </button>
         </div>
-        <div class="col">
-          ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
+        <div className="col">
+          ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
         </div>
       </div>
     </div>
@@ -172,17 +172,17 @@ export const App = () => {
 
   const confirmItems = Products.map((el) => (
     // PRODUCT
-    <div class="row border-top border-bottom" key={el.id}>
-      <div class="row main align-items-center">
-        <div class="col-2">
-          <img class="img-fluid" src={el.image} />
+    <div className="row border-top border-bottom" key={el.id}>
+      <div className="row main align-items-center">
+        <div className="col-2">
+          <img className="img-fluid" src={el.image} />
         </div>
-        <div class="col">
-          <div class="row">{el.title}</div>
-          <div class="row text-muted">{el.category}</div>
+        <div className="col">
+          <div className="row">{el.title}</div>
+          <div className="row text-muted">{el.category}</div>
         </div>
-        <div class="col">
-          ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
+        <div className="col">
+          ${el.price} <span className="close">&#10005;</span>{howManyofThis(el.id)}
         </div>
       </div>
     </div>
@@ -222,7 +222,7 @@ export const App = () => {
               </div>
             </div>
             <div className='add-buttons'>
-              <input type="text" class="form-control" defaultValue={1} placeholder="Quantity" />
+              <input type="text" className="form-control" defaultValue={1} placeholder="Quantity" />
               <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
               <button type="button" onClick={() => addToCart(product, 5)}> + </button>
             </div>
@@ -339,7 +339,7 @@ export const App = () => {
       }
 
       for (const [key, value] of Object.entries(order)) {
-        document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
+        document.querySelector('.card > ul').innerHTML += '<li className="list-group-item"> <b>' + `${key}` +
           ': </b>' + `${value}` + '</li>'
       }
     }
@@ -348,9 +348,9 @@ export const App = () => {
   const alert = (message, type) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
-      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `<div className="alert alert-${type} alert-dismissible" role="alert">`,
       ` <div>${message}</div>`,
-      ' <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close" ></button > ',
+      ' <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label = "Close" ></button > ',
       '</div>'
     ].join('')
 
@@ -401,109 +401,109 @@ export const App = () => {
             <button className="bg-lime-600 rounded-full px-3 py-1
                text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={handleShowHideCart}>Return and Continue Shopping</button>
           </b>
-          <div class="card">
-            <div class="row">
+          <div className="card">
+            <div className="row">
               {/* HERE, IT IS THE SHOPING CART */}
-              <div class="col-md-8 cart">
-                <div class="title">
-                  <div class="row">
-                    <div class="col">
+              <div className="col-md-8 cart">
+                <div className="title">
+                  <div className="row">
+                    <div className="col">
                       <h4>
                         <b>319 Shopping Cart</b>
                       </h4>
                     </div>
-                    <div class="col align-self-center text-right text-muted">
+                    <div className="col align-self-center text-right text-muted">
                       Products selected {cart.length}
                     </div>
                   </div>
                 </div>
                 <div>{listItems}</div>
               </div>
-              <div class="float-end">
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Cost of Cart:</span>
-                  <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
+              <div className="float-end">
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Cost of Cart:</span>
+                  <span className="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
                 </p>
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Tax:</span>
-                  <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Tax:</span>
+                  <span className="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
                 </p>
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Order Total:</span>
-                  <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Order Total:</span>
+                  <span className="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
+        <div className="container">
+          <div className="row">
+            <div className="col-2"></div>
+            <div className="col-8">
               <h1>Order Checkout Form</h1>
               <div id="liveAlertPlaceholder"></div>
-              <form class="row g-3" id="checkout-form">
+              <form className="row g-3" id="checkout-form">
 
                 {/* Full Name */}
-                <div class="col-md-6">
-                  <label for="inputName" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="inputName" />
-                  <div class="invalid-feedback">
+                <div className="col-md-6">
+                  <label htmlFor="inputName" className="form-label">Name</label>
+                  <input type="text" className="form-control" id="inputName" />
+                  <div className="invalid-feedback">
                     Invalid Name. Example: "John Doe"
                   </div>
                 </div>
 
                 {/* Email */}
-                <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4" />
-                  <div class="invalid-feedback">
+                <div className="col-md-6">
+                  <label htmlFor="inputEmail4" className="form-label">Email</label>
+                  <input type="email" className="form-control" id="inputEmail4" />
+                  <div className="invalid-feedback">
                     Invalid Email Address. Must be formatted like "abc@xyz.efg"
                   </div>
                 </div>
 
                 {/* Credit Card */}
-                <div class="col-12">
-                  <label for="inputCard" class="form-label">Credit Card</label>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
-                    <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
+                <div className="col-12">
+                  <label htmlFor="inputCard" className="form-label">Credit Card</label>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
+                    <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
                       aria-label="Username" aria-describedby="basic-addon1" />
-                    <div class="invalid-feedback">
+                    <div className="invalid-feedback">
                       Invalid Credit Card Number. Must be formatted like "5555-5555-5555-5555"
                     </div>
                   </div>
                 </div>
 
                 {/* Shipping Address */}
-                <div class="col-12">
-                  <label for="inputAddress" class="form-label">Shipping Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
-                  <div class="invalid-feedback">
+                <div className="col-12">
+                  <label htmlFor="inputAddress" className="form-label">Shipping Address</label>
+                  <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
+                  <div className="invalid-feedback">
                     Invalid Shipping Address. Must be formatted like "1234 Main St"
                   </div>
                 </div>
 
                 {/* Secondary Address */}
-                <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Secondary Address</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+                <div className="col-12">
+                  <label htmlFor="inputAddress2" className="form-label">Secondary Address</label>
+                  <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
                 </div>
 
                 {/* City */}
-                <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity" />
-                  <div class="invalid-feedback">
+                <div className="col-md-6">
+                  <label htmlFor="inputCity" className="form-label">City</label>
+                  <input type="text" className="form-control" id="inputCity" />
+                  <div className="invalid-feedback">
                     Invalid City. Must be formatted like "Berlin"
                   </div>
                 </div>
 
                 {/* State */}
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
+                <div className="col-md-4">
+                  <label htmlFor="inputState" className="form-label">State</label>
+                  <select id="inputState" className="form-select">
+                    <option defaultValue={"Selected"}>Choose...</option>
                     <option>Alabama</option>
                     <option>Alaska</option>
                     <option>Arizona</option>
@@ -555,27 +555,27 @@ export const App = () => {
                     <option>Wisconsin</option>
                     <option>Wyoming</option>
                   </select>
-                  <div class="invalid-feedback">
+                  <div className="invalid-feedback">
                     Invalid State. Something other than the default must be chosen.
                   </div>
                 </div>
 
                 {/* Zip Code */}
-                <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip Code</label>
-                  <input type="text" class="form-control" id="inputZip" />
-                  <div class="invalid-feedback">
+                <div className="col-md-2">
+                  <label htmlFor="inputZip" className="form-label">Zip Code</label>
+                  <input type="text" className="form-control" id="inputZip" />
+                  <div className="invalid-feedback">
                     Invalid Zip Code. Must be formatted like "55555"
                   </div>
                 </div>
 
                 {/* Order Button */}
-                <div class="col-12">
-                  <button type="submit" class="btn btn-outline-success"> <i class="bi-bag-check"></i> Proceed to Confirmation</button>
+                <div className="col-12">
+                  <button type="submit" className="btn btn-outline-success"> <i className="bi-bag-check"></i> Proceed to Confirmation</button>
                 </div>
               </form>
             </div>
-            <div class="col-2"></div>
+            <div className="col-2"></div>
           </div>
         </div>
       </div>
@@ -590,30 +590,30 @@ export const App = () => {
           </b>
 
 
-          <div class="card" style={{ width: '18rem' }}>
-            <div class="card-body">
-              <h5 class="card-title">Order summary</h5>
-              <p class="card-text">Here is a summary of your order.</p>
+          <div className="card" style={{ width: '18rem' }}>
+            <div className="card-body">
+              <h5 className="card-title">Order summary</h5>
+              <p className="card-text">Here is a summary of your order.</p>
             </div>
             <div>{confirmItems}</div>
-            <div class="float-end">
-              <p class="mb-0 me-5 d-flex align-items-center">
-                <span class="small text-muted me-2">Cost of Cart:</span>
-                <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
+            <div className="float-end">
+              <p className="mb-0 me-5 d-flex align-items-center">
+                <span className="small text-muted me-2">Cost of Cart:</span>
+                <span className="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
               </p>
-              <p class="mb-0 me-5 d-flex align-items-center">
-                <span class="small text-muted me-2">Tax:</span>
-                <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
+              <p className="mb-0 me-5 d-flex align-items-center">
+                <span className="small text-muted me-2">Tax:</span>
+                <span className="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
               </p>
-              <p class="mb-0 me-5 d-flex align-items-center">
-                <span class="small text-muted me-2">Order Total:</span>
-                <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
+              <p className="mb-0 me-5 d-flex align-items-center">
+                <span className="small text-muted me-2">Order Total:</span>
+                <span className="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
               </p>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul className="list-group list-group-flush">
 
             </ul>
-            <a href="" class="btn btn-secondary"> <i class="bi-arrow-left-circle"></i>
+            <a href="" className="btn btn-secondary"> <i className="bi-arrow-left-circle"></i>
               Confirm and Place Order</a>
           </div>
         </div>
