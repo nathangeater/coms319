@@ -3,13 +3,24 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import Products from './products.json';
 
+//Declaring and Initialising the order object for submitting the order
+var order = {
+  Name: '',
+  Email: '',
+  Card: '',
+  City: '',
+  Address: '',
+  Secondary_Address: '',
+  Zip: '',
+  State: ''
+}
+
 //Tests if the input is numeric
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 export const App = () => {
-  console.log("Step 1 : After reading file :");
 
   //All State Variables
   const Categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
@@ -27,18 +38,6 @@ export const App = () => {
   const alertTrigger = document.getElementById('submit-btn');
   const summaryCard = document.querySelector('.card');
   const summaryList = document.querySelector('.card > ul');
-
-  //Declaring and Initialising the order object for submitting the order
-  var order = {
-    Name: '',
-    Email: '',
-    Card: '',
-    City: '',
-    Address: '',
-    Secondary_Address: '',
-    Zip: '',
-    State: ''
-  }
 
   //Used to update the cart's total cost
   useEffect(() => {
@@ -58,13 +57,11 @@ export const App = () => {
   function handleClick(tag) {
     let filtered = Products.filter(cat => cat.category === tag);
     setProductsCategory(filtered);
-    console.log("Step 2: STATISTICS", Products.length, ProductsCategory.length);
   }
 
   //Deals with handling text changes with the search bar
   const handleChanges = (e) => {
     setQuery(e.target.value);
-    console.log("Step 6 : in handleChange, Target Value :", e.target.value, " Query Value :", query);
     const results = Products.filter(eachProduct => {
       if (e.target.value === "") return ProductsCategory;
       return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
@@ -75,6 +72,8 @@ export const App = () => {
   //Toggles between the catalog and cart view
   function handleShowHideCart() {
     setShowCart(!showCart);
+
+    window.scrollTo(0, 0);
 
     if(!showCart){
       document.body.style["overflow-y"] = 'visible';
@@ -157,6 +156,24 @@ export const App = () => {
         <div class="col">
           <button class="btn btn-outline-secondary" type="button" onClick={() => removeFromCart(el)} > - </button>{" "}
           <button class="btn btn-outline-secondary" type="button" onClick={() => addToCart(el)}> + </button>
+        </div>
+        <div class="col">
+          ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
+        </div>
+      </div>
+    </div>
+  ));
+
+  const confirmItems = Products.map((el) => (
+    // PRODUCT
+    <div class="row border-top border-bottom" key={el.id}>
+      <div class="row main align-items-center">
+        <div class="col-2">
+          <img class="img-fluid" src={el.image} />
+        </div>
+        <div class="col">
+          <div class="row">{el.title}</div>
+          <div class="row text-muted">{el.category}</div>
         </div>
         <div class="col">
           ${el.price} <span class="close">&#10005;</span>{howManyofThis(el.id)}
@@ -303,7 +320,9 @@ export const App = () => {
       //document.getElementById('checkout-form').classList.add("collapse")
       document.querySelector('.card').classList.remove("collapse");
 
-
+      for(let item in cart){
+        console.log(item);
+      }
 
       for (const [key, value] of Object.entries(order)) {
         document.querySelector('.card > ul').innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
@@ -363,7 +382,6 @@ export const App = () => {
           </div>
         </div>
         <div className="ml-5 p-10 xl:basis-4/5">
-          {console.log("Before render :", Products.length, ProductsCategory.length)}
           {render_products(ProductsCategory)}
         </div>
       </div>
@@ -570,6 +588,7 @@ export const App = () => {
               <h5 class="card-title">Order summary</h5>
               <p class="card-text">Here is a summary of your order.</p>
             </div>
+            <div>{confirmItems}</div>
             <ul class="list-group list-group-flush">
 
             </ul>
