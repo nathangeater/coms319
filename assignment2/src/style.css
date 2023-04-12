@@ -53,17 +53,18 @@ code {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-#top_confirm{
+#top_confirm {
   position: absolute;
   top: 0;
 }
 
-.add-buttons{
+.add-buttons {
   z-index: 1000000;
   background-color: whitesmoke;
 }

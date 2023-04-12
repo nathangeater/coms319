@@ -1,5 +1,5 @@
 import logo from './logo.png';
-import './App.css';
+import './style.css';
 import React, { useState, useEffect } from "react";
 import Products from './products.json';
 
@@ -108,8 +108,8 @@ export const App = () => {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
         alert('<i className="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
       }
-      event.preventDefault()
-      event.stopPropagation()
+      event.preventDefault();
+      event.stopPropagation();
     }, false);
 
   }
@@ -144,8 +144,6 @@ export const App = () => {
       }
     }
 
-
-    //hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
     setCart(hardCopy);
   }
 
@@ -162,7 +160,7 @@ export const App = () => {
   //Function used to list the items on the cart screen
   const listItems = Products.map((el) => (
     // PRODUCT
-    <div  key={el.id}>
+    <div key={el.id}>
       {checkCart(el) && <div className="row border-top border-bottom">
         <div className="row main align-items-center">
           <div className="col-2">
@@ -186,7 +184,7 @@ export const App = () => {
 
   const confirmItems = Products.map((el) => (
     // PRODUCT
-    <div  key={el.id}>
+    <div key={el.id}>
       {checkCart(el) && <div className="row border-top border-bottom">
         <div className="row main align-items-center">
           <div className="col-2">
