@@ -30,6 +30,7 @@ export const App = () => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [addNum, setAddNum] = useState(1);
 
   //Declaring and Initialising Variables used with the submission form
   let inputCard = document.querySelector('#inputCard');
@@ -129,7 +130,6 @@ export const App = () => {
       let ev = structuredClone(el);
       setCart(cart => ([...cart, ev]));
     }
-
     
   };
 
@@ -215,9 +215,9 @@ export const App = () => {
               </div>
             </div>
             <div className='add-buttons'>
-              <input type="text" className="form-control" defaultValue={1} placeholder="Quantity" />
+              <input id={index} type="text" className="form-control" defaultValue={1} placeholder="Quantity"/>
               <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
-              <button type="button" onClick={() => addToCart(product, 5)}> + </button>
+              <button type="button" onClick={() => addToCart(product, document.getElementById(index).value)}> + </button>
             </div>
           </div>
         ))}
