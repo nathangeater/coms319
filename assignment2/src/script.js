@@ -130,7 +130,7 @@ export const App = () => {
       setCart(cart => ([...cart, ev]));
     }
 
-    console.log(cart);
+    
   };
 
   //Removes the product from the cart
