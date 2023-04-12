@@ -75,10 +75,10 @@ export const App = () => {
 
     window.scrollTo(0, 0);
 
-    if(!showCart){
+    if (!showCart) {
       document.body.style["overflow-y"] = 'visible';
     }
-    else{
+    else {
       document.body.style["overflow-y"] = 'hidden';
     }
 
@@ -182,6 +182,10 @@ export const App = () => {
     </div>
   ));
 
+  function temp() {
+
+  }
+
   //Renders the products
   const render_products = (ProductsCategory) => {
     return <div className='category-section fixed'>
@@ -192,29 +196,34 @@ export const App = () => {
       }}>
         {/* Loop Products */}
         {ProductsCategory.map((product, index) => (
-          <div key={index} className="group relative shadow-lg" >
-            <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
-              <img
-                alt="Product Image"
-                src={product.image}
-                className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-              />
-            </div>
-            <div className="flex justify-between p-3">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href={product.href}>
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    <span style={{ fontSize: '16px', fontWeight: '600' }}>{product.title}</span>
-                  </a>
-                  <p>Genre - {product.category}</p>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Rating: {product.rating.rate}</p>
+          <div>
+            <div key={index} className="group relative shadow-lg" >
+              <div className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
+                <img
+                  alt="Product Image"
+                  src={product.image}
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                />
               </div>
-              <p className="text-sm font-medium text-green-600">${product.price}</p>
+              <div className="flex justify-between p-3">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href={product.href}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      <span style={{ fontSize: '16px', fontWeight: '600' }}>{product.title}</span>
+                    </a>
+                    <p>Genre - {product.category}</p>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Rating: {product.rating.rate}</p>
+                </div>
+                <p className="text-sm font-medium text-green-600">${product.price}</p>
+              </div>
             </div>
-            <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
-            <button type="button" onClick={() => addToCart(product)}> + </button>
+            <div className='add-buttons'>
+              <input type="text" class="form-control" defaultValue={1} placeholder="Quantity" />
+              <button type="button" onClick={() => removeFromCart(product)} > - </button>{" "}
+              <button type="button" onClick={() => addToCart(product)}> + </button>
+            </div>
           </div>
         ))}
       </div>
@@ -319,7 +328,7 @@ export const App = () => {
     if (test) {
       document.querySelector('.card').classList.remove("collapse");
 
-      for(let item in cart){
+      for (let item in cart) {
         console.log(item);
       }
 
@@ -571,7 +580,7 @@ export const App = () => {
       {/* Checkout Confirmation Page */}
       <div id='top_confirm' style={{ visibility: showConfirm ? 'visible' : 'hidden' }}>
         <div>
-        <img src={logo} alt="Logo" style={{ maxWidth: '30%' }} />
+          <img src={logo} alt="Logo" style={{ maxWidth: '30%' }} />
           <b>
             {/* Return Button */}
             <button className="bg-lime-600 rounded-full px-3 py-1
@@ -586,19 +595,19 @@ export const App = () => {
             </div>
             <div>{confirmItems}</div>
             <div class="float-end">
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Cost of Cart:</span>
-                  <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
-                </p>
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Tax:</span>
-                  <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
-                </p>
-                <p class="mb-0 me-5 d-flex align-items-center">
-                  <span class="small text-muted me-2">Order Total:</span>
-                  <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
-                </p>
-              </div>
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Cost of Cart:</span>
+                <span class="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span>
+              </p>
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Tax:</span>
+                <span class="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span>
+              </p>
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Order Total:</span>
+                <span class="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span>
+              </p>
+            </div>
             <ul class="list-group list-group-flush">
 
             </ul>
