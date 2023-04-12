@@ -1,4 +1,4 @@
-import logo from './img/logo.png';
+import logo from './logo.png';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Products from './products.json';
