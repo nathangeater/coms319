@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const ReactFormDataSchema = new mongoose.Schema({
     _id: { type: Number },
     title: { type: String },
@@ -13,5 +14,6 @@ const ReactFormDataSchema = new mongoose.Schema({
 },
     { collection: "fakestore_catalog" }
 )
+
 const Product = mongoose.model('Product', ReactFormDataSchema)
 module.exports = Product
