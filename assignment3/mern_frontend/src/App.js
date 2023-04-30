@@ -16,6 +16,8 @@ function App() {
   const [checked5, setChecked5] = useState(false);
   const [index2, setIndex2] = useState(0);
 
+  const [menu, setMenu] = useState(1);
+
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
     _id: 0,
@@ -213,11 +215,28 @@ function App() {
   return (
     <div>
       <h1>Catalog of Products</h1>
-      <button onClick={() => getAllProducts()}>Show All products</button>
-
-      <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
-
       <div>
+        <button onClick={() => setMenu(1)}>Create</button>
+        <button onClick={() => setMenu(2)}>Read</button>
+        <button onClick={() => setMenu(3)}>Update</button>
+        <button onClick={() => setMenu(4)}>Delete</button>
+        <button onClick={() => setMenu(5)}>Credits</button>
+      </div>
+
+      {menu === 2 && <div>
+      <h1>Show all available Products.</h1>
+      <button onClick={() => getAllProducts()}>Show All products</button>
+      <hr></hr>
+      {viewer1 && <div>Products {showAllItems}</div>}
+
+      <hr></hr>
+      <h1>Show one Product by Id:</h1>
+      <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
+      {viewer2 && <div>Product: {showOneItem}</div>}
+      <hr></hr>
+      </div>}
+
+      {menu === 1 && <div>
         <h3>Add a new product :</h3>
         <form action="">
           <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
@@ -232,9 +251,9 @@ function App() {
             Submit
           </button>
         </form>
-      </div>
+      </div>}
 
-      <div>
+      {menu === 4 && <div>
         <h3>Delete one product:</h3>
         <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
           onChange={(e) => setChecked4(!checked4)} />
@@ -252,9 +271,9 @@ function App() {
             {product[index].rating.count} <br />
           </div>
         )}
-      </div>
+      </div>}
 
-      <div>
+      {menu === 3 && <div>
         <h3>Update One Product's Price:</h3>
         <input type="checkbox" id="acceptupdate" name="acceptdelete" checked={checked5}
           onChange={(e) => setChecked5(!checked5)} />
@@ -275,15 +294,11 @@ function App() {
             </div>
           </div>
         )}
-      </div>
+      </div>}
 
-      <h1>Show all available Products.</h1>
-      <hr></hr>
-      {viewer1 && <div>Products {showAllItems}</div>}
-      <hr></hr>
-      <h1>Show one Product by Id:</h1>
-      {viewer2 && <div>Product: {showOneItem}</div>}
-      <hr></hr>
+      {menu === 5 && <div>
+        <h1>Credits</h1>
+      </div>}
     </div>
   );
 } // App end
