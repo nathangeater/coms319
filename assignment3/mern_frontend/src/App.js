@@ -298,6 +298,16 @@ function App() {
 
       {menu === 5 && <div>
         <h1>Credits</h1>
+        <p>Team #49</p>
+        <p>Member #1: Nathan Geater (nkgeater@iastate.edu)</p>
+        <p>Member #2: Andrew Sand (asand@iastate.edu)</p>
+        <p>Course: SE/ComS 319</p>
+        <p>Instructor: </p>
+        <p>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester exclusively for educational purposes. 
+          The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Using the website, users can create, 
+          read, update, and deleted data from the database, which stores information on various fictional products. Furthermore, this assignment uses
+          images from the FakeStoreAPI.
+        </p>
       </div>}
     </div>
   );
