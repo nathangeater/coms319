@@ -33,6 +33,7 @@ function App() {
 
   useEffect(() => {
     getAllProducts();
+  // eslint-disable-next-line
   }, [checked4]);
 
   function getAllProducts() {
@@ -45,16 +46,6 @@ function App() {
       });
     setViewer1(!viewer1);
   }
-
-  const showAllItems = product.map((el) => (
-    <div key={el._id}>
-      <img src={el.image} width={30} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
-    </div>
-  ));
 
   function getOneProduct(id) {
     console.log(id);
@@ -78,40 +69,7 @@ function App() {
       console.log("Wrong number of Product id.");
       setViewer2(false);
     }
-
-
-
-
-
-
-
-    
-    // if (id >= 1) {
-    //   fetch("http://localhost:4000/" + id)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log("Show one product :", id);
-    //       console.log(data);
-    //       const dataArr = [];
-    //       dataArr.push(data);
-    //       setOneProduct(dataArr);
-    //     });
-    //   setViewer2(!viewer2);
-    // } else {
-    //   console.log("Wrong number of Product id.");
-    //   setViewer2(false);
-    // }
   }
-
-  const showOneItem = oneProduct.map((el) => (
-    <div key={el._id}>
-      <img src={el.image} width={30} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
-    </div>
-  ));
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -238,8 +196,29 @@ function App() {
           alert(value);
         }
       });
+    setViewer1(false);
     setChecked5(!checked5);
   }
+
+  const showAllItems = product.map((el) => (
+    <div key={el._id}>
+      <img src={el.image} width={30} alt={el.title} /> <br />
+      Title: {el.title} <br />
+      Category: {el.category} <br />
+      Price: {el.price} <br />
+      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+    </div>
+  ));
+
+  const showOneItem = oneProduct.map((el) => (
+    <div key={el._id}>
+      <img src={el.image} width={30} alt={el.title} /> <br />
+      Title: {el.title} <br />
+      Category: {el.category} <br />
+      Price: {el.price} <br />
+      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+    </div>
+  ));
 
   return (
     <div>
@@ -284,14 +263,11 @@ function App() {
 
       {menu === 4 && <div>
         <h3>Delete one product:</h3>
-        <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
-          onChange={(e) => setChecked4(!checked4)} />
         <button onClick={() => getOneByOneProductPrev()}>Prev</button>
         <button onClick={() => getOneByOneProductNext()}>Next</button>
         <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
-        {checked4 && (
           <div key={product[index]._id}>
-            <img src={product[index].image} width={30} /> <br />
+            <img src={product[index].image} width={30} alt={product[index].title} /> <br />
             Id:{product[index]._id} <br />
             Title: {product[index].title} <br />
             Category: {product[index].category} <br />
@@ -299,21 +275,17 @@ function App() {
             Rate :{product[index].rating.rate} and Count:
             {product[index].rating.count} <br />
           </div>
-        )}
       </div>}
 
       {menu === 3 && <div>
         <h3>Update One Product's Price:</h3>
-        <input type="checkbox" id="acceptupdate" name="acceptdelete" checked={checked5}
-          onChange={(e) => setChecked5(!checked5)} />
         <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
         <button onClick={() => getOneByOneProductNextU()}>Next</button>
-        {checked5 && (
           <div>
             <input type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
             <button onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update</button>
             <div key={product[index2]._id}>
-              <img src={product[index2].image} width={30} /> <br />
+              <img src={product[index2].image} width={30} alt={product[index2].title} /> <br />
               Id:{product[index2]._id} <br />
               Title: {product[index2].title} <br />
               Category: {product[index2].category} <br />
@@ -322,7 +294,6 @@ function App() {
               {product[index2].rating.count} <br />
             </div>
           </div>
-        )}
       </div>}
 
       {menu === 5 && <div>
