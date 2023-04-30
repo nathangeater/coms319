@@ -13,6 +13,9 @@ function App() {
   const [checked4, setChecked4] = useState(false);
   const [index, setIndex] = useState(0);
 
+  const [checked5, setChecked5] = useState(false);
+  const [index2, setIndex2] = useState(0);
+
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
     _id: 0,
@@ -23,6 +26,8 @@ function App() {
     image: "http://127.0.0.1:4000/images/",
     rating: { rate: 0.0, count: 0 },
   });
+
+  const [addNewPrice, setAddNewPrice] = useState(0);
 
   useEffect(() => {
     getAllProducts();
@@ -103,6 +108,10 @@ function App() {
     }
   }
 
+  function handleUpdateChange(evt){
+    setAddNewPrice(evt.target.value);
+  }
+
   function handleOnSubmit(e) {
     e.preventDefault();
     console.log(e.target.value);
@@ -142,6 +151,24 @@ function App() {
     }
   }
 
+  function getOneByOneProductNextU() {
+    if (product.length > 0) {
+      if (index2 === product.length - 1) setIndex2(0);
+      else setIndex2(index2 + 1);
+      if (product.length > 0) setChecked5(true);
+      else setChecked5(false);
+    }
+  }
+
+  function getOneByOneProductPrevU() {
+    if (product.length > 0) {
+      if (index2 === 0) setIndex2(product.length - 1);
+      else setIndex2(index2 - 1);
+      if (product.length > 0) setChecked5(true);
+      else setChecked5(false);
+    }
+  }
+
   function deleteOneProduct(deleteid) {
     console.log("Product to delete :", deleteid);
     fetch("http://localhost:4000/delete/", {
@@ -160,6 +187,27 @@ function App() {
         }
       });
     setChecked4(!checked4);
+  }
+
+  function updateOneProduct(updateid, new_price) {
+    console.log("Product to update :", updateid);
+    console.log("Value to update :", new_price);
+    fetch("http://localhost:4000/update/", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _id: updateid , price: new_price}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Updating the product's price completed : ", updateid);
+        console.log(data);
+        if (data) {
+          //const keys = Object.keys(data);
+          const value = Object.values(data);
+          alert(value);
+        }
+      });
+    setChecked5(!checked5);
   }
 
   return (
@@ -181,7 +229,7 @@ function App() {
           <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
           <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
           <button type="submit" onClick={handleOnSubmit}>
-            submit
+            Submit
           </button>
         </form>
       </div>
@@ -202,6 +250,29 @@ function App() {
             Price: {product[index].price} <br />
             Rate :{product[index].rating.rate} and Count:
             {product[index].rating.count} <br />
+          </div>
+        )}
+      </div>
+
+      <div>
+        <h3>Update One Product's Price:</h3>
+        <input type="checkbox" id="acceptupdate" name="acceptdelete" checked={checked5}
+          onChange={(e) => setChecked5(!checked5)} />
+        <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
+        <button onClick={() => getOneByOneProductNextU()}>Next</button>
+        {checked5 && (
+          <div>
+            <input type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
+            <button onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update</button>
+            <div key={product[index2]._id}>
+              <img src={product[index2].image} width={30} /> <br />
+              Id:{product[index2]._id} <br />
+              Title: {product[index2].title} <br />
+              Category: {product[index2].category} <br />
+              Price: {product[index2].price} <br />
+              Rate :{product[index2].rating.rate} and Count:
+              {product[index2].rating.count} <br />
+            </div>
           </div>
         )}
       </div>
