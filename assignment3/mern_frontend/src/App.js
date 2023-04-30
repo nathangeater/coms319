@@ -16,7 +16,7 @@ function App() {
   const [checked5, setChecked5] = useState(false);
   const [index2, setIndex2] = useState(0);
 
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(2);
 
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
@@ -58,7 +58,8 @@ function App() {
 
   function getOneProduct(id) {
     console.log(id);
-    if (id >= 1 && id <= 20) {
+
+    if (id >= 1) {
       fetch("http://localhost:4000/" + id)
         .then((response) => response.json())
         .then((data) => {
@@ -67,11 +68,39 @@ function App() {
           const dataArr = [];
           dataArr.push(data);
           setOneProduct(dataArr);
-        });
-      setViewer2(!viewer2);
+          setViewer2(!viewer2);
+        })
+        .catch((err) => {
+          console.log("Wrong number of Product id.");
+          setViewer2(false);
+        })
     } else {
       console.log("Wrong number of Product id.");
+      setViewer2(false);
     }
+
+
+
+
+
+
+
+    
+    // if (id >= 1) {
+    //   fetch("http://localhost:4000/" + id)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log("Show one product :", id);
+    //       console.log(data);
+    //       const dataArr = [];
+    //       dataArr.push(data);
+    //       setOneProduct(dataArr);
+    //     });
+    //   setViewer2(!viewer2);
+    // } else {
+    //   console.log("Wrong number of Product id.");
+    //   setViewer2(false);
+    // }
   }
 
   const showOneItem = oneProduct.map((el) => (

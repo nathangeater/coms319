@@ -37,7 +37,14 @@ app.get("/:id", async (req, resp) => {
     const query = { _id: id };
     const oneProduct = await Product.findOne(query);
     console.log(oneProduct);
-    resp.send(oneProduct);
+
+    if(oneProduct === null){
+        console.log("Failed");
+        resp.send(null);
+    }
+    else{
+        resp.send(oneProduct);
+    }
 });
 
 app.post("/insert", async (req, res) => {
