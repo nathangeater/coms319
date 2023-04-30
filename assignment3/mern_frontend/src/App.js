@@ -87,13 +87,11 @@ function App() {
       const temp = value;
       setAddNewProduct({ ...addNewProduct, image: temp });
     } else if (evt.target.name === "rate") {
+      console.log(value);
       setAddNewProduct({ ...addNewProduct, rating: { rate: value } });
     } else if (evt.target.name === "count") {
       const temp = addNewProduct.rating.rate;
-      setAddNewProduct({
-        ...addNewProduct,
-        rating: { rate: temp, count: value },
-      });
+      setAddNewProduct({...addNewProduct, rating: { rate: temp, count: value }});
     }
   }
 
