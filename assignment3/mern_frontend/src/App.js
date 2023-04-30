@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     getAllProducts();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [checked4]);
 
   function getAllProducts() {
@@ -91,11 +91,11 @@ function App() {
       setAddNewProduct({ ...addNewProduct, rating: { rate: value } });
     } else if (evt.target.name === "count") {
       const temp = addNewProduct.rating.rate;
-      setAddNewProduct({...addNewProduct, rating: { rate: temp, count: value }});
+      setAddNewProduct({ ...addNewProduct, rating: { rate: temp, count: value } });
     }
   }
 
-  function handleUpdateChange(evt){
+  function handleUpdateChange(evt) {
     setAddNewPrice(evt.target.value);
   }
 
@@ -182,7 +182,7 @@ function App() {
     fetch("http://localhost:4000/update/", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _id: updateid , price: new_price}),
+      body: JSON.stringify({ _id: updateid, price: new_price }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -219,51 +219,60 @@ function App() {
   ));
 
   return (
-    <div>
-      <h1>Catalog of Products</h1>
-      <div>
-        <button onClick={() => setMenu(1)}>Create</button>
-        <button onClick={() => setMenu(2)}>Read</button>
-        <button onClick={() => setMenu(3)}>Update</button>
-        <button onClick={() => setMenu(4)}>Delete</button>
-        <button onClick={() => setMenu(5)}>Credits</button>
+    <div style={{background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh`}}>
+      <div style={{ textAlign: 'center' }}>
+        <h1>SE/ComS 319 Assignment #3: Catalog of Products</h1>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary border border-dark" style={{background: `radial-gradient(#cfcfcf, #a2b0a3)`}}>
+          <div className="container-fluid">
+            <div className="collapse navbar-collapse justify-content-center">
+              <div className="btn-group-lg" role="group">
+                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(1)}>Create</button>
+                <button className="btn btn-success" aria-current="page" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(2)}>Read</button>
+                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(3)}>Update</button>
+                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(4)}>Delete</button>
+                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(5)}>Credits</button>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
 
-      {menu === 2 && <div>
-      <h1>Show all available Products.</h1>
-      <button onClick={() => getAllProducts()}>Show All products</button>
-      <hr></hr>
-      {viewer1 && <div>Products {showAllItems}</div>}
+      <div>
+        {menu === 2 && <div>
+          <h1>Show all available Products.</h1>
+          <button onClick={() => getAllProducts()}>Show All products</button>
+          <hr></hr>
+          {viewer1 && <div>Products {showAllItems}</div>}
 
-      <hr></hr>
-      <h1>Show one Product by Id:</h1>
-      <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
-      {viewer2 && <div>Product: {showOneItem}</div>}
-      <hr></hr>
-      </div>}
+          <hr></hr>
+          <h1>Show one Product by Id:</h1>
+          <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
+          {viewer2 && <div>Product: {showOneItem}</div>}
+          <hr></hr>
+        </div>}
 
-      {menu === 1 && <div>
-        <h3>Add a new product :</h3>
-        <form action="">
-          <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
-          <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
-          <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
-          <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
-          <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
-          <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
-          <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
-          <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
-          <button type="submit" onClick={handleOnSubmit}>
-            Submit
-          </button>
-        </form>
-      </div>}
+        {menu === 1 && <div>
+          <h3>Add a new product :</h3>
+          <form action="">
+            <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
+            <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
+            <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
+            <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
+            <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
+            <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
+            <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+            <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+            <button type="submit" onClick={handleOnSubmit}>
+              Submit
+            </button>
+          </form>
+        </div>}
 
-      {menu === 4 && <div>
-        <h3>Delete one product:</h3>
-        <button onClick={() => getOneByOneProductPrev()}>Prev</button>
-        <button onClick={() => getOneByOneProductNext()}>Next</button>
-        <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+        {menu === 4 && <div>
+          <h3>Delete one product:</h3>
+          <button onClick={() => getOneByOneProductPrev()}>Prev</button>
+          <button onClick={() => getOneByOneProductNext()}>Next</button>
+          <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
           <div key={product[index]._id}>
             <img src={product[index].image} width={30} alt={product[index].title} /> <br />
             Id:{product[index]._id} <br />
@@ -273,12 +282,12 @@ function App() {
             Rate :{product[index].rating.rate} and Count:
             {product[index].rating.count} <br />
           </div>
-      </div>}
+        </div>}
 
-      {menu === 3 && <div>
-        <h3>Update One Product's Price:</h3>
-        <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
-        <button onClick={() => getOneByOneProductNextU()}>Next</button>
+        {menu === 3 && <div>
+          <h3>Update One Product's Price:</h3>
+          <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
+          <button onClick={() => getOneByOneProductNextU()}>Next</button>
           <div>
             <input type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
             <button onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update</button>
@@ -292,21 +301,22 @@ function App() {
               {product[index2].rating.count} <br />
             </div>
           </div>
-      </div>}
+        </div>}
 
-      {menu === 5 && <div>
-        <h1>Credits</h1>
-        <p>Team #49</p>
-        <p>Member #1: Nathan Geater (nkgeater@iastate.edu)</p>
-        <p>Member #2: Andrew Sand (asand@iastate.edu)</p>
-        <p>Course: SE/ComS 319</p>
-        <p>Instructor: </p>
-        <p>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester exclusively for educational purposes. 
-          The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Using the website, users can create, 
-          read, update, and deleted data from the database, which stores information on various fictional products. Furthermore, this assignment uses
-          images from the FakeStoreAPI.
-        </p>
-      </div>}
+        {menu === 5 && <div>
+          <h1>Credits</h1>
+          <p>Team #49</p>
+          <p>Member #1: Nathan Geater (nkgeater@iastate.edu)</p>
+          <p>Member #2: Andrew Sand (asand@iastate.edu)</p>
+          <p>Course: SE/ComS 319</p>
+          <p>Instructor: </p>
+          <p>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester exclusively for educational purposes.
+            The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Using the website, users can create,
+            read, update, and deleted data from the database, which stores information on various fictional products. Furthermore, this assignment uses
+            images from the FakeStoreAPI.
+          </p>
+        </div>}
+      </div>
     </div>
   );
 } // App end
