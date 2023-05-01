@@ -315,9 +315,21 @@ function App() {
 
         {menu === 4 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
-          <button onClick={() => getOneByOneProductPrev()}>Prev.</button>
-          <button onClick={() => getOneByOneProductNext()}>Next</button>
-          <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+          
+          <div style={{width: `286px`, marginLeft: `41vw`}}>
+            <div>
+              <div className="row flex-nowrap">
+                <div className="col">
+                <button className='btn btn-secondary' onClick={() => getOneByOneProductPrev()}>Prev.</button>
+                </div>
+                <div className="col">
+                <button className='btn btn-secondary' onClick={() => getOneByOneProductNext()}>Next</button>
+                </div>
+                <div className="col">
+                <button className='btn btn-success' onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+                </div>
+              </div>
+            </div>
           <div key={product[index]._id}>
             <div className='card border border-dark' style={{ width: `18rem` }}>
               <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
@@ -327,6 +339,7 @@ function App() {
                 <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
                 <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
               </div>
+            </div>
             </div>
           </div>
         </div>}
