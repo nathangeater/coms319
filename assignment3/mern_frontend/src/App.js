@@ -264,43 +264,43 @@ function App() {
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Add a New Product:</u></h1>
           <form style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>
             <div className="row mb-3">
-              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product ID</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product ID</label>
               <div className="col-sm-10">
                 <input type="number" className="form-control form-control-lg" placeholder="ID" name="_id" value={addNewProduct._id} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="title" className="col-sm-2 col-form-label col-form-label-lg">Name</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Name</label>
               <div className="col-sm-10">
                 <input type="text" placeholder="Title" className="form-control form-control-lg" name="title" value={addNewProduct.title} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="price" className="col-sm-2 col-form-label col-form-label-lg">Price</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Price</label>
               <div className="col-sm-10">
                 <input type="number" placeholder="Price" className="form-control form-control-lg" name="price" value={addNewProduct.price} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Category</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Category</label>
               <div className="col-sm-10">
                 <input type="text" placeholder="Category" className="form-control form-control-lg" name="category" value={addNewProduct.category} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Image Filepath</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Image Filepath</label>
               <div className="col-sm-10">
                 <input type="text" placeholder="Image" className="form-control form-control-lg" name="image" value={addNewProduct.image} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Rating</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Rating</label>
               <div className="col-sm-10">
                 <input type="number" placeholder="Rate" className="form-control form-control-lg" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
               </div>
             </div>
             <div className="row mb-3">
-              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Count</label>
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Count</label>
               <div className="col-sm-10">
                 <input type="number" placeholder="Count" className="form-control form-control-lg" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
               </div>
