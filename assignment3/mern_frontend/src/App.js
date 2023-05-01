@@ -115,6 +115,7 @@ function App() {
           //const keys = Object.keys(data);
           const value = Object.values(data);
           alert(value);
+          window.location.reload();
         }
       });
   }
@@ -174,6 +175,7 @@ function App() {
         }
       });
     setChecked4(!checked4);
+    window.location.reload();
   }
 
   function updateOneProduct(updateid, new_price) {
@@ -196,6 +198,7 @@ function App() {
       });
     setViewer1(false);
     setChecked5(!checked5);
+    window.location.reload();
   }
 
   const showAllItems = product.map((el) => (
