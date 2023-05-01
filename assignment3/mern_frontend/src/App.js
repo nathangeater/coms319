@@ -380,10 +380,11 @@ function App() {
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Credits</u></h1>
           <div className='text-center'>
             <p><span className='fw-bold'>Team:</span> #49</p>
-            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (nkgeater@iastate.edu)</p>
-            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (asand@iastate.edu)</p>
+            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (<a href="mailto:nkgeater@iastate.edu">nkgeater@iastate.edu</a>)</p>
+            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href="mailto:asand@iastate.edu">asand@iastate.edu</a>)</p>
             <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
             <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
+            <p><span className='fw-bold'>Date:</span> 30 Apr. 2023 </p>
             <p style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester, exclusively for educational purposes.
               The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Usrs can use the website to create,
               read, update, and delete data from the database, which stores information on various fictional products. Furthermore, this assignment uses
