@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 
 import { useState, useEffect } from "react";
 
@@ -16,6 +16,8 @@ function App() {
   const [checked5, setChecked5] = useState(false);
   const [index2, setIndex2] = useState(0);
 
+  const [menu, setMenu] = useState(2);
+
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
     _id: 0,
@@ -31,6 +33,7 @@ function App() {
 
   useEffect(() => {
     getAllProducts();
+    // eslint-disable-next-line
   }, [checked4]);
 
   function getAllProducts() {
@@ -44,19 +47,10 @@ function App() {
     setViewer1(!viewer1);
   }
 
-  const showAllItems = product.map((el) => (
-    <div key={el._id}>
-      <img src={el.image} width={30} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
-    </div>
-  ));
-
   function getOneProduct(id) {
     console.log(id);
-    if (id >= 1 && id <= 20) {
+
+    if (id >= 1) {
       fetch("http://localhost:4000/" + id)
         .then((response) => response.json())
         .then((data) => {
@@ -65,22 +59,17 @@ function App() {
           const dataArr = [];
           dataArr.push(data);
           setOneProduct(dataArr);
-        });
-      setViewer2(!viewer2);
+          setViewer2(!viewer2);
+        })
+        .catch((err) => {
+          console.log("Wrong number of Product id.");
+          setViewer2(false);
+        })
     } else {
       console.log("Wrong number of Product id.");
+      setViewer2(false);
     }
   }
-
-  const showOneItem = oneProduct.map((el) => (
-    <div key={el._id}>
-      <img src={el.image} width={30} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
-    </div>
-  ));
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -98,17 +87,15 @@ function App() {
       const temp = value;
       setAddNewProduct({ ...addNewProduct, image: temp });
     } else if (evt.target.name === "rate") {
+      console.log(value);
       setAddNewProduct({ ...addNewProduct, rating: { rate: value } });
     } else if (evt.target.name === "count") {
       const temp = addNewProduct.rating.rate;
-      setAddNewProduct({
-        ...addNewProduct,
-        rating: { rate: temp, count: value },
-      });
+      setAddNewProduct({ ...addNewProduct, rating: { rate: temp, count: value } });
     }
   }
 
-  function handleUpdateChange(evt){
+  function handleUpdateChange(evt) {
     setAddNewPrice(evt.target.value);
   }
 
@@ -128,6 +115,7 @@ function App() {
           //const keys = Object.keys(data);
           const value = Object.values(data);
           alert(value);
+          window.location.reload();
         }
       });
   }
@@ -187,6 +175,7 @@ function App() {
         }
       });
     setChecked4(!checked4);
+    window.location.reload();
   }
 
   function updateOneProduct(updateid, new_price) {
@@ -195,7 +184,7 @@ function App() {
     fetch("http://localhost:4000/update/", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _id: updateid , price: new_price}),
+      body: JSON.stringify({ _id: updateid, price: new_price }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -207,83 +196,203 @@ function App() {
           alert(value);
         }
       });
+    setViewer1(false);
     setChecked5(!checked5);
+    window.location.reload();
   }
 
+  const showAllItems = product.map((el) => (
+    <div key={el._id} className='col mt-3'>
+      <div className='card border border-dark' style={{ width: `18rem` }}>
+        <img src={el.image} width={20} alt={el.title} className='card-img-top' />
+        <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+          <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
+          <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
+          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
+          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+        </div>
+      </div>
+    </div>
+  ));
+
+  const showOneItem = oneProduct.map((el) => (
+    <div key={el._id}>
+      <div className='card border border-dark' style={{ width: `18rem` }}>
+        <img src={el.image} width={20} alt={el.title} className='card-img-top' />
+        <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+          <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
+          <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
+          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
+          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+        </div>
+      </div>
+    </div>
+  ));
+
   return (
-    <div>
-      <h1>Catalog of Products</h1>
-      <button onClick={() => getAllProducts()}>Show All products</button>
-
-      <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
-
-      <div>
-        <h3>Add a new product :</h3>
-        <form action="">
-          <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
-          <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
-          <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
-          <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
-          <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
-          <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
-          <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
-          <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
-          <button type="submit" onClick={handleOnSubmit}>
-            Submit
-          </button>
-        </form>
-      </div>
-
-      <div>
-        <h3>Delete one product:</h3>
-        <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
-          onChange={(e) => setChecked4(!checked4)} />
-        <button onClick={() => getOneByOneProductPrev()}>Prev</button>
-        <button onClick={() => getOneByOneProductNext()}>Next</button>
-        <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
-        {checked4 && (
-          <div key={product[index]._id}>
-            <img src={product[index].image} width={30} /> <br />
-            Id:{product[index]._id} <br />
-            Title: {product[index].title} <br />
-            Category: {product[index].category} <br />
-            Price: {product[index].price} <br />
-            Rate :{product[index].rating.rate} and Count:
-            {product[index].rating.count} <br />
-          </div>
-        )}
-      </div>
-
-      <div>
-        <h3>Update One Product's Price:</h3>
-        <input type="checkbox" id="acceptupdate" name="acceptdelete" checked={checked5}
-          onChange={(e) => setChecked5(!checked5)} />
-        <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
-        <button onClick={() => getOneByOneProductNextU()}>Next</button>
-        {checked5 && (
-          <div>
-            <input type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
-            <button onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update</button>
-            <div key={product[index2]._id}>
-              <img src={product[index2].image} width={30} /> <br />
-              Id:{product[index2]._id} <br />
-              Title: {product[index2].title} <br />
-              Category: {product[index2].category} <br />
-              Price: {product[index2].price} <br />
-              Rate :{product[index2].rating.rate} and Count:
-              {product[index2].rating.count} <br />
+    <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
+      <div style={{ textAlign: 'center' }}>
+        <h1>SE/ComS 319 Assignment #3: Catalog of Products</h1>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary border border-dark" style={{ background: `radial-gradient(#cfcfcf, #a2b0a3)` }}>
+          <div className="container-fluid">
+            <div className="collapse navbar-collapse justify-content-center">
+              <div className="btn-group-lg" role="group">
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button>
+                <button className="btn btn-success" aria-current="page" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Read</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>Credits</button>
+              </div>
             </div>
           </div>
-        )}
+        </nav>
       </div>
 
-      <h1>Show all available Products.</h1>
-      <hr></hr>
-      {viewer1 && <div>Products {showAllItems}</div>}
-      <hr></hr>
-      <h1>Show one Product by Id:</h1>
-      {viewer2 && <div>Product: {showOneItem}</div>}
-      <hr></hr>
+      <div className='m-4'>
+        {menu === 2 && <div>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>View Products:</u></h1>
+          <h1><u>Show All Available Products:</u></h1>
+          <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Toggle Showing All Products</button>
+          <hr></hr>
+          {viewer1 && <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>}
+
+          <hr></hr>
+          <h1><u>Show One Product by ID:</u></h1>
+          <input type="text" id="message" name="message" placeholder="id" className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
+          {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
+          <hr></hr>
+        </div>}
+
+        {menu === 1 && <div>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Add a New Product:</u></h1>
+          <form style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product ID</label>
+              <div className="col-sm-10">
+                <input type="number" className="form-control form-control-lg" placeholder="ID" name="_id" value={addNewProduct._id} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Name</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Title" className="form-control form-control-lg" name="title" value={addNewProduct.title} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Price</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Price" className="form-control form-control-lg" name="price" value={addNewProduct.price} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Category</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Category" className="form-control form-control-lg" name="category" value={addNewProduct.category} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Image Filepath</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Image" className="form-control form-control-lg" name="image" value={addNewProduct.image} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Rating</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Rate" className="form-control form-control-lg" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label col-form-label-lg">Product Count</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Count" className="form-control form-control-lg" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <button type="submit" onClick={handleOnSubmit} className="btn btn-success col-auto">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>}
+
+        {menu === 4 && <div>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
+          
+          <div style={{width: `286px`, marginLeft: `41vw`}}>
+            <div>
+              <div className="row flex-nowrap">
+                <div className="col">
+                <button className='btn btn-secondary' onClick={() => getOneByOneProductPrev()}>Prev.</button>
+                </div>
+                <div className="col">
+                <button className='btn btn-secondary' onClick={() => getOneByOneProductNext()}>Next</button>
+                </div>
+                <div className="col">
+                <button className='btn btn-success' onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+                </div>
+              </div>
+            </div>
+          <div key={product[index]._id}>
+            <div className='card border border-dark' style={{ width: `18rem` }}>
+              <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
+              <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+                <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index].title}</p>
+                <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index].category}</p>
+                <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
+                <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>}
+
+        {menu === 3 && <div>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update One Products's Price:</u></h1>
+          <div style={{width: `286px`, marginLeft: `41vw`}}>
+            <div>
+              <div className="row flex-nowrap">
+                <div className="col">
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductPrevU()}>Prev.</button>
+                </div>
+                <div className="col">
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductNextU()}>Next</button>
+                </div>
+              </div>
+            </div>
+            <input style={{maxWidth: `50%`}} type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
+            <button className='btn btn-success m-2' onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update Price</button>
+            <div key={product[index2]._id}>
+              <div className='card border border-dark' style={{ width: `18rem` }}>
+                <img src={product[index2].image} width={20} alt={product[index2].title} className='card-img-top' />
+                <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+                  <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index2].title}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index2].category}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index2].price}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index2].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index2].rating.count}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>}
+
+        {menu === 5 && <div>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Credits</u></h1>
+          <div className='text-center'>
+            <p><span className='fw-bold'>Team:</span> #49</p>
+            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (<a href="mailto:nkgeater@iastate.edu">nkgeater@iastate.edu</a>)</p>
+            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href="mailto:asand@iastate.edu">asand@iastate.edu</a>)</p>
+            <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
+            <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
+            <p><span className='fw-bold'>Date:</span> 30 Apr. 2023 </p>
+            <p style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester, exclusively for educational purposes.
+              The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Usrs can use the website to create,
+              read, update, and delete data from the database, which stores information on various fictional products. Furthermore, this assignment uses
+              images from the FakeStoreAPI and styling from Bootstrap, the latter of which is &copy; Bootstrap.
+            </p>
+          </div>
+        </div>}
+      </div>
     </div>
   );
 } // App end
