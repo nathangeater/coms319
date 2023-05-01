@@ -199,7 +199,7 @@ function App() {
   }
 
   const showAllItems = product.map((el) => (
-    <div key={el._id}>
+    <div key={el._id} className='col mt-3'>
       <div className='card border border-dark' style={{ width: `18rem` }}>
         <img src={el.image} width={20} alt={el.title} className='card-img-top' />
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
@@ -245,22 +245,23 @@ function App() {
         </nav>
       </div>
 
-      <div>
+      <div className='m-4'>
         {menu === 2 && <div>
-          <h1>Show all available Products.</h1>
-          <button onClick={() => getAllProducts()}>Show All products</button>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>View Products:</u></h1>
+          <h1><u>Show All Available Products:</u></h1>
+          <button onClick={() => getAllProducts()}>Show All Products</button>
           <hr></hr>
-          {viewer1 && <div><span className='fs-2'>Products:</span> {showAllItems}</div>}
+          {viewer1 && <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>}
 
           <hr></hr>
-          <h1>Show one Product by Id:</h1>
+          <h1><u>Show One Product by ID:</u></h1>
           <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
-          {viewer2 && <div>Product: {showOneItem}</div>}
+          {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
           <hr></hr>
         </div>}
 
         {menu === 1 && <div>
-          <h3>Add a new product :</h3>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Add a New Product:</u></h1>
           <form action="">
             <div className="row">
               <div className="col-auto">
@@ -327,7 +328,7 @@ function App() {
         </div>}
 
         {menu === 4 && <div>
-          <h3>Delete one product:</h3>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
           <button onClick={() => getOneByOneProductPrev()}>Prev</button>
           <button onClick={() => getOneByOneProductNext()}>Next</button>
           <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
@@ -343,7 +344,7 @@ function App() {
         </div>}
 
         {menu === 3 && <div>
-          <h3>Update One Product's Price:</h3>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update One Products's Price:</u></h1>
           <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
           <button onClick={() => getOneByOneProductNextU()}>Next</button>
           <div>
