@@ -249,78 +249,64 @@ function App() {
         {menu === 2 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>View Products:</u></h1>
           <h1><u>Show All Available Products:</u></h1>
-          <button onClick={() => getAllProducts()}>Show All Products</button>
+          <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Toggle Showing All Products</button>
           <hr></hr>
           {viewer1 && <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>}
 
           <hr></hr>
           <h1><u>Show One Product by ID:</u></h1>
-          <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
+          <input type="text" id="message" name="message" placeholder="id" className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
           {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
           <hr></hr>
         </div>}
 
         {menu === 1 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Add a New Product:</u></h1>
-          <form action="">
-            <div className="row">
-              <div className="col-auto">
-                <label for="_id" className="col-form-label">Product ID</label>
-              </div>
-              <div className="col-auto">
-                <input type="number" className="form-control" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
+          <form style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>
+            <div className="row mb-3">
+              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product ID</label>
+              <div className="col-sm-10">
+                <input type="number" className="form-control form-control-lg" placeholder="ID" name="_id" value={addNewProduct._id} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="title" className="col-form-label">Title</label>
-              </div>
-              <div className="col-auto">
-                <input type="text" placeholder="title?" className="form-control" name="title" value={addNewProduct.title} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="title" className="col-sm-2 col-form-label col-form-label-lg">Name</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Title" className="form-control form-control-lg" name="title" value={addNewProduct.title} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="price" className="col-form-label">Price</label>
-              </div>
-              <div className="col-auto">
-                <input type="number" placeholder="price?" className="form-control" name="price" value={addNewProduct.price} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="price" className="col-sm-2 col-form-label col-form-label-lg">Price</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Price" className="form-control form-control-lg" name="price" value={addNewProduct.price} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="category" className="col-form-label">Product Category</label>
-              </div>
-              <div className="col-auto">
-                <input type="text" placeholder="category?" className="form-control" name="category" value={addNewProduct.category} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Category</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Category" className="form-control form-control-lg" name="category" value={addNewProduct.category} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="image" className="col-form-label">Image Filepath</label>
-              </div>
-              <div className="col-auto">
-                <input type="text" placeholder="image?" className="form-control" name="image" value={addNewProduct.image} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Image Filepath</label>
+              <div className="col-sm-10">
+                <input type="text" placeholder="Image" className="form-control form-control-lg" name="image" value={addNewProduct.image} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="rate" className="col-form-label">Product Rating</label>
-              </div>
-              <div className="col-auto">
-                <input type="number" placeholder="rate?" className="form-control" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Rating</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Rate" className="form-control form-control-lg" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
-                <label for="count" className="col-form-label">Product Count</label>
-              </div>
-              <div className="col-auto">
-                <input type="number" placeholder="count?" className="form-control" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+            <div className="row mb-3">
+              <label for="_id" className="col-sm-2 col-form-label col-form-label-lg">Product Count</label>
+              <div className="col-sm-10">
+                <input type="number" placeholder="Count" className="form-control form-control-lg" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
               </div>
             </div>
-            <div className="row">
-              <button type="submit" onClick={handleOnSubmit} className="col-auto">
+            <div className="row mb-3">
+              <button type="submit" onClick={handleOnSubmit} className="btn btn-success col-auto">
                 Submit
               </button>
             </div>
@@ -329,35 +315,47 @@ function App() {
 
         {menu === 4 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
-          <button onClick={() => getOneByOneProductPrev()}>Prev</button>
+          <button onClick={() => getOneByOneProductPrev()}>Prev.</button>
           <button onClick={() => getOneByOneProductNext()}>Next</button>
           <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
           <div key={product[index]._id}>
-            <img src={product[index].image} width={30} alt={product[index].title} /> <br />
-            Id:{product[index]._id} <br />
-            Title: {product[index].title} <br />
-            Category: {product[index].category} <br />
-            Price: {product[index].price} <br />
-            Rate :{product[index].rating.rate} and Count:
-            {product[index].rating.count} <br />
+            <div className='card border border-dark' style={{ width: `18rem` }}>
+              <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
+              <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+                <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index].title}</p>
+                <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index].category}</p>
+                <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
+                <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
+              </div>
+            </div>
           </div>
         </div>}
 
         {menu === 3 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update One Products's Price:</u></h1>
-          <button onClick={() => getOneByOneProductPrevU()}>Prev</button>
-          <button onClick={() => getOneByOneProductNextU()}>Next</button>
-          <div>
-            <input type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
-            <button onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update</button>
+          <div style={{width: `286px`, marginLeft: `41vw`}}>
+            <div>
+              <div className="row flex-nowrap">
+                <div className="col">
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductPrevU()}>Prev.</button>
+                </div>
+                <div className="col">
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductNextU()}>Next</button>
+                </div>
+              </div>
+            </div>
+            <input style={{maxWidth: `50%`}} type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
+            <button className='btn btn-success m-2' onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update Price</button>
             <div key={product[index2]._id}>
-              <img src={product[index2].image} width={30} alt={product[index2].title} /> <br />
-              Id:{product[index2]._id} <br />
-              Title: {product[index2].title} <br />
-              Category: {product[index2].category} <br />
-              Price: {product[index2].price} <br />
-              Rate :{product[index2].rating.rate} and Count:
-              {product[index2].rating.count} <br />
+              <div className='card border border-dark' style={{ width: `18rem` }}>
+                <img src={product[index2].image} width={20} alt={product[index2].title} className='card-img-top' />
+                <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+                  <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index2].title}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index2].category}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index2].price}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index2].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index2].rating.count}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>}
