@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 
 import { useState, useEffect } from "react";
 
@@ -200,37 +200,45 @@ function App() {
 
   const showAllItems = product.map((el) => (
     <div key={el._id}>
-      <img src={el.image} width={30} alt={el.title} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+      <div className='card border border-dark' style={{ width: `18rem` }}>
+        <img src={el.image} width={20} alt={el.title} className='card-img-top' />
+        <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+          <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
+          <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
+          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
+          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+        </div>
+      </div>
     </div>
   ));
 
   const showOneItem = oneProduct.map((el) => (
     <div key={el._id}>
-      <img src={el.image} width={30} alt={el.title} /> <br />
-      Title: {el.title} <br />
-      Category: {el.category} <br />
-      Price: {el.price} <br />
-      Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+      <div className='card border border-dark' style={{ width: `18rem` }}>
+        <img src={el.image} width={20} alt={el.title} className='card-img-top' />
+        <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+          <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
+          <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
+          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
+          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+        </div>
+      </div>
     </div>
   ));
 
   return (
-    <div style={{background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh`}}>
+    <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
       <div style={{ textAlign: 'center' }}>
         <h1>SE/ComS 319 Assignment #3: Catalog of Products</h1>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary border border-dark" style={{background: `radial-gradient(#cfcfcf, #a2b0a3)`}}>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary border border-dark" style={{ background: `radial-gradient(#cfcfcf, #a2b0a3)` }}>
           <div className="container-fluid">
             <div className="collapse navbar-collapse justify-content-center">
               <div className="btn-group-lg" role="group">
-                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(1)}>Create</button>
-                <button className="btn btn-success" aria-current="page" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(2)}>Read</button>
-                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(3)}>Update</button>
-                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(4)}>Delete</button>
-                <button className="btn btn-success" style={{marginLeft: `15px`, marginRight: `15px`}} onClick={() => setMenu(5)}>Credits</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button>
+                <button className="btn btn-success" aria-current="page" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Read</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button>
+                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>Credits</button>
               </div>
             </div>
           </div>
@@ -242,7 +250,7 @@ function App() {
           <h1>Show all available Products.</h1>
           <button onClick={() => getAllProducts()}>Show All products</button>
           <hr></hr>
-          {viewer1 && <div>Products {showAllItems}</div>}
+          {viewer1 && <div><span className='fs-2'>Products:</span> {showAllItems}</div>}
 
           <hr></hr>
           <h1>Show one Product by Id:</h1>
@@ -254,17 +262,67 @@ function App() {
         {menu === 1 && <div>
           <h3>Add a new product :</h3>
           <form action="">
-            <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
-            <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
-            <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
-            <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
-            <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
-            <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
-            <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
-            <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
-            <button type="submit" onClick={handleOnSubmit}>
-              Submit
-            </button>
+            <div className="row">
+              <div className="col-auto">
+                <label for="_id" className="col-form-label">Product ID</label>
+              </div>
+              <div className="col-auto">
+                <input type="number" className="form-control" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="title" className="col-form-label">Title</label>
+              </div>
+              <div className="col-auto">
+                <input type="text" placeholder="title?" className="form-control" name="title" value={addNewProduct.title} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="price" className="col-form-label">Price</label>
+              </div>
+              <div className="col-auto">
+                <input type="number" placeholder="price?" className="form-control" name="price" value={addNewProduct.price} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="category" className="col-form-label">Product Category</label>
+              </div>
+              <div className="col-auto">
+                <input type="text" placeholder="category?" className="form-control" name="category" value={addNewProduct.category} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="image" className="col-form-label">Image Filepath</label>
+              </div>
+              <div className="col-auto">
+                <input type="text" placeholder="image?" className="form-control" name="image" value={addNewProduct.image} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="rate" className="col-form-label">Product Rating</label>
+              </div>
+              <div className="col-auto">
+                <input type="number" placeholder="rate?" className="form-control" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-auto">
+                <label for="count" className="col-form-label">Product Count</label>
+              </div>
+              <div className="col-auto">
+                <input type="number" placeholder="count?" className="form-control" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <button type="submit" onClick={handleOnSubmit} className="col-auto">
+                Submit
+              </button>
+            </div>
           </form>
         </div>}
 
@@ -304,17 +362,19 @@ function App() {
         </div>}
 
         {menu === 5 && <div>
-          <h1>Credits</h1>
-          <p>Team #49</p>
-          <p>Member #1: Nathan Geater (nkgeater@iastate.edu)</p>
-          <p>Member #2: Andrew Sand (asand@iastate.edu)</p>
-          <p>Course: SE/ComS 319</p>
-          <p>Instructor: </p>
-          <p>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester exclusively for educational purposes.
-            The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Using the website, users can create,
-            read, update, and deleted data from the database, which stores information on various fictional products. Furthermore, this assignment uses
-            images from the FakeStoreAPI.
-          </p>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Credits</u></h1>
+          <div className='text-center'>
+            <p><span className='fw-bold'>Team:</span> #49</p>
+            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (nkgeater@iastate.edu)</p>
+            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (asand@iastate.edu)</p>
+            <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
+            <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
+            <p style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester, exclusively for educational purposes.
+              The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Usrs can use the website to create,
+              read, update, and delete data from the database, which stores information on various fictional products. Furthermore, this assignment uses
+              images from the FakeStoreAPI and styling from Bootstrap, the latter of which is &copy; Bootstrap.
+            </p>
+          </div>
         </div>}
       </div>
     </div>
