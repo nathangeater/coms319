@@ -300,6 +300,7 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Genres:</u></span> {el.genres}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
+          <p className='card-text'><span className='fw-bold'><u>Recommended By:</u></span> {el.recommender}</p>
           <div className='add-buttons'>
             <input id={el._id} type="number" className="form-control" defaultValue={1} placeholder="Quantity" />
             <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => removeFromCart(el._id, document.getElementById(el._id).value)} > - </button>
@@ -431,7 +432,7 @@ function App() {
     }
     else {
       email.setAttribute("class", "form-control is-valid");
-      // order.Email = email.value
+      order.Email = email.value
     }
     //Check Name
     if (name.value.length === 0) {
@@ -440,7 +441,7 @@ function App() {
     }
     else {
       name.setAttribute("class", "form-control is-valid");
-      // order.Name = name.value
+      order.Name = name.value
     }
     //Check Credit Card
     if (!card.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
@@ -449,7 +450,7 @@ function App() {
     }
     else {
       card.setAttribute("class", "form-control is-valid");
-      // order.Card = card.value
+      order.Card = card.value
     }
     //Check City
     if (city.value.length === 0) {
@@ -458,7 +459,7 @@ function App() {
     }
     else {
       city.setAttribute("class", "form-control is-valid");
-      // order.City = city.value
+      order.City = city.value
     }
     //Check Address
     if (address.value.length === 0) {
@@ -467,12 +468,12 @@ function App() {
     }
     else {
       address.setAttribute("class", "form-control is-valid");
-      // order.Address = address.value
+      order.Address = address.value
     }
     //Zip Code
     if (zip.value.length === 5 && !isNaN(zip.value)) {
       zip.setAttribute("class", "form-control is-valid");
-      // order.Zip = zip.value
+      order.Zip = zip.value
     }
     else {
       zip.setAttribute("class", "form-control is-invalid")
@@ -485,11 +486,11 @@ function App() {
     }
     else {
       state.setAttribute("class", "form-control is-valid");
-      // order.State = state.value
+      order.State = state.value
     }
     //Checking Secondary Address
     if (address2.value.length > 0) {
-      // order.Secondary_Address = address2.value
+      order.Secondary_Address = address2.value
     }
 
     if (val) {
