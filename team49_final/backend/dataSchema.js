@@ -8,11 +8,11 @@ const ReactFormDataSchema = new mongoose.Schema({
     category: { type: String },
     image: { type: String },
     rating: {
-        rate: { type: Number },
+        rate: { type: String },
         count: { type: Number }
     }
 },
-    { collection: "fakestore_catalog" }
+    { collection: "games" }
 )
 
 const Product = mongoose.model('Product', ReactFormDataSchema)
