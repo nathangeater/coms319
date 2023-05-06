@@ -5,8 +5,16 @@ const ReactFormDataSchema = new mongoose.Schema({
     title: { type: String },
     price: { type: Number },
     description: { type: String },
-    category: { type: String },
+    genres: { type: String },
     image: { type: String },
+    image2: { type: String },
+    image3: { type: String },
+    releaseDate: { type: String },
+    developer: { type: String },
+    publisher: { type: String },
+    platforms: { type: String },
+    numOfPlayers: { type: String },
+    recommender: { type: String },
     rating: {
         rate: { type: String },
         count: { type: Number }

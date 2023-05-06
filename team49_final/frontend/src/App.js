@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 function App() {
   const [product, setProduct] = useState([]);
@@ -21,11 +21,11 @@ function App() {
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
     _id: 0,
-    title: "",
+    title: '',
     price: 0.0,
-    description: "",
-    category: "",
-    image: "http://127.0.0.1:4000/images/",
+    description: '',
+    category: '',
+    image: 'http://127.0.0.1:4000/images/',
     rating: { rate: 0.0, count: 0 },
   });
 
@@ -37,10 +37,10 @@ function App() {
   }, [checked4]);
 
   function getAllProducts() {
-    fetch("http://localhost:4000/")
+    fetch('http://localhost:4000/')
       .then((response) => response.json())
       .then((data) => {
-        console.log("Show Catalog of Products :");
+        console.log('Show Catalog of Products :');
         console.log(data);
         setProduct(data);
       });
@@ -51,10 +51,10 @@ function App() {
     console.log(id);
 
     if (id >= 1) {
-      fetch("http://localhost:4000/" + id)
+      fetch('http://localhost:4000/' + id)
         .then((response) => response.json())
         .then((data) => {
-          console.log("Show one product :", id);
+          console.log('Show one product :', id);
           console.log(data);
           const dataArr = [];
           dataArr.push(data);
@@ -62,34 +62,55 @@ function App() {
           setViewer2(!viewer2);
         })
         .catch((err) => {
-          console.log("Wrong number of Product id.");
+          console.log('Wrong number of Product id.');
           setViewer2(false);
         })
     } else {
-      console.log("Wrong number of Product id.");
+      console.log('Wrong number of Product id.');
       setViewer2(false);
+    }
+  }
+
+  function getOneDetailedProduct(id) {
+    console.log(id);
+
+    if (id >= 1) {
+      fetch('http://localhost:4000/' + id)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Show one product page :', id);
+          console.log(data);
+          const dataArr = [];
+          dataArr.push(data);
+          setOneProduct(dataArr);
+        })
+        .catch((err) => {
+          console.log('Wrong number of Product id.');
+        })
+    } else {
+      console.log('Wrong number of Product id.');
     }
   }
 
   function handleChange(evt) {
     const value = evt.target.value;
-    if (evt.target.name === "_id") {
+    if (evt.target.name === '_id') {
       setAddNewProduct({ ...addNewProduct, _id: value });
-    } else if (evt.target.name === "title") {
+    } else if (evt.target.name === 'title') {
       setAddNewProduct({ ...addNewProduct, title: value });
-    } else if (evt.target.name === "price") {
+    } else if (evt.target.name === 'price') {
       setAddNewProduct({ ...addNewProduct, price: value });
-    } else if (evt.target.name === "description") {
+    } else if (evt.target.name === 'description') {
       setAddNewProduct({ ...addNewProduct, description: value });
-    } else if (evt.target.name === "category") {
+    } else if (evt.target.name === 'category') {
       setAddNewProduct({ ...addNewProduct, category: value });
-    } else if (evt.target.name === "image") {
+    } else if (evt.target.name === 'image') {
       const temp = value;
       setAddNewProduct({ ...addNewProduct, image: temp });
-    } else if (evt.target.name === "rate") {
+    } else if (evt.target.name === 'rate') {
       console.log(value);
       setAddNewProduct({ ...addNewProduct, rating: { rate: value } });
-    } else if (evt.target.name === "count") {
+    } else if (evt.target.name === 'count') {
       const temp = addNewProduct.rating.rate;
       setAddNewProduct({ ...addNewProduct, rating: { rate: temp, count: value } });
     }
@@ -102,14 +123,14 @@ function App() {
   function handleOnSubmit(e) {
     e.preventDefault();
     console.log(e.target.value);
-    fetch("http://localhost:4000/insert", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetch('http://localhost:4000/insert', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(addNewProduct),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Post a new product completed");
+        console.log('Post a new product completed');
         console.log(data);
         if (data) {
           //const keys = Object.keys(data);
@@ -158,15 +179,15 @@ function App() {
   }
 
   function deleteOneProduct(deleteid) {
-    console.log("Product to delete :", deleteid);
-    fetch("http://localhost:4000/delete/", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+    console.log('Product to delete :', deleteid);
+    fetch('http://localhost:4000/delete/', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id: deleteid }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Delete a product completed : ", deleteid);
+        console.log('Delete a product completed : ', deleteid);
         console.log(data);
         if (data) {
           //const keys = Object.keys(data);
@@ -179,11 +200,11 @@ function App() {
   }
 
   function updateOneProduct(updateid, new_price) {
-    console.log("Product to update :", updateid);
-    console.log("Value to update :", new_price);
-    fetch("http://localhost:4000/update/", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
+    console.log('Product to update :', updateid);
+    console.log('Value to update :', new_price);
+    fetch('http://localhost:4000/update/', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id: updateid, price: new_price }),
     })
       .then((response) => response.json())
@@ -210,6 +231,7 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); }}>Go to Store Page</button>
         </div>
       </div>
     </div>
@@ -229,19 +251,55 @@ function App() {
     </div>
   ));
 
+  const showDetailedPage = oneProduct.map((el) => (
+    <div key={el._id}>
+      <table style={{ marginTop: `10px` }}>
+        <tr>
+          <td><img id='image' className='details-imgs card shadow-sm card-border' /></td>
+          <td>
+            <h1 id='title' style={{position: `relative`, left: `27vw`, maxWidth: `30vw`}}>{el.title}</h1>
+            <p id='description' style={{ position: `relative`, top: `1vh`, left: `30vw`, wordWrap: `break-word`, maxWidth: `25vw` }}>{el.description}</p>
+          </td>
+        </tr>
+      </table>
+      <div className='info-grid'>
+        <h3 className='info-grid-text'>Release Date</h3>
+        <h3 id='relDate' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>Developer</h3>
+        <h3 id='dev' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>Publisher</h3>
+        <h3 id='pub' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>Platforms</h3>
+        <h3 id='platforms' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>Genres</h3>
+        <h3 id='genres' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>No. of Players</h3>
+        <h3 id='numPlayers' className='info-grid-text'></h3>
+        <h3 className='info-grid-text'>Recommended By</h3>
+        <h3 id='recommended' className='info-grid-text'></h3>
+      </div>
+      <div style={{marginBottom: `50px`, textAlign: `center`}}>
+        <h1 style={{textAlign: `center`}}>Gameplay Images</h1>
+        <img id='image2' className='gameplay-images' src={el.image2} />
+        <img id='image3' className='gameplay-images' />
+      </div>
+    </div>
+  ));
+
   return (
     <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
       <div style={{ textAlign: 'center' }}>
-        <h1>SE/ComS 319 Assignment #3: Catalog of Products</h1>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary border border-dark" style={{ background: `radial-gradient(#cfcfcf, #a2b0a3)` }}>
-          <div className="container-fluid">
-            <div className="collapse navbar-collapse justify-content-center">
-              <div className="btn-group-lg" role="group">
-                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button>
-                <button className="btn btn-success" aria-current="page" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Read</button>
-                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button>
-                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button>
-                <button className="btn btn-success" style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>Credits</button>
+        <h1>SE/ComS 319 Final Project: Fake Video Game Store</h1>
+        <nav className='navbar navbar-expand-lg bg-body-tertiary border border-dark' style={{ background: `radial-gradient(#cfcfcf, #a2b0a3)` }}>
+          <div className='container-fluid'>
+            <div className='collapse navbar-collapse justify-content-center'>
+              <div className='btn-group-lg' role='group'>
+                {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button> */}
+                <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Catalog</button>
+                {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
+                {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(6)}>View Cart</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>About & Credits</button>
               </div>
             </div>
           </div>
@@ -258,7 +316,7 @@ function App() {
 
           <hr></hr>
           <h1><u>Show One Product by ID:</u></h1>
-          <input type="text" id="message" name="message" placeholder="id" className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
+          <input type='text' id='message' name='message' placeholder='id' className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
           {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
           <hr></hr>
         </div>}
@@ -266,50 +324,50 @@ function App() {
         {menu === 1 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Add a New Product:</u></h1>
           <form style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Product ID</label>
-              <div className="col-sm-10">
-                <input type="number" className="form-control form-control-lg" placeholder="ID" name="_id" value={addNewProduct._id} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Product ID</label>
+              <div className='col-sm-10'>
+                <input type='number' className='form-control form-control-lg' placeholder='ID' name='_id' value={addNewProduct._id} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Name</label>
-              <div className="col-sm-10">
-                <input type="text" placeholder="Title" className="form-control form-control-lg" name="title" value={addNewProduct.title} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Name</label>
+              <div className='col-sm-10'>
+                <input type='text' placeholder='Title' className='form-control form-control-lg' name='title' value={addNewProduct.title} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Price</label>
-              <div className="col-sm-10">
-                <input type="number" placeholder="Price" className="form-control form-control-lg" name="price" value={addNewProduct.price} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Price</label>
+              <div className='col-sm-10'>
+                <input type='number' placeholder='Price' className='form-control form-control-lg' name='price' value={addNewProduct.price} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Product Category</label>
-              <div className="col-sm-10">
-                <input type="text" placeholder="Category" className="form-control form-control-lg" name="category" value={addNewProduct.category} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Product Category</label>
+              <div className='col-sm-10'>
+                <input type='text' placeholder='Category' className='form-control form-control-lg' name='category' value={addNewProduct.category} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Image Filepath</label>
-              <div className="col-sm-10">
-                <input type="text" placeholder="Image" className="form-control form-control-lg" name="image" value={addNewProduct.image} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Image Filepath</label>
+              <div className='col-sm-10'>
+                <input type='text' placeholder='Image' className='form-control form-control-lg' name='image' value={addNewProduct.image} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Product Rating</label>
-              <div className="col-sm-10">
-                <input type="number" placeholder="Rate" className="form-control form-control-lg" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Product Rating</label>
+              <div className='col-sm-10'>
+                <input type='number' placeholder='Rate' className='form-control form-control-lg' name='rate' value={addNewProduct.rating.rate} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <label className="col-sm-2 col-form-label col-form-label-lg">Product Count</label>
-              <div className="col-sm-10">
-                <input type="number" placeholder="Count" className="form-control form-control-lg" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+            <div className='row mb-3'>
+              <label className='col-sm-2 col-form-label col-form-label-lg'>Product Count</label>
+              <div className='col-sm-10'>
+                <input type='number' placeholder='Count' className='form-control form-control-lg' name='count' value={addNewProduct.rating.count} onChange={handleChange} />
               </div>
             </div>
-            <div className="row mb-3">
-              <button type="submit" onClick={handleOnSubmit} className="btn btn-success col-auto">
+            <div className='row mb-3'>
+              <button type='submit' onClick={handleOnSubmit} className='btn btn-success col-auto'>
                 Submit
               </button>
             </div>
@@ -318,49 +376,49 @@ function App() {
 
         {menu === 4 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
-          
-          <div style={{width: `286px`, marginLeft: `41vw`}}>
+
+          <div style={{ width: `286px`, marginLeft: `41vw` }}>
             <div>
-              <div className="row flex-nowrap">
-                <div className="col">
-                <button className='btn btn-secondary' onClick={() => getOneByOneProductPrev()}>Prev.</button>
+              <div className='row flex-nowrap'>
+                <div className='col'>
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductPrev()}>Prev.</button>
                 </div>
-                <div className="col">
-                <button className='btn btn-secondary' onClick={() => getOneByOneProductNext()}>Next</button>
+                <div className='col'>
+                  <button className='btn btn-secondary' onClick={() => getOneByOneProductNext()}>Next</button>
                 </div>
-                <div className="col">
-                <button className='btn btn-success' onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+                <div className='col'>
+                  <button className='btn btn-success' onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
                 </div>
               </div>
             </div>
-          <div key={product[index]._id}>
-            <div className='card border border-dark' style={{ width: `18rem` }}>
-              <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
-              <div className='card-body border border-dark' style={{ background: `lightgray` }}>
-                <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index].title}</p>
-                <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index].category}</p>
-                <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
-                <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
+            <div key={product[index]._id}>
+              <div className='card border border-dark' style={{ width: `18rem` }}>
+                <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
+                <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+                  <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index].title}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index].category}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
+                  <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>}
 
         {menu === 3 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update One Products's Price:</u></h1>
-          <div style={{width: `286px`, marginLeft: `41vw`}}>
+          <div style={{ width: `286px`, marginLeft: `41vw` }}>
             <div>
-              <div className="row flex-nowrap">
-                <div className="col">
+              <div className='row flex-nowrap'>
+                <div className='col'>
                   <button className='btn btn-secondary' onClick={() => getOneByOneProductPrevU()}>Prev.</button>
                 </div>
-                <div className="col">
+                <div className='col'>
                   <button className='btn btn-secondary' onClick={() => getOneByOneProductNextU()}>Next</button>
                 </div>
               </div>
             </div>
-            <input style={{maxWidth: `50%`}} type="number" placeholder="New Price" name="updated_price" value={addNewPrice} onChange={handleUpdateChange} />
+            <input style={{ maxWidth: `50%` }} type='number' placeholder='New Price' name='updated_price' value={addNewPrice} onChange={handleUpdateChange} />
             <button className='btn btn-success m-2' onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update Price</button>
             <div key={product[index2]._id}>
               <div className='card border border-dark' style={{ width: `18rem` }}>
@@ -377,11 +435,11 @@ function App() {
         </div>}
 
         {menu === 5 && <div>
-          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Credits</u></h1>
+          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>About & Credits</u></h1>
           <div className='text-center'>
             <p><span className='fw-bold'>Team:</span> #49</p>
-            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (<a href="mailto:nkgeater@iastate.edu">nkgeater@iastate.edu</a>)</p>
-            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href="mailto:asand@iastate.edu">asand@iastate.edu</a>)</p>
+            <p><span className='fw-bold'>Member #1:</span> Nathan Geater (<a href='mailto:nkgeater@iastate.edu'>nkgeater@iastate.edu</a>)</p>
+            <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href='mailto:asand@iastate.edu'>asand@iastate.edu</a>)</p>
             <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
             <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
             <p><span className='fw-bold'>Date:</span> 30 Apr. 2023 </p>
@@ -391,6 +449,13 @@ function App() {
               images from the FakeStoreAPI and styling from Bootstrap, the latter of which is &copy; Bootstrap.
             </p>
           </div>
+        </div>}
+        {menu === 6 && <div>
+          <h1>Cart</h1>
+        </div>}
+        {menu === 7 && <div>
+          <h1>Detailed Product Page</h1>
+          <div>{showDetailedPage}</div>
         </div>}
       </div>
     </div>
