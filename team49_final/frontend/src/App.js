@@ -229,7 +229,7 @@ function App() {
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
           <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
           <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
-          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
+          <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
           <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); }}>Go to Store Page</button>
         </div>
