@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [product, setProduct] = useState([]);
-  const [viewer1, setViewer1] = useState(false);
 
   const [oneProduct, setOneProduct] = useState([]);
   const [viewer2, setViewer2] = useState(false);
@@ -47,7 +46,6 @@ function App() {
         console.log(data);
         setProduct(data);
       });
-    setViewer1(!viewer1);
   }
 
   function getOneProduct(id) {
@@ -220,9 +218,56 @@ function App() {
           alert(value);
         }
       });
-    setViewer1(false);
     setChecked5(!checked5);
     window.location.reload();
+  }
+
+  //Adds the product to the cart
+  const addToCart = (addID, addValue) => {
+    const newVal = +product.find(x => x._id === addID).inCart + +addValue;
+    
+    fetch('http://localhost:4000/update/', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ _id: addID, inCart: newVal }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Updating the product's quantity completed : ", newVal);
+        console.log(data);
+        if (data) {
+          //const keys = Object.keys(data);
+          const value = Object.values(data);
+          alert(value);
+        }
+      });
+      getAllProducts();
+  };
+
+  //Removes the product from the cart
+  const removeFromCart = (remID, remValue) => {
+    let newVal = +product.find(x => x._id === remID).inCart - +remValue;
+    
+    if(newVal < 0){
+      newVal = 0;
+    }
+
+    fetch('http://localhost:4000/update/', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ _id: remID, inCart: newVal }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Updating the product's quantity completed : ", newVal);
+        console.log(data);
+        if (data) {
+          //const keys = Object.keys(data);
+          const value = Object.values(data);
+          alert(value);
+        }
+      });
+      getAllProducts();
   }
 
   const showAllItems = product.map((el) => (
@@ -234,6 +279,11 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Genres:</u></span> {el.genres}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
+          <div className='add-buttons'>
+            <input id={el._id} type="number" className="form-control" defaultValue={1} placeholder="Quantity" />
+            <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => removeFromCart(el._id, document.getElementById(el._id).value)} > - </button>
+            <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => addToCart(el._id, document.getElementById(el._id).value)}> + </button>
+          </div>
           <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); window.scroll({ top: 0, left: 0, behavior: "instant" }); }}>Go to Store Page</button>
         </div>
       </div>
@@ -293,7 +343,7 @@ function App() {
     </div>
   ));
 
-    //Tests if the input is numeric
+  //Tests if the input is numeric
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
@@ -388,7 +438,7 @@ function App() {
     wrapper.innerHTML = [
       `<div className="alert alert-${type} alert-dismissible" role="alert">`,
       ` <div>${message}</div>`,
-      ' <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label = "Close" ></button > ',
+      //' <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label = "Close" ></button > ',
       '</div>'
     ].join('')
 
@@ -432,10 +482,10 @@ function App() {
 
   let showCart = false;
 
-  if(menu == 6){
+  if (menu == 6) {
     showCart = true;
   }
-  else{
+  else {
     showCart = false;
   }
 
@@ -451,7 +501,7 @@ function App() {
                 <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Catalog</button>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(6); cartConfig();}}>View Cart</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); }}>View Cart</button>
                 <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>About & Credits</button>
               </div>
             </div>
@@ -462,10 +512,9 @@ function App() {
       <div className='m-4'>
         {menu === 2 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>View Products:</u></h1>
-          <h1><u>Show All Available Products:</u></h1>
-          <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Toggle Showing All Products</button>
+          <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Refresh Products</button>
           <hr></hr>
-          {viewer1 && <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>}
+          <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>
 
           <hr></hr>
           <h1><u>Show One Product by ID:</u></h1>
@@ -603,7 +652,7 @@ function App() {
             </p>
           </div>
         </div>}
-        {<div id='topCart' style={{ display: showCart ? 'contents' : 'none'}}>
+        {<div id='topCart' style={{ display: showCart ? 'contents' : 'none' }}>
           {/* Shopping Cart Page */}
           <div id='top_cart'>
             <div>

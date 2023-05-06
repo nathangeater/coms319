@@ -85,11 +85,11 @@ app.delete("/delete", async (req, res) => {
 
 app.put("/update", async (req, res) => {
     console.log("Update :", req.body._id);
-    console.log("New Price :", req.body.price);
+    console.log("Value to be added :", req.body.inCart);
 
     try{
         const filter = { _id: `${req.body._id}` };
-        const updateDoc = { $set: { price: `${req.body.price}`} };
+        const updateDoc = { $set: { inCart: `${req.body.inCart}`} };
         await Product.updateOne(filter, updateDoc, null);
         const messageResponse = {
             message: `Product ${req.body_id} updated correctly`
