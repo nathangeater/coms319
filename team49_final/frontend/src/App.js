@@ -231,7 +231,7 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Genres:</u></span> {el.genres}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
-          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); window.scroll({ top: 0, left: 0, behavior: "instant"}); }}>Go to Store Page</button>
+          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); window.scroll({ top: 0, left: 0, behavior: "instant" }); }}>Go to Store Page</button>
         </div>
       </div>
     </div>
@@ -257,7 +257,7 @@ function App() {
         <tr>
           <td><img id='image' className='details-imgs card shadow-sm card-border' src={el.image} /></td>
           <td>
-            <h1 id='title' style={{position: `relative`, left: `27vw`, maxWidth: `30vw`}}>{el.title}</h1>
+            <h1 id='title' style={{ position: `relative`, left: `27vw`, maxWidth: `30vw` }}>{el.title}</h1>
             <p id='description' style={{ position: `relative`, top: `1vh`, left: `30vw`, wordWrap: `break-word`, maxWidth: `25vw` }}>{el.description}</p>
           </td>
         </tr>
@@ -282,8 +282,8 @@ function App() {
         <h3 className='info-grid-text'>Recommended By</h3>
         <h3 id='recommended' className='info-grid-text'>{el.recommender}</h3>
       </div>
-      <div style={{marginBottom: `50px`, textAlign: `center`}}>
-        <h1 style={{textAlign: `center`}}>Gameplay Images</h1>
+      <div style={{ marginBottom: `50px`, textAlign: `center` }}>
+        <h1 style={{ textAlign: `center` }}>Gameplay Images</h1>
         <img id='image2' className='gameplay-images' src={el.image2} />
         <img id='image3' className='gameplay-images' src={el.image3} />
       </div>
@@ -455,7 +455,189 @@ function App() {
           </div>
         </div>}
         {menu === 6 && <div>
-          <h1>Cart</h1>
+          {/* Shopping Cart Page */}
+          <div id='top_cart'>
+            <div>
+              <div className="py-1"></div>
+              <div className="card">
+                <div className="row">
+                  {/* HERE, IT IS THE SHOPING CART */}
+                  <div className="col-md-8 cart">
+                    <div className="title">
+                      <div className="row">
+                        <div className="col">
+                          <h4>
+                            <b>Fake Game Store Shopping Cart</b>
+                          </h4>
+                        </div>
+                        <div className="col align-self-center text-right text-muted">
+                          Products selected
+                          {/* {cart.length} */}
+                        </div>
+                      </div>
+                    </div>
+                    {/* <div>{listItems}</div> */}
+                  </div>
+                  <div className="float-end">
+                    <p className="mb-0 me-5 d-flex align-items-center">
+                      <span className="small text-muted me-2">Cost of Cart:</span>
+                      {/* <span className="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span> */}
+                    </p>
+                    <p className="mb-0 me-5 d-flex align-items-center">
+                      <span className="small text-muted me-2">Tax:</span>
+                      {/* <span className="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span> */}
+                    </p>
+                    <p className="mb-0 me-5 d-flex align-items-center">
+                      <span className="small text-muted me-2">Order Total:</span>
+                      {/* <span className="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span> */}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+              <div className="row">
+                <div className="col-2"></div>
+                <div className="col-8">
+                  <h1>Order Checkout Form</h1>
+                  <div id="liveAlertPlaceholder"></div>
+                  <form className="row g-3" id="checkout-form">
+
+                    {/* Full Name */}
+                    <div className="col-md-6">
+                      <label htmlFor="inputName" className="form-label">Name</label>
+                      <input type="text" className="form-control" id="inputName" />
+                      <div className="invalid-feedback">
+                        Invalid Name. Example: "John Doe"
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="col-md-6">
+                      <label htmlFor="inputEmail4" className="form-label">Email</label>
+                      <input type="email" className="form-control" id="inputEmail4" />
+                      <div className="invalid-feedback">
+                        Invalid Email Address. Must be formatted like "abc@xyz.efg"
+                      </div>
+                    </div>
+
+                    {/* Credit Card */}
+                    <div className="col-12">
+                      <label htmlFor="inputCard" className="form-label">Credit Card</label>
+                      <div className="input-group mb-3">
+                        <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
+                        <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
+                          aria-label="Username" aria-describedby="basic-addon1" />
+                        <div className="invalid-feedback">
+                          Invalid Credit Card Number. Must be formatted like "5555-5555-5555-5555"
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Shipping Address */}
+                    <div className="col-12">
+                      <label htmlFor="inputAddress" className="form-label">Shipping Address</label>
+                      <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
+                      <div className="invalid-feedback">
+                        Invalid Shipping Address. Must be formatted like "1234 Main St"
+                      </div>
+                    </div>
+
+                    {/* Secondary Address */}
+                    <div className="col-12">
+                      <label htmlFor="inputAddress2" className="form-label">Secondary Address</label>
+                      <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+                    </div>
+
+                    {/* City */}
+                    <div className="col-md-6">
+                      <label htmlFor="inputCity" className="form-label">City</label>
+                      <input type="text" className="form-control" id="inputCity" />
+                      <div className="invalid-feedback">
+                        Invalid City. Must be formatted like "Berlin"
+                      </div>
+                    </div>
+
+                    {/* State */}
+                    <div className="col-md-4">
+                      <label htmlFor="inputState" className="form-label">State</label>
+                      <select id="inputState" className="form-select">
+                        <option defaultValue={"Selected"}>Choose...</option>
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>Arizona</option>
+                        <option>Arkansas</option>
+                        <option>California</option>
+                        <option>Colorado</option>
+                        <option>Connecticut</option>
+                        <option>Delaware</option>
+                        <option>Florida</option>
+                        <option>Georgia</option>
+                        <option>Hawaii</option>
+                        <option>Idaho</option>
+                        <option>Illinois</option>
+                        <option>Indiana</option>
+                        <option>Iowa</option>
+                        <option>Kansas</option>
+                        <option>Kentucky</option>
+                        <option>Louisiana</option>
+                        <option>Maine</option>
+                        <option>Maryland</option>
+                        <option>Massachusetts</option>
+                        <option>Michigan</option>
+                        <option>Minnesota</option>
+                        <option>Mississippi</option>
+                        <option>Missouri</option>
+                        <option>Montana</option>
+                        <option>Nebraska</option>
+                        <option>Nevada</option>
+                        <option>New Hampshire</option>
+                        <option>New Jersey</option>
+                        <option>New Mexico</option>
+                        <option>New York</option>
+                        <option>North Carolina</option>
+                        <option>North Dakota</option>
+                        <option>Ohio</option>
+                        <option>Oklahoma</option>
+                        <option>Oregon</option>
+                        <option>Pennsylvania</option>
+                        <option>Rhode Island</option>
+                        <option>South Carolina</option>
+                        <option>South Dakota</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Utah</option>
+                        <option>Vermont</option>
+                        <option>Virginia</option>
+                        <option>Washington</option>
+                        <option>West Virginia</option>
+                        <option>Wisconsin</option>
+                        <option>Wyoming</option>
+                      </select>
+                      <div className="invalid-feedback">
+                        Invalid State. Something other than the default must be chosen.
+                      </div>
+                    </div>
+
+                    {/* Zip Code */}
+                    <div className="col-md-2">
+                      <label htmlFor="inputZip" className="form-label">Zip Code</label>
+                      <input type="text" className="form-control" id="inputZip" />
+                      <div className="invalid-feedback">
+                        Invalid Zip Code. Must be formatted like "55555"
+                      </div>
+                    </div>
+
+                    {/* Order Button */}
+                    <div className="col-12">
+                      <button type="submit" className="btn btn-success"> <i className="bi-bag-check"></i> Proceed to Confirmation</button>
+                    </div>
+                  </form>
+                </div>
+                <div className="col-2"></div>
+              </div>
+            </div>
+          </div>
         </div>}
         {menu === 7 && <div>
           <div>{showDetailedPage}</div>
