@@ -19,6 +19,8 @@ function App() {
 
   const [showConfirm, setShowConfirm] = useState(false);
 
+  let showCart = false;
+
   //Declaring and Initialising the order object for submitting the order
   var order = {
     Name: '',
@@ -499,9 +501,13 @@ function App() {
 
   //Toggles between the catalog and cart view
   function handleShowHideConfirm(test) {
+    showCart = !test;
     setShowConfirm(test);
 
+    window.scroll({ top: 0, left: 0, behavior: "instant" });
+
     if (test) {
+      setMenu(8);
       document.querySelector('.card').classList.remove("collapse");
 
       for (let i = 0; i < 8; i++) {
@@ -514,6 +520,9 @@ function App() {
           // eslint-disable-next-line
           ': </b>' + `${value}` + '</li>'
       }
+    }
+    else{
+      setMenu(6);
     }
   }
 
@@ -564,8 +573,6 @@ function App() {
     }, false);
   }
 
-  let showCart = false;
-
   if (menu == 6) {
     showCart = true;
   }
@@ -582,11 +589,11 @@ function App() {
             <div className='collapse navbar-collapse justify-content-center'>
               <div className='btn-group-lg' role='group'>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button> */}
-                <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Catalog</button>
+                <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(2); setShowConfirm(false)}}>Catalog</button>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); }}>View Cart</button>
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>About & Credits</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); setShowConfirm(false)}}>View Cart</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(5); setShowConfirm(false)}}>About & Credits</button>
               </div>
             </div>
           </div>
@@ -931,7 +938,7 @@ function App() {
             <b>
               {/* Return Button */}
               <button className="bg-lime-600 rounded-full px-3 py-1
-               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => setMenu(6)}>Return to Cart</button>
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => handleShowHideConfirm(false)}>Return to Cart</button>
             </b>
 
 
