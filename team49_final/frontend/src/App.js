@@ -228,10 +228,10 @@ function App() {
         <img src={el.image} width={20} alt={el.title} className='card-img-top' />
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
           <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
-          <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
+          <p className='card-text'><span className='fw-bold'><u>Genres:</u></span> {el.genres}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
-          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
-          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); }}>Go to Store Page</button>
+          <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
+          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); window.scroll({ top: 0, left: 0, behavior: "instant"}); }}>Go to Store Page</button>
         </div>
       </div>
     </div>
@@ -255,7 +255,7 @@ function App() {
     <div key={el._id}>
       <table style={{ marginTop: `10px` }}>
         <tr>
-          <td><img id='image' className='details-imgs card shadow-sm card-border' /></td>
+          <td><img id='image' className='details-imgs card shadow-sm card-border' src={el.image} /></td>
           <td>
             <h1 id='title' style={{position: `relative`, left: `27vw`, maxWidth: `30vw`}}>{el.title}</h1>
             <p id='description' style={{ position: `relative`, top: `1vh`, left: `30vw`, wordWrap: `break-word`, maxWidth: `25vw` }}>{el.description}</p>
@@ -263,25 +263,29 @@ function App() {
         </tr>
       </table>
       <div className='info-grid'>
+        <h3 className='info-grid-text'>Price</h3>
+        <h3 className='info-grid-text'>${el.price}</h3>
+        <h3 className='info-grid-text'>Reviews</h3>
+        <h3 className='info-grid-text'>{el.rating.rate} ({el.rating.count})</h3>
         <h3 className='info-grid-text'>Release Date</h3>
-        <h3 id='relDate' className='info-grid-text'></h3>
+        <h3 id='relDate' className='info-grid-text'>{el.releaseDate}</h3>
         <h3 className='info-grid-text'>Developer</h3>
-        <h3 id='dev' className='info-grid-text'></h3>
+        <h3 id='dev' className='info-grid-text'>{el.developer}</h3>
         <h3 className='info-grid-text'>Publisher</h3>
-        <h3 id='pub' className='info-grid-text'></h3>
+        <h3 id='pub' className='info-grid-text'>{el.publisher}</h3>
         <h3 className='info-grid-text'>Platforms</h3>
-        <h3 id='platforms' className='info-grid-text'></h3>
+        <h3 id='platforms' className='info-grid-text'>{el.platforms}</h3>
         <h3 className='info-grid-text'>Genres</h3>
-        <h3 id='genres' className='info-grid-text'></h3>
+        <h3 id='genres' className='info-grid-text'>{el.genres}</h3>
         <h3 className='info-grid-text'>No. of Players</h3>
-        <h3 id='numPlayers' className='info-grid-text'></h3>
+        <h3 id='numPlayers' className='info-grid-text'>{el.numOfPlayers}</h3>
         <h3 className='info-grid-text'>Recommended By</h3>
-        <h3 id='recommended' className='info-grid-text'></h3>
+        <h3 id='recommended' className='info-grid-text'>{el.recommender}</h3>
       </div>
       <div style={{marginBottom: `50px`, textAlign: `center`}}>
         <h1 style={{textAlign: `center`}}>Gameplay Images</h1>
         <img id='image2' className='gameplay-images' src={el.image2} />
-        <img id='image3' className='gameplay-images' />
+        <img id='image3' className='gameplay-images' src={el.image3} />
       </div>
     </div>
   ));
@@ -454,7 +458,6 @@ function App() {
           <h1>Cart</h1>
         </div>}
         {menu === 7 && <div>
-          <h1>Detailed Product Page</h1>
           <div>{showDetailedPage}</div>
         </div>}
       </div>
