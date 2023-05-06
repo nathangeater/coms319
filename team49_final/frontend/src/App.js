@@ -17,6 +17,20 @@ function App() {
 
   const [menu, setMenu] = useState(2);
 
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  //Declaring and Initialising the order object for submitting the order
+  var order = {
+    Name: '',
+    Email: '',
+    Card: '',
+    City: '',
+    Address: '',
+    Secondary_Address: '',
+    Zip: '',
+    State: ''
+  }
+
   //Declaring and Initialising Variables used with the submission form
   let inputCard = document.querySelector('#inputCard');
 
@@ -45,7 +59,8 @@ function App() {
         console.log('Show Catalog of Products :');
         console.log(data);
         setProduct(data);
-      });
+      })
+    console.log("End of Gett All Products");
   }
 
   function getOneProduct(id) {
@@ -225,13 +240,15 @@ function App() {
   //Adds the product to the cart
   const addToCart = (addID, addValue) => {
     const newVal = +product.find(x => x._id === addID).inCart + +addValue;
-    
+
+    console.log(newVal);
+
     fetch('http://localhost:4000/update/', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id: addID, inCart: newVal }),
     })
-      .then((response) => response.json())
+      .then((response) => console.log(response))
       .then((data) => {
         console.log("Updating the product's quantity completed : ", newVal);
         console.log(data);
@@ -241,14 +258,16 @@ function App() {
           alert(value);
         }
       });
-      getAllProducts();
+    getAllProducts();
+    console.log("End of Add To Cart");
+    console.log(product);
   };
 
   //Removes the product from the cart
   const removeFromCart = (remID, remValue) => {
     let newVal = +product.find(x => x._id === remID).inCart - +remValue;
-    
-    if(newVal < 0){
+
+    if (newVal < 0) {
       newVal = 0;
     }
 
@@ -267,7 +286,7 @@ function App() {
           alert(value);
         }
       });
-      getAllProducts();
+    getAllProducts();
   }
 
   const showAllItems = product.map((el) => (
@@ -340,6 +359,51 @@ function App() {
         <img id='image2' className='gameplay-images' src={el.image2} />
         <img id='image3' className='gameplay-images' src={el.image3} />
       </div>
+    </div>
+  ));
+
+  //Function used to list the items on the cart screen
+  const listItems = product.map((el) => (
+    // PRODUCT
+    <div key={el._id}>
+      {el.inCart > 0 && <div className="row border-top border-bottom">
+        <div className="row main align-items-center">
+          <div className="col-2">
+            <img className="img-fluid" src={el.image} alt={el.title} />
+          </div>
+          <div className="col">
+            <div className="row">{el.title}</div>
+            <div className="row text-muted">{el.genres}</div>
+          </div>
+          <div className="col">
+            <button className="btn fw-bold btn-outline-secondary" type="button" onClick={() => removeFromCart(el._id, 1)} > - </button>
+            <button className="btn fw-bold btn-outline-secondary" type="button" onClick={() => addToCart(el._id, 1)}> + </button>
+          </div>
+          <div className="col">
+            ${el.price} <span className="close">&#10005;</span>{el.inCart}
+          </div>
+        </div>
+      </div>}
+    </div>
+  ));
+
+  const confirmItems = product.map((el) => (
+    // PRODUCT
+    <div key={el._id}>
+      {el.inCart > 0 && <div className="row border-top border-bottom">
+        <div className="row main align-items-center">
+          <div className="col-2">
+            <img className="img-fluid" src={el.image} alt={el.title} />
+          </div>
+          <div className="col">
+            <div className="row">{el.title}</div>
+            <div className="row text-muted">{el.genres}</div>
+          </div>
+          <div className="col">
+            ${el.price} <span className="close">&#10005;</span>{el.inCart}
+          </div>
+        </div>
+      </div>}
     </div>
   ));
 
@@ -427,10 +491,30 @@ function App() {
     }
 
     if (val) {
-      // handleShowHideConfirm(true);
+      handleShowHideConfirm(true);
     }
 
     return val;
+  }
+
+  //Toggles between the catalog and cart view
+  function handleShowHideConfirm(test) {
+    setShowConfirm(test);
+
+    if (test) {
+      document.querySelector('.card').classList.remove("collapse");
+
+      for (let i = 0; i < 8; i++) {
+        document.querySelector('.card > ul').innerHTML = '';
+      }
+
+      for (const [key, value] of Object.entries(order)) {
+        // eslint-disable-next-line
+        document.querySelector('.card > ul').innerHTML += '<li className="list-group-item"> <b>' + `${key}` +
+          // eslint-disable-next-line
+          ': </b>' + `${value}` + '</li>'
+      }
+    }
   }
 
   const alert = (message, type) => {
@@ -674,7 +758,7 @@ function App() {
                         </div>
                       </div>
                     </div>
-                    {/* <div>{listItems}</div> */}
+                    <div>{listItems}</div>
                   </div>
                   <div className="float-end">
                     <p className="mb-0 me-5 d-flex align-items-center">
@@ -840,6 +924,44 @@ function App() {
         {menu === 7 && <div>
           <div>{showDetailedPage}</div>
         </div>}
+        {/* Checkout Confirmation Page */}
+
+        <div id='top_confirm' style={{ display: showConfirm ? 'contents' : 'none' }}>
+          <div>
+            <b>
+              {/* Return Button */}
+              <button className="bg-lime-600 rounded-full px-3 py-1
+               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => setMenu(6)}>Return to Cart</button>
+            </b>
+
+
+            <div className="card" style={{ width: '18rem' }}>
+              <div className="card-body">
+                <h5 className="card-title">Order summary</h5>
+                <p className="card-text">Here is a summary of your order.</p>
+              </div>
+              <div>{confirmItems}</div>
+              <div className="float-end">
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Cost of Cart:</span>
+                  {/* <span className="lead fw-normal">${Math.round(cartTotal * 100) / 100}</span> */}
+                </p>
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Tax:</span>
+                  {/* <span className="lead fw-normal">${Math.round((cartTotal * 0.07) * 100) / 100}</span> */}
+                </p>
+                <p className="mb-0 me-5 d-flex align-items-center">
+                  <span className="small text-muted me-2">Order Total:</span>
+                  {/* <span className="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span> */}
+                </p>
+              </div>
+              <ul className="list-group list-group-flush">
+
+              </ul>
+              <button className="btn btn-secondary" onClick={window.location.reload.bind(window.location)}>Confirm and Place Order</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
