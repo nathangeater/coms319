@@ -18,6 +18,9 @@ function App() {
 
   const [menu, setMenu] = useState(2);
 
+  //Declaring and Initialising Variables used with the submission form
+  let inputCard = document.querySelector('#inputCard');
+
   // new Product
   const [addNewProduct, setAddNewProduct] = useState({
     _id: 0,
@@ -290,6 +293,152 @@ function App() {
     </div>
   ));
 
+    //Tests if the input is numeric
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  let validate = function () {
+    let val = true;
+    let email = document.getElementById('inputEmail4')
+    let name = document.getElementById('inputName')
+    let card = document.getElementById('inputCard')
+    let city = document.getElementById('inputCity');
+    let address = document.getElementById('inputAddress');
+    let zip = document.getElementById('inputZip');
+    let state = document.getElementById('inputState');
+    let address2 = document.getElementById('inputAddress2');
+    //Check Email Address
+    if (!email.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+      email.setAttribute("class", "form-control is-invalid");
+      val = false;
+    }
+    else {
+      email.setAttribute("class", "form-control is-valid");
+      // order.Email = email.value
+    }
+    //Check Name
+    if (name.value.length === 0) {
+      name.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      name.setAttribute("class", "form-control is-valid");
+      // order.Name = name.value
+    }
+    //Check Credit Card
+    if (!card.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
+      card.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      card.setAttribute("class", "form-control is-valid");
+      // order.Card = card.value
+    }
+    //Check City
+    if (city.value.length === 0) {
+      city.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      city.setAttribute("class", "form-control is-valid");
+      // order.City = city.value
+    }
+    //Check Address
+    if (address.value.length === 0) {
+      address.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      address.setAttribute("class", "form-control is-valid");
+      // order.Address = address.value
+    }
+    //Zip Code
+    if (zip.value.length === 5 && !isNaN(zip.value)) {
+      zip.setAttribute("class", "form-control is-valid");
+      // order.Zip = zip.value
+    }
+    else {
+      zip.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    //Check State
+    if (state.options[state.selectedIndex].text === 'Choose...') {
+      state.setAttribute("class", "form-control is-invalid")
+      val = false
+    }
+    else {
+      state.setAttribute("class", "form-control is-valid");
+      // order.State = state.value
+    }
+    //Checking Secondary Address
+    if (address2.value.length > 0) {
+      // order.Secondary_Address = address2.value
+    }
+
+    if (val) {
+      // handleShowHideConfirm(true);
+    }
+
+    return val;
+  }
+
+  const alert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div className="alert alert-${type} alert-dismissible" role="alert">`,
+      ` <div>${message}</div>`,
+      ' <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label = "Close" ></button > ',
+      '</div>'
+    ].join('')
+
+    document.getElementById('liveAlertPlaceholder').append(wrapper);
+  }
+
+  let cartConfig = function () {
+    //Add event listener for credit card formatting
+    inputCard = document.querySelector('#inputCard');
+    inputCard.addEventListener('input', event => {
+      if (!inputCard.value) {
+        return event.preventDefault();
+      }
+      else {
+        inputCard.value = inputCard.value.replace(/-/g, '');
+        let newVal = '';
+        for (var i = 0, nums = 0; i < inputCard.value.length; i++) {
+          if (nums !== 0 && nums % 4 === 0) {
+            newVal += '-';
+          }
+
+          newVal += inputCard.value[i];
+          if (isNumeric(inputCard.value[i])) {
+            nums++;
+          }
+        }
+        inputCard.value = newVal;
+      }
+    });
+
+    //Add event listener for checkout form validity
+    document.getElementById('checkout-form').addEventListener('submit', event => {
+      if (!validate()) {
+        document.getElementById('liveAlertPlaceholder').innerHTML = ''
+        alert('<i className="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
+      }
+      event.preventDefault();
+      event.stopPropagation();
+    }, false);
+  }
+
+  let showCart = false;
+
+  if(menu == 6){
+    showCart = true;
+  }
+  else{
+    showCart = false;
+  }
+
   return (
     <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
       <div style={{ textAlign: 'center' }}>
@@ -302,7 +451,7 @@ function App() {
                 <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(2)}>Catalog</button>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(6)}>View Cart</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(6); cartConfig();}}>View Cart</button>
                 <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(5)}>About & Credits</button>
               </div>
             </div>
@@ -454,7 +603,7 @@ function App() {
             </p>
           </div>
         </div>}
-        {menu === 6 && <div>
+        {<div id='topCart' style={{ display: showCart ? 'contents' : 'none'}}>
           {/* Shopping Cart Page */}
           <div id='top_cart'>
             <div>
@@ -467,7 +616,7 @@ function App() {
                       <div className="row">
                         <div className="col">
                           <h4>
-                            <b>Fake Game Store Shopping Cart</b>
+                            <b>Your Shopping Cart</b>
                           </h4>
                         </div>
                         <div className="col align-self-center text-right text-muted">

@@ -18,7 +18,8 @@ const ReactFormDataSchema = new mongoose.Schema({
     rating: {
         rate: { type: String },
         count: { type: Number }
-    }
+    },
+    inCart : { type: Number }
 },
     { collection: "games" }
 )
