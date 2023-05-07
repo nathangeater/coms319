@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [product, setProduct] = useState([]);
+  const [placedOrders, setPlacedOrders] = useState([]);
 
   const [oneProduct, setOneProduct] = useState([]);
   const [viewer2, setViewer2] = useState(false);
@@ -60,6 +61,7 @@ function App() {
 
   useEffect(() => {
     getAllProducts();
+    getAllOrders();
     // eslint-disable-next-line
   }, [checked4]);
 
@@ -71,7 +73,18 @@ function App() {
         console.log(data);
         setProduct(data);
       })
-    console.log("End of Gett All Products");
+    console.log("End of Get All Products");
+  }
+
+  function getAllOrders() {
+    fetch('http://localhost:4000/getOrders')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Show List of Orders :');
+        console.log(data);
+        setPlacedOrders(data);
+      })
+    console.log("End of Get All Orders");
   }
 
   function getOneProduct(id) {
@@ -168,45 +181,8 @@ function App() {
       });
   }
 
-
-  function getOneByOneProductNext() {
-    if (product.length > 0) {
-      if (index === product.length - 1) setIndex(0);
-      else setIndex(index + 1);
-      if (product.length > 0) setChecked4(true);
-      else setChecked4(false);
-    }
-  }
-
-  function getOneByOneProductPrev() {
-    if (product.length > 0) {
-      if (index === 0) setIndex(product.length - 1);
-      else setIndex(index - 1);
-      if (product.length > 0) setChecked4(true);
-      else setChecked4(false);
-    }
-  }
-
-  function getOneByOneProductNextU() {
-    if (product.length > 0) {
-      if (index2 === product.length - 1) setIndex2(0);
-      else setIndex2(index2 + 1);
-      if (product.length > 0) setChecked5(true);
-      else setChecked5(false);
-    }
-  }
-
-  function getOneByOneProductPrevU() {
-    if (product.length > 0) {
-      if (index2 === 0) setIndex2(product.length - 1);
-      else setIndex2(index2 - 1);
-      if (product.length > 0) setChecked5(true);
-      else setChecked5(false);
-    }
-  }
-
-  function deleteOneProduct(deleteid) {
-    console.log('Product to delete :', deleteid);
+  function deleteOneOrder(deleteid) {
+    console.log('Order to delete :', deleteid);
     fetch('http://localhost:4000/delete/', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -222,8 +198,7 @@ function App() {
           alert(value);
         }
       });
-    setChecked4(!checked4);
-    window.location.reload();
+    getAllOrders();
   }
 
   function updateOneProduct(updateid, new_price) {
@@ -321,6 +296,25 @@ function App() {
     </div>
   ));
 
+  const showAllOrders = placedOrders.map((el) => (
+    <div key={el._id} className='col mt-3'>
+      <div className='card border border-dark' style={{ width: `18rem` }}>
+        <div className='card-body border border-dark' style={{ background: `lightgray` }}>
+          <p className='card-text'><span className='fw-bold'><u>ID:</u></span> {el._id}</p>
+          <p className='card-text'><span className='fw-bold'><u>Name:</u></span> {el.name}</p>
+          <p className='card-text'><span className='fw-bold'><u>Email:</u></span> {el.email}</p>
+          <p className='card-text'><span className='fw-bold'><u>Card:</u></span> {el.card}</p>
+          <p className='card-text'><span className='fw-bold'><u>City:</u></span> {el.city}</p>
+          <p className='card-text'><span className='fw-bold'><u>Address:</u></span> {el.address}</p>
+          <p className='card-text'><span className='fw-bold'><u>Secondary Address:</u></span> {el.secondary_address}</p>
+          <p className='card-text'><span className='fw-bold'><u>Zip:</u></span> {el.zip}</p>
+          <p className='card-text'><span className='fw-bold'><u>State:</u></span> {el.state}</p>
+          <button className='btn btn-danger' onClick={() => deleteOneOrder(el._id)}>Delete</button>
+        </div>
+      </div>
+    </div>
+  ));
+
   const showOneItem = oneProduct.map((el) => (
     <div key={el._id}>
       <div className='card border border-dark' style={{ width: `18rem` }}>
@@ -329,7 +323,14 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
           <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {el.category}</p>
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
-          <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {el.rating.rate} <span className='fw-bold'><u>Count:</u></span> {el.rating.count}</p>
+          <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
+          <p className='card-text'><span className='fw-bold'><u>Recommended By:</u></span> {el.recommender}</p>
+          <div className='add-buttons'>
+            <input id={el._id} type="number" className="form-control" defaultValue={1} placeholder="Quantity" />
+            <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => removeFromCart(el._id, document.getElementById(el._id).value)} > - </button>
+            <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => addToCart(el._id, document.getElementById(el._id).value)}> + </button>
+          </div>
+          <button className='btn btn-success' onClick={() => { setMenu(7); getOneDetailedProduct(el._id); window.scroll({ top: 0, left: 0, behavior: "instant" }); }}>Go to Store Page</button>
         </div>
       </div>
     </div>
@@ -539,7 +540,7 @@ function App() {
           ': </b>' + `${value}` + '</li>'
       }
     }
-    else{
+    else {
       setMenu(6);
     }
   }
@@ -598,9 +599,9 @@ function App() {
     showCart = false;
   }
 
-  function handleOrderSubmission(){
+  function handleOrderSubmission() {
     order.Name = nameState;
-    order.Email =emailState;
+    order.Email = emailState;
     order.Card = cardState;
     order.City = cityState;
     order.Address = addressState;
@@ -635,11 +636,12 @@ function App() {
             <div className='collapse navbar-collapse justify-content-center'>
               <div className='btn-group-lg' role='group'>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button> */}
-                <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(2); setShowConfirm(false)}}>Catalog</button>
+                <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(2); setShowConfirm(false) }}>Catalog</button>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); setShowConfirm(false)}}>View Cart & Checkout</button>
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(5); setShowConfirm(false)}}>About & Credits</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); setShowConfirm(false) }}>View Cart & Checkout</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(9); setShowConfirm(false) }}>Manage Orders</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(5); setShowConfirm(false) }}>About & Credits</button>
               </div>
             </div>
           </div>
@@ -654,7 +656,7 @@ function App() {
           <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>
 
           <hr></hr>
-          <h1><u>Show One Product by ID:</u></h1>
+          <h1><u>Find Product by ID:</u></h1>
           <input type='text' id='message' name='message' placeholder='id' className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
           {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
           <hr></hr>
@@ -713,66 +715,6 @@ function App() {
           </form>
         </div>}
 
-        {menu === 4 && <div>
-          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Delete One Product:</u></h1>
-
-          <div style={{ width: `286px`, marginLeft: `41vw` }}>
-            <div>
-              <div className='row flex-nowrap'>
-                <div className='col'>
-                  <button className='btn btn-secondary' onClick={() => getOneByOneProductPrev()}>Prev.</button>
-                </div>
-                <div className='col'>
-                  <button className='btn btn-secondary' onClick={() => getOneByOneProductNext()}>Next</button>
-                </div>
-                <div className='col'>
-                  <button className='btn btn-success' onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
-                </div>
-              </div>
-            </div>
-            <div key={product[index]._id}>
-              <div className='card border border-dark' style={{ width: `18rem` }}>
-                <img src={product[index].image} width={20} alt={product[index].title} className='card-img-top' />
-                <div className='card-body border border-dark' style={{ background: `lightgray` }}>
-                  <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index].title}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index].category}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index].price}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index].rating.count}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>}
-
-        {menu === 3 && <div>
-          <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update One Products's Price:</u></h1>
-          <div style={{ width: `286px`, marginLeft: `41vw` }}>
-            <div>
-              <div className='row flex-nowrap'>
-                <div className='col'>
-                  <button className='btn btn-secondary' onClick={() => getOneByOneProductPrevU()}>Prev.</button>
-                </div>
-                <div className='col'>
-                  <button className='btn btn-secondary' onClick={() => getOneByOneProductNextU()}>Next</button>
-                </div>
-              </div>
-            </div>
-            <input style={{ maxWidth: `50%` }} type='number' placeholder='New Price' name='updated_price' value={addNewPrice} onChange={handleUpdateChange} />
-            <button className='btn btn-success m-2' onClick={() => updateOneProduct(product[index2]._id, addNewPrice)}>Update Price</button>
-            <div key={product[index2]._id}>
-              <div className='card border border-dark' style={{ width: `18rem` }}>
-                <img src={product[index2].image} width={20} alt={product[index2].title} className='card-img-top' />
-                <div className='card-body border border-dark' style={{ background: `lightgray` }}>
-                  <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {product[index2].title}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Category:</u></span> {product[index2].category}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {product[index2].price}</p>
-                  <p className='card-text'><span className='fw-bold'><u>Rate:</u></span> {product[index2].rating.rate} <span className='fw-bold'><u>Count:</u></span> {product[index2].rating.count}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>}
-
         {menu === 5 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>About & Credits</u></h1>
           <div className='text-center'>
@@ -781,11 +723,11 @@ function App() {
             <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href='mailto:asand@iastate.edu'>asand@iastate.edu</a>)</p>
             <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
             <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
-            <p><span className='fw-bold'>Date:</span> 30 Apr. 2023 </p>
-            <p style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>This basic website was created for assignment #3 for Iowa State University's SE/ComS 319 course in the Spring 2023 semester, exclusively for educational purposes.
-              The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Usrs can use the website to create,
-              read, update, and delete data from the database, which stores information on various fictional products. Furthermore, this assignment uses
-              images from the FakeStoreAPI and styling from Bootstrap, the latter of which is &copy; Bootstrap.
+            <p><span className='fw-bold'>Date:</span> 6 May 2023 </p>
+            <p style={{ maxWidth: `50vw`, marginLeft: `25vw` }}>This basic website was created for the final project's Phase 2 Assignment for Iowa State University's SE/ComS 319 course
+              in the Spring 2023 semester, exclusively for educational purposes. The project utilizes MongoDB, Express, React, and NodeJS to create a simple website that can interface with
+              a locally-run database. Users can use the website to create, read, update, and delete data from the database, which stores information on various fictional products and orders.
+              Furthermore, this assignment uses styling from Bootstrap, which is &copy; Bootstrap.
             </p>
           </div>
         </div>}
@@ -1015,6 +957,14 @@ function App() {
             </div>
           </div>
         </div>
+        {menu === 9 && <div>
+          <div>
+            <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Manage Orders:</u></h1>
+            <button className='btn btn-success btn-lg' onClick={() => getAllOrders()}>Refresh Orders</button>
+            <hr></hr>
+            <div><span className='fs-2'>Orders:</span><span className='row row-cols-auto'>{showAllOrders}</span></div>
+          </div>
+        </div>}
       </div>
     </div>
   );

@@ -33,6 +33,13 @@ app.get("/", async (req, resp) => {
     resp.send(allProducts);
 });
 
+app.get("/getOrders", async (req, resp) => {
+    const query = {};
+    const allOrders = await Order.find(query);
+    console.log(allOrders);
+    resp.send(allOrders);
+});
+
 app.get("/:id", async (req, resp) => {
     const id = req.params.id;
     const query = { _id: id };
@@ -74,11 +81,10 @@ app.delete("/delete", async (req, res) => {
     console.log("Delete :", req.body);
     try {
         const query = { _id: req.body._id };
-        await Product.deleteOne(query);
+        await Order.deleteOne(query);
         const messageResponse = {
-            message: `Product ${req.body._id} deleted correctly`,
+            message: `Order ${req.body._id} deleted correctly`,
         };
-        res.send(JSON.stringify(messageResponse));
     } catch (err) {
         console.log("Error while deleting :" + p_id + " " + err);
     }
