@@ -24,5 +24,19 @@ const ReactFormDataSchema = new mongoose.Schema({
     { collection: "games" }
 )
 
+const ReactOrderDataSchema = new mongoose.Schema({
+    name: { type: String },
+    email: { type: String },
+    card: { type: String },
+    city: { type: String },
+    address: { type: String },
+    secondary_address: { type: String },
+    zip: { type: String },
+    state: { type: String }
+},
+    { collection: "orders" }
+)
+
 const Product = mongoose.model('Product', ReactFormDataSchema)
-module.exports = Product
+const Order = mongoose.model('Order', ReactOrderDataSchema)
+module.exports = {Product: Product, Order: Order}

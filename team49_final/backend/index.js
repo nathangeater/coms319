@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-const Product = require('./dataSchema.js');
+const {Product} = require('./dataSchema.js');
+const {Order} = require('./dataSchema.js');
 
 app.use(express.json());
 app.use(cors());
@@ -96,5 +97,37 @@ app.put("/update", async (req, res) => {
         };
     } catch (err) {
         console.log("Error while updating :" + p_id + " " + err);
+    }
+});
+
+app.post("/order", async (req, res) => {
+    console.log(req.body);
+    const pname = req.body.Name;
+    const pemail = req.body.Email;
+    const pcard = req.body.Card;
+    const pcity = req.body.City;
+    const paddress = req.body.Address;
+    const psecondary_address = req.body.Secondary_Address;
+    const pzip = req.body.Zip;
+    const pstate = req.body.State;
+    const orderData = new Order({
+        platforms: pname,
+        name: pname,
+        email: pemail,
+        card: pcard,
+        city: pcity,
+        address: paddress,
+        secondary_address: psecondary_address,
+        zip: pzip,
+        state: pstate,
+    });
+    console.log(orderData);
+    try {
+        // await formData.save();
+        await Order.create(orderData);
+        const messageResponse = { message: `Order ${orderData._id} added correctly` };
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while adding a new order:" + err);
     }
 });

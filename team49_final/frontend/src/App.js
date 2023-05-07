@@ -21,8 +21,17 @@ function App() {
 
   let showCart = false;
 
+  const [nameState, setNameState] = useState('');
+  const [emailState, setEmailState] = useState('');
+  const [cardState, setCardState] = useState('');
+  const [cityState, setCityState] = useState('');
+  const [addressState, setAddressState] = useState('');
+  const [address2State, setAddress2State] = useState('');
+  const [zipState, setZipState] = useState('');
+  const [stateState, setStateState] = useState('');
+
   //Declaring and Initialising the order object for submitting the order
-  var order = {
+  const order = {
     Name: '',
     Email: '',
     Card: '',
@@ -432,7 +441,8 @@ function App() {
     }
     else {
       email.setAttribute("class", "form-control is-valid");
-      order.Email = email.value
+      order.Email = email.value;
+      setEmailState(email.value)
     }
     //Check Name
     if (name.value.length === 0) {
@@ -441,7 +451,8 @@ function App() {
     }
     else {
       name.setAttribute("class", "form-control is-valid");
-      order.Name = name.value
+      order.Name = name.value;
+      setNameState(name.value);
     }
     //Check Credit Card
     if (!card.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
@@ -450,7 +461,8 @@ function App() {
     }
     else {
       card.setAttribute("class", "form-control is-valid");
-      order.Card = card.value
+      order.Card = card.value;
+      setCardState(card.value);
     }
     //Check City
     if (city.value.length === 0) {
@@ -459,7 +471,8 @@ function App() {
     }
     else {
       city.setAttribute("class", "form-control is-valid");
-      order.City = city.value
+      order.City = city.value;
+      setCityState(city.value);
     }
     //Check Address
     if (address.value.length === 0) {
@@ -468,12 +481,14 @@ function App() {
     }
     else {
       address.setAttribute("class", "form-control is-valid");
-      order.Address = address.value
+      order.Address = address.value;
+      setAddressState(address.value);
     }
     //Zip Code
     if (zip.value.length === 5 && !isNaN(zip.value)) {
       zip.setAttribute("class", "form-control is-valid");
-      order.Zip = zip.value
+      order.Zip = zip.value;
+      setZipState(zip.value);
     }
     else {
       zip.setAttribute("class", "form-control is-invalid")
@@ -486,11 +501,13 @@ function App() {
     }
     else {
       state.setAttribute("class", "form-control is-valid");
-      order.State = state.value
+      order.State = state.value;
+      setStateState(state.value);
     }
     //Checking Secondary Address
     if (address2.value.length > 0) {
-      order.Secondary_Address = address2.value
+      order.Secondary_Address = address2.value;
+      setAddress2State(address2.value);
     }
 
     if (val) {
@@ -581,6 +598,34 @@ function App() {
     showCart = false;
   }
 
+  function handleOrderSubmission(){
+    order.Name = nameState;
+    order.Email =emailState;
+    order.Card = cardState;
+    order.City = cityState;
+    order.Address = addressState;
+    order.Secondary_Address = address2State;
+    order.Zip = zipState;
+    order.State = stateState;
+    console.log(order);
+    fetch('http://localhost:4000/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Post a new order completed');
+        console.log(data);
+        if (data) {
+          //const keys = Object.keys(data);
+          const value = Object.values(data);
+          alert(value);
+          window.location.reload();
+        }
+      });
+  }
+
   return (
     <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
       <div style={{ textAlign: 'center' }}>
@@ -593,7 +638,7 @@ function App() {
                 <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(2); setShowConfirm(false)}}>Catalog</button>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(3)}>Update</button> */}
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(4)}>Delete</button> */}
-                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); setShowConfirm(false)}}>View Cart</button>
+                <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(6); cartConfig(); setShowConfirm(false)}}>View Cart & Checkout</button>
                 <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => {setMenu(5); setShowConfirm(false)}}>About & Credits</button>
               </div>
             </div>
@@ -966,7 +1011,7 @@ function App() {
               <ul className="list-group list-group-flush">
 
               </ul>
-              <button className="btn btn-secondary" onClick={window.location.reload.bind(window.location)}>Confirm and Place Order</button>
+              <button className="btn btn-secondary" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
             </div>
           </div>
         </div>
