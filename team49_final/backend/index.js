@@ -106,6 +106,21 @@ app.put("/update", async (req, res) => {
     }
 });
 
+app.put("/updateOrder", async (req, res) => {
+    console.log("Update :", req.body);
+
+    try{
+        const filter = { _id: `${req.body._id}` };
+        // const updateDoc = { $set: { inCart: `${req.body}`} };
+        await Order.replaceOne(filter, req.body, null);
+        const messageResponse = {
+            message: `Product ${req.body_id} updated correctly`
+        };
+    } catch (err) {
+        console.log("Error while updating :" + req.body._id + " " + err);
+    }
+});
+
 app.post("/order", async (req, res) => {
     console.log(req.body);
     const pname = req.body.Name;
