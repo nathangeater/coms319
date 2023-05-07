@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-const Product = require('./dataSchema.js');
+const {Product} = require('./dataSchema.js');
+const {Order} = require('./dataSchema.js');
 
 app.use(express.json());
 app.use(cors());
@@ -10,9 +11,9 @@ app.use(cors());
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
 
-mongoose.connect("mongodb://127.0.0.1:27017/reactdata",
+mongoose.connect("mongodb://127.0.0.1:27017/finaldata",
     {
-        dbName: "reactdata",
+        dbName: "finaldata",
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }
@@ -30,6 +31,13 @@ app.get("/", async (req, resp) => {
     const allProducts = await Product.find(query);
     console.log(allProducts);
     resp.send(allProducts);
+});
+
+app.get("/getOrders", async (req, resp) => {
+    const query = {};
+    const allOrders = await Order.find(query);
+    console.log(allOrders);
+    resp.send(allOrders);
 });
 
 app.get("/:id", async (req, resp) => {
@@ -73,11 +81,10 @@ app.delete("/delete", async (req, res) => {
     console.log("Delete :", req.body);
     try {
         const query = { _id: req.body._id };
-        await Product.deleteOne(query);
+        await Order.deleteOne(query);
         const messageResponse = {
-            message: `Product ${req.body._id} deleted correctly`,
+            message: `Order ${req.body._id} deleted correctly`,
         };
-        res.send(JSON.stringify(messageResponse));
     } catch (err) {
         console.log("Error while deleting :" + p_id + " " + err);
     }
@@ -85,16 +92,63 @@ app.delete("/delete", async (req, res) => {
 
 app.put("/update", async (req, res) => {
     console.log("Update :", req.body._id);
-    console.log("New Price :", req.body.price);
+    console.log("Value to be added :", req.body.inCart);
 
     try{
         const filter = { _id: `${req.body._id}` };
-        const updateDoc = { $set: { price: `${req.body.price}`} };
+        const updateDoc = { $set: { inCart: `${req.body.inCart}`} };
         await Product.updateOne(filter, updateDoc, null);
         const messageResponse = {
             message: `Product ${req.body_id} updated correctly`
         };
     } catch (err) {
         console.log("Error while updating :" + p_id + " " + err);
+    }
+});
+
+app.put("/updateOrder", async (req, res) => {
+    console.log("Update :", req.body);
+
+    try{
+        const filter = { _id: `${req.body._id}` };
+        // const updateDoc = { $set: { inCart: `${req.body}`} };
+        await Order.replaceOne(filter, req.body, null);
+        const messageResponse = {
+            message: `Product ${req.body_id} updated correctly`
+        };
+    } catch (err) {
+        console.log("Error while updating :" + req.body._id + " " + err);
+    }
+});
+
+app.post("/order", async (req, res) => {
+    console.log(req.body);
+    const pname = req.body.Name;
+    const pemail = req.body.Email;
+    const pcard = req.body.Card;
+    const pcity = req.body.City;
+    const paddress = req.body.Address;
+    const psecondary_address = req.body.Secondary_Address;
+    const pzip = req.body.Zip;
+    const pstate = req.body.State;
+    const orderData = new Order({
+        platforms: pname,
+        name: pname,
+        email: pemail,
+        card: pcard,
+        city: pcity,
+        address: paddress,
+        secondary_address: psecondary_address,
+        zip: pzip,
+        state: pstate,
+    });
+    console.log(orderData);
+    try {
+        // await formData.save();
+        await Order.create(orderData);
+        const messageResponse = { message: `Order ${orderData._id} added correctly` };
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while adding a new order:" + err);
     }
 });
