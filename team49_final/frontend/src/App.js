@@ -632,10 +632,10 @@ return (
           <p><span className='fw-bold'>Member #1:</span> Nathan Geater (<a href='mailto:nkgeater@iastate.edu'>nkgeater@iastate.edu</a>)</p>
           <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href='mailto:asand@iastate.edu'>asand@iastate.edu</a>)</p>
           <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
-          <p><span className='fw-bold'>Instructor:</span> Dr. Aldaco </p>
+          <p><span className='fw-bold'>Instructor:</span> Dr. Abraham N. Aldaco Gastelum </p>
           <p><span className='fw-bold'>Date:</span> 6 May 2023 </p>
           <div style={{ width: '50%', marginLeft: '25%' }}>
-            <p style={{ textAlign: 'center' }}>This basic website was created for the final project's Phase 2 Assignment for Iowa State University's SE/ComS 319 course
+            <p style={{ textAlign: 'center' }}>This basic website was created for the final project's Phase 2 Assignment for Iowa State University's SE/ComS 319 Construction of User Interfaces course
               in the Spring 2023 semester, exclusively for educational purposes. <b>This website does NOT actually sell any products!</b> The project utilizes MongoDB, 
               Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Users can use the website to create, read, update, 
               and delete data from the database, which stores information on various fictional products and orders. Furthermore, this assignment uses styling from 
@@ -875,7 +875,7 @@ return (
       {/* Checkout Confirmation Page */}
 
       <div id='top_confirm' style={{ display: showConfirm ? 'contents' : 'none' }}>
-        <div>
+        <div style={{ width: '50%', marginLeft: '25%' }}>
           <b>
             {/* Return Button */}
             <button className="bg-lime-600 rounded-full px-3 py-1
@@ -883,7 +883,7 @@ return (
           </b>
 
 
-          <div className="card" style={{ width: '18rem' }}>
+          <div className="card">
             <div className="card-body">
               <h5 className="card-title">Order summary</h5>
               <p className="card-text">Here is a summary of your order.</p>
