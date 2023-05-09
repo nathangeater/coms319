@@ -338,7 +338,7 @@ const listItems = product.map((el) => (
 const confirmItems = product.map((el) => (
   // PRODUCT
   <div key={el._id}>
-    {cart[el._id] > 0 && <div className="row border-top border-bottom">
+    {cart[el._id - 1] > 0 && <div className="row border-top border-bottom">
       <div className="row main align-items-center">
         <div className="col-2">
           <img className="img-fluid" src={el.image} alt={el.title} />
@@ -348,7 +348,7 @@ const confirmItems = product.map((el) => (
           <div className="row text-muted">{el.genres}</div>
         </div>
         <div className="col">
-          ${el.price} <span className="close">&#10005;</span>{el.inCart}
+          ${el.price} <span className="close">&#10005;</span>{cart[el._id - 1]}
         </div>
       </div>
     </div>}
@@ -854,10 +854,10 @@ return (
           </b>
 
 
-          <div className="card">
+          <div className="card shadow-lg p-3">
             <div className="card-body">
               <h5 className="card-title">Order summary</h5>
-              <p className="card-text">Here is a summary of your order.</p>
+              <p className="card-text">Here is a summary of your order:</p>
             </div>
             <div>{confirmItems}</div>
             <div className="float-end">
@@ -874,7 +874,7 @@ return (
                 {/* <span className="lead fw-normal">${Math.round((cartTotal + cartTotal * 0.07) * 100) / 100}</span> */}
               </p>
             </div>
-            <ul className="list-group list-group-flush">
+            <ul className="list-group list-group-flush" style={{listStyleType: 'none'}}>
 
             </ul>
             <button className="btn btn-outline-success" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
