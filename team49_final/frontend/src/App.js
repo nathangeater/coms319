@@ -24,6 +24,8 @@ function App() {
   const [zipState, setZipState] = useState('');
   const [stateState, setStateState] = useState('');
 
+  const [cart, setCart] = useState([0, 0, 0, 0, 0, 0, 0]);
+
   const [updateOrder, setUpdateOrder] = useState({
     name: "",
     email: "",
@@ -187,54 +189,24 @@ function deleteOneOrder(deleteid) {
 
 //Adds the product to the cart
 const addToCart = (addID, addValue) => {
-  const newVal = +product.find(x => x._id === addID).inCart + +addValue;
-
-  console.log(newVal);
-
-  fetch('http://localhost:4000/update/', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ _id: addID, inCart: newVal }),
-  })
-    .then((response) => console.log(response))
-    .then((data) => {
-      console.log("Updating the product's quantity completed : ", newVal);
-      console.log(data);
-      if (data) {
-        //const keys = Object.keys(data);
-        const value = Object.values(data);
-        alert(value);
-      }
-    });
-  getAllProducts();
-  console.log("End of Add To Cart");
-  console.log(product);
+  const newCart = cart.slice();
+  newCart[addID - 1] = +cart[(addID - 1)] + +addValue;
+  setCart(newCart);
+  console.log("This is the new cart: " + cart);
 };
 
 //Removes the product from the cart
 const removeFromCart = (remID, remValue) => {
-  let newVal = +product.find(x => x._id === remID).inCart - +remValue;
+  const newCart = cart.slice();
+  let newVal = +cart[(remID - 1)] - +remValue;
 
   if (newVal < 0) {
     newVal = 0;
   }
 
-  fetch('http://localhost:4000/update/', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ _id: remID, inCart: newVal }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Updating the product's quantity completed : ", newVal);
-      console.log(data);
-      if (data) {
-        //const keys = Object.keys(data);
-        const value = Object.values(data);
-        alert(value);
-      }
-    });
-  getAllProducts();
+  newCart[remID - 1] = newVal;
+  setCart(newCart);
+  console.log("This is the new cart: " + cart);
 }
 
 const showAllItems = product.map((el) => (
@@ -342,7 +314,7 @@ const showDetailedPage = oneProduct.map((el) => (
 const listItems = product.map((el) => (
   // PRODUCT
   <div key={el._id}>
-    {el.inCart > 0 && <div className="row border-top border-bottom">
+    {cart[el._id - 1] > 0 && <div className="row border-top border-bottom">
       <div className="row main align-items-center">
         <div className="col-2">
           <img className="img-fluid" src={el.image} alt={el.title} />
@@ -356,7 +328,7 @@ const listItems = product.map((el) => (
           <button className="btn fw-bold btn-outline-secondary" type="button" onClick={() => addToCart(el._id, 1)}> + </button>
         </div>
         <div className="col">
-          ${el.price} <span className="close">&#10005;</span>{el.inCart}
+          ${el.price} <span className="close">&#10005;</span>{cart[el._id - 1]}
         </div>
       </div>
     </div>}
@@ -366,7 +338,7 @@ const listItems = product.map((el) => (
 const confirmItems = product.map((el) => (
   // PRODUCT
   <div key={el._id}>
-    {el.inCart > 0 && <div className="row border-top border-bottom">
+    {cart[el._id] > 0 && <div className="row border-top border-bottom">
       <div className="row main align-items-center">
         <div className="col-2">
           <img className="img-fluid" src={el.image} alt={el.title} />
@@ -872,14 +844,13 @@ return (
       {menu === 7 && <div>
         <div>{showDetailedPage}</div>
       </div>}
-      {/* Checkout Confirmation Page */}
 
+      {/* Checkout Confirmation Page */}
       <div id='top_confirm' style={{ display: showConfirm ? 'contents' : 'none' }}>
         <div style={{ width: '50%', marginLeft: '25%' }}>
           <b>
             {/* Return Button */}
-            <button className="bg-lime-600 rounded-full px-3 py-1
-               text-sm font-semibold text-gray-700 mr-2 mt-2" onClick={() => handleShowHideConfirm(false)}>Return to Cart</button>
+            <button className="px-3 py-1 btn btn-secondary" onClick={() => handleShowHideConfirm(false)}>Return to Cart</button>
           </b>
 
 
@@ -906,7 +877,7 @@ return (
             <ul className="list-group list-group-flush">
 
             </ul>
-            <button className="btn btn-secondary" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
+            <button className="btn btn-outline-success" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
           </div>
         </div>
       </div>
