@@ -15,6 +15,10 @@ function App() {
 
   let showCart = false;
 
+  const [showSpinner1, setShowSpinner1] = useState(false);
+  const [showSpinner2, setShowSpinner2] = useState(false);
+  const [showSpinner3, setShowSpinner3] = useState(false);
+
   const [nameState, setNameState] = useState('');
   const [emailState, setEmailState] = useState('');
   const [cardState, setCardState] = useState('');
@@ -280,17 +284,23 @@ function App() {
   ));
 
   const showDetailedPage = oneProduct.map((el) => (
-    <div key={el._id}>
-      <table style={{ marginTop: `10px` }}>
-        <tr>
-          <td><img id='image' className='details-imgs card shadow-sm card-border' src={el.image} alt={el.title} /></td>
-          <td>
-            <h1 id='title' style={{ position: `relative`, left: `27vw`, maxWidth: `30vw` }}>{el.title}</h1>
-            <p id='description' style={{ position: `relative`, top: `1vh`, left: `30vw`, wordWrap: `break-word`, maxWidth: `25vw` }}>{el.description}</p>
-          </td>
-        </tr>
-      </table>
-      <div className='info-grid'>
+    <div key={el._id} className="p-3">
+      <div class="container text-left">
+        <div class="row">
+          <div class="col">
+            <img id='image' style={{left: '50%', maxWidth: '50%'}} className='details-imgs card shadow-lg border border-secondary border-3' src={el.image} alt={el.title} />
+          </div>
+          <div class="col">
+            <div className='m-5'>
+              <h1 id='title'>{el.title}</h1>
+            <hr style={{ height: '5px', color: 'black', backgroundColor: 'black', maxWidth: '85%'}}></hr>
+            <p id='description' style={{maxWidth: '75%'}}>{el.description}</p>
+            <button type="button" className='btn btn-success py-2 px-4 rounded' onClick={() => addToCart(el._id, 1)}> Add to Cart </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='info-grid shadow-lg'>
         <h3 className='info-grid-text'>Price</h3>
         <h3 className='info-grid-text'>${el.price}</h3>
         <h3 className='info-grid-text'>Reviews</h3>
@@ -312,8 +322,8 @@ function App() {
       </div>
       <div style={{ marginBottom: `50px`, textAlign: `center` }}>
         <h1 style={{ textAlign: `center` }}>Gameplay Images</h1>
-        <img id='image2' className='gameplay-images' src={el.image2} alt={el.title + "2"} />
-        <img id='image3' className='gameplay-images' src={el.image3} alt={el.title + "3"} />
+        <img id='image2' className='gameplay-images shadow-lg border border-secondary border-3' src={el.image2} alt={el.title + "2"} />
+        <img id='image3' className='gameplay-images shadow-lg border border-secondary border-3' src={el.image3} alt={el.title + "3"} />
       </div>
     </div>
   ));
@@ -454,6 +464,10 @@ function App() {
       setAddress2State(address2.value);
     }
 
+    if (!countCart()) {
+      val = false;
+    }
+
     if (val) {
       handleShowHideConfirm(true);
     }
@@ -528,7 +542,7 @@ function App() {
     document.getElementById('checkout-form').addEventListener('submit', event => {
       if (!validate()) {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
-        alert('<div class="alert alert-danger d-flex align-items-center">Invalid Input! See the errors below for details.</div>', 'danger')
+        alert('<div className="alert alert-danger d-flex align-items-center">Invalid Input! See the errors below for details.</div>', 'danger')
       }
       event.preventDefault();
       event.stopPropagation();
@@ -545,7 +559,7 @@ function App() {
     count += cart[5];
     count += cart[6];
 
-    return (<span>{count}</span>);
+    return (count);
   }
 
   if (menu === 6) {
@@ -583,6 +597,21 @@ function App() {
       });
   }
 
+  function showSpinner(spinnerID) {
+    if (spinnerID === 1) {
+      setShowSpinner1(true);
+      setTimeout(function () { setShowSpinner1(false) }, 1000);
+    }
+    if (spinnerID === 2) {
+      setShowSpinner2(true);
+      setTimeout(function () { setShowSpinner2(false) }, 1000);
+    }
+    if (spinnerID === 3) {
+      setShowSpinner3(true);
+      setTimeout(function () { setShowSpinner3(false) }, 1000);
+    }
+  }
+
   return (
     <div style={{ background: `linear-gradient(lightblue, lightgreen)`, minHeight: `100vh` }}>
       <div style={{ textAlign: 'center' }}>
@@ -607,7 +636,7 @@ function App() {
       <div className='m-4'>
         {menu === 2 && <div>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>View Products:</u></h1>
-          <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Refresh Products</button>
+          <button className='btn btn-success btn-lg' onClick={() => { showSpinner(1); getAllProducts(); }}>Refresh Products {showSpinner1 && <span id="spinner1" className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}</button>
           <hr></hr>
           <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>
 
@@ -680,7 +709,7 @@ function App() {
           {/* Shopping Cart Page */}
           <div id='top_cart'>
             <div>
-              <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Refresh Shopping Cart</button>
+              <button className='btn btn-success btn-lg' onClick={() => { showSpinner(2); getAllProducts(); }}>Refresh Shopping Cart {showSpinner2 && <span id="spinner2" className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}</button>
               <div className="py-1"></div>
               <div className="card shadow-lg p-2">
                 <div className="row">
@@ -896,6 +925,7 @@ function App() {
               <ul className="list-group list-group-flush mt-2 mb-2 border-0" style={{ listStyleType: 'none' }}>
 
               </ul>
+              <div className="alert alert-warning d-flex align-items-center" role="alert"><div>This will clear your cart and return you to the product catalog!</div></div>
               <button className="btn btn-outline-success shadow-sm" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
             </div>
           </div>
@@ -903,12 +933,12 @@ function App() {
         {menu === 9 && <div>
           <div>
             <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Manage Orders:</u></h1>
-            <button className='btn btn-success btn-lg' onClick={() => getAllOrders()}>Refresh Orders</button>
+            <button className='btn btn-success btn-lg' onClick={() => { showSpinner(3); getAllOrders(); }}>Refresh Orders {showSpinner3 && <span id="spinner3" className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}</button>
             <hr></hr>
             <div><span className='fs-2'>Orders:</span><span className='row row-cols-auto pb-5'>{showAllOrders}</span></div>
           </div>
         </div>}
-        {menu === 10 && <div>
+        {menu === 10 && <div className='p-3'>
           <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Update Order {updateOrder._id}:</u></h1>
           <form style={{ maxWidth: `50%`, marginLeft: `25%` }}>
             <div className='row mb-3'>
