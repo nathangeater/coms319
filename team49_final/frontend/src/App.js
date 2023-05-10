@@ -219,7 +219,7 @@ function App() {
 
   const showAllItems = product.map((el) => (
     <div key={el._id} className='col mt-3'>
-      <div className='card border border-dark' style={{ width: `18rem` }}>
+      <div className='card border border-dark shadow-lg' style={{ width: `18rem` }}>
         <img src={el.image} width={20} alt={el.title} className='card-img-top' />
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
           <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
@@ -227,8 +227,8 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> ${el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
           <p className='card-text'><span className='fw-bold'><u>Recommended By:</u></span> {el.recommender}</p>
-          <div className='add-buttons'>
-            <input id={el._id} type="number" className="form-control" defaultValue={1} placeholder="Quantity" />
+          <input id={el._id} type="number" className="form-control mb-2" defaultValue={1} placeholder="Quantity" />
+          <div className='add-buttons pb-2'>
             <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => removeFromCart(el._id, document.getElementById(el._id).value)} > - </button>
             <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => addToCart(el._id, document.getElementById(el._id).value)}> + </button>
           </div>
@@ -240,7 +240,7 @@ function App() {
 
   const showAllOrders = placedOrders.map((el) => (
     <div key={el._id} className='col mt-3'>
-      <div className='card border border-dark' style={{ width: `18rem` }}>
+      <div className='card border border-dark shadow-lg' style={{ width: `18rem` }}>
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
           <p className='card-text'><span className='fw-bold'><u>ID:</u></span> {el._id}</p>
           <p className='card-text'><span className='fw-bold'><u>Name:</u></span> {el.name}</p>
@@ -260,7 +260,7 @@ function App() {
 
   const showOneItem = oneProduct.map((el) => (
     <div key={el._id}>
-      <div className='card border border-dark' style={{ width: `18rem` }}>
+      <div className='card border border-dark shadow-lg' style={{ width: `18rem` }}>
         <img src={el.image} width={20} alt={el.title} className='card-img-top' />
         <div className='card-body border border-dark' style={{ background: `lightgray` }}>
           <p className='card-text'><span className='fw-bold'><u>Title:</u></span> {el.title}</p>
@@ -268,8 +268,8 @@ function App() {
           <p className='card-text'><span className='fw-bold'><u>Price:</u></span> {el.price}</p>
           <p className='card-text'><span className='fw-bold'><u>Rating:</u></span> {el.rating.rate} ({el.rating.count})</p>
           <p className='card-text'><span className='fw-bold'><u>Recommended By:</u></span> {el.recommender}</p>
-          <div className='add-buttons'>
-            <input id={el._id} type="number" className="form-control" defaultValue={1} placeholder="Quantity" />
+          <input id={el._id} type="number" className="form-control mb-2" defaultValue={1} placeholder="Quantity" />
+          <div className='add-buttons pb-2'>
             <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => removeFromCart(el._id, document.getElementById(el._id).value)} > - </button>
             <button type="button" className='bg-lime-500 hover:bg-lime-700 fw-bold py-2 px-4 rounded' onClick={() => addToCart(el._id, document.getElementById(el._id).value)}> + </button>
           </div>
@@ -325,10 +325,10 @@ function App() {
       {cart[el._id - 1] > 0 && <div className="row border-top border-bottom">
         <div className="row main align-items-center">
           <div className="col-2">
-            <img className="img-fluid" src={el.image} alt={el.title} />
+            <img className="img-fluid border border-secondary border-2 shadow-sm" src={el.image} alt={el.title} />
           </div>
           <div className="col">
-            <div className="row">{el.title}</div>
+            <div className="row fw-bold">{el.title}</div>
             <div className="row text-muted">{el.genres}</div>
           </div>
           <div className="col">
@@ -336,7 +336,7 @@ function App() {
             <button className="btn fw-bold btn-outline-secondary" type="button" onClick={() => addToCart(el._id, 1)}> + </button>
           </div>
           <div className="col">
-            ${el.price} <span className="close">&#10005;</span>{cart[el._id - 1]}
+            ${el.price} <span className="close">&#10005;</span> {cart[el._id - 1]}
           </div>
         </div>
       </div>}
@@ -356,7 +356,7 @@ function App() {
             <div className="row text-muted">{el.genres}</div>
           </div>
           <div className="col">
-            ${el.price} <span className="close">&#10005;</span>{cart[el._id - 1]}
+            ${el.price} <span className="close">&#10005;</span> {cart[el._id - 1]}
           </div>
         </div>
       </div>}
@@ -528,7 +528,7 @@ function App() {
     document.getElementById('checkout-form').addEventListener('submit', event => {
       if (!validate()) {
         document.getElementById('liveAlertPlaceholder').innerHTML = ''
-        alert('<i className="bi-exclamation-circle"></i> Invalid Input! See the errors below for details.', 'danger')
+        alert('<div class="alert alert-danger d-flex align-items-center">Invalid Input! See the errors below for details.</div>', 'danger')
       }
       event.preventDefault();
       event.stopPropagation();
@@ -536,16 +536,16 @@ function App() {
   }
 
   function countCart() {
-      let count = 0;
-      count += cart[0];
-      count += cart[1];
-      count += cart[2];
-      count += cart[3];
-      count += cart[4];
-      count += cart[5];
-      count += cart[6];
+    let count = 0;
+    count += cart[0];
+    count += cart[1];
+    count += cart[2];
+    count += cart[3];
+    count += cart[4];
+    count += cart[5];
+    count += cart[6];
 
-      return (<h1>{count}</h1>);
+    return (<span>{count}</span>);
   }
 
   if (menu === 6) {
@@ -589,7 +589,7 @@ function App() {
         <h1>SE/ComS 319 Final Project: Fake Video Game Store</h1>
         <nav className='navbar navbar-expand-lg bg-body-tertiary border border-dark' style={{ background: `radial-gradient(#cfcfcf, #a2b0a3)` }}>
           <div className='container-fluid'>
-            <div className='collapse navbar-collapse justify-content-center'>
+            <div className='navbar-collapse justify-content-center'>
               <div className='btn-group-lg' role='group'>
                 {/* <button className='btn btn-success' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => setMenu(1)}>Create</button> */}
                 <button className='btn btn-success' aria-current='page' style={{ marginLeft: `15px`, marginRight: `15px` }} onClick={() => { setMenu(2); setShowConfirm(false) }}>Catalog</button>
@@ -612,9 +612,9 @@ function App() {
           <div><span className='fs-2'>Products:</span><span className='row row-cols-auto'>{showAllItems}</span></div>
 
           <hr></hr>
-          <h1><u>Find Product by ID:</u></h1>
+          <h1 className='text-success fw-bold'>Find Product by ID:</h1>
           <input type='text' id='message' name='message' placeholder='id' className='form-control form-control-lg' style={{ maxWidth: `10vw` }} onChange={(e) => getOneProduct(e.target.value)} />
-          {viewer2 && <div><span className='fs-2'>Product:</span> {showOneItem}</div>}
+          {viewer2 && <div className='pb-5'><span className='fs-2'>Product:</span> {showOneItem}</div>}
           <hr></hr>
         </div>}
 
@@ -636,7 +636,7 @@ function App() {
               </p>
             </div>
             <h1 style={{ fontFamily: 'Times New Roman', lineHeight: 3, textAlign: 'center' }}>Sources Cited</h1>
-            <div id="sources-text">
+            <div id="sources-text" className='pb-5'>
               <p>Bench, Evan. “portal 2.” <i>flickr</i>, 24 Apr. 2011, www.flickr.com/photos/austinevan/5650008236. Accessed
                 12 Mar. 2023.</p>
               <p>Bennett, Reece. “Terraria - Improving The House.” <i>flickr</i>, 19 May 2011,
@@ -682,7 +682,7 @@ function App() {
             <div>
               <button className='btn btn-success btn-lg' onClick={() => getAllProducts()}>Refresh Shopping Cart</button>
               <div className="py-1"></div>
-              <div className="card">
+              <div className="card shadow-lg p-2">
                 <div className="row">
                   {/* HERE, IT IS THE SHOPING CART */}
                   <div className="col-md-8 cart">
@@ -694,8 +694,7 @@ function App() {
                           </h4>
                         </div>
                         <div className="col align-self-center text-right text-muted">
-                          Products selected
-                          <div>{countCart()}</div>
+                          Products selected: {countCart()}
                         </div>
                       </div>
                     </div>
@@ -721,9 +720,9 @@ function App() {
             <div className="container">
               <div className="row">
                 <div className="col-2"></div>
-                <div className="col-8">
+                <div className="col-8 mt-5 mb-5">
                   <h1>Order Checkout Form</h1>
-                  <hr style={{height: '5px', color: 'black', backgroundColor: 'black'}}></hr>
+                  <hr style={{ height: '5px', color: 'black', backgroundColor: 'black' }}></hr>
                   <div id="liveAlertPlaceholder"></div>
                   <form className="row g-3" id="checkout-form">
 
@@ -869,11 +868,11 @@ function App() {
 
         {/* Checkout Confirmation Page */}
         <div id='top_confirm' style={{ display: showConfirm ? 'contents' : 'none' }}>
-          <div style={{ width: '50%', marginLeft: '25%' }}>
+          <div style={{ width: '50%', marginLeft: '25%' }} className="pb-4">
             <div className="card shadow-lg p-3">
               <b>
                 {/* Return Button */}
-                <button className="px-3 py-1 btn btn-secondary" onClick={() => handleShowHideConfirm(false)}>Return to Cart</button>
+                <button className="px-3 py-1 btn btn-secondary pt-0 shadow-sm" onClick={() => handleShowHideConfirm(false)}><span style={{ fontSize: '15pt' }}>&#x2190;</span> Return to Cart</button>
               </b>
               <div className="card-body border mt-1 mb-2 border-black border-2">
                 <h5 className="card-title">Order summary</h5>
@@ -897,7 +896,7 @@ function App() {
               <ul className="list-group list-group-flush mt-2 mb-2 border-0" style={{ listStyleType: 'none' }}>
 
               </ul>
-              <button className="btn btn-outline-success" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
+              <button className="btn btn-outline-success shadow-sm" onClick={() => handleOrderSubmission()}>Confirm and Place Order</button>
             </div>
           </div>
         </div>
@@ -906,7 +905,7 @@ function App() {
             <h1 className='text-center fs-1 fw-bold text-success fw-underline'><u>Manage Orders:</u></h1>
             <button className='btn btn-success btn-lg' onClick={() => getAllOrders()}>Refresh Orders</button>
             <hr></hr>
-            <div><span className='fs-2'>Orders:</span><span className='row row-cols-auto'>{showAllOrders}</span></div>
+            <div><span className='fs-2'>Orders:</span><span className='row row-cols-auto pb-5'>{showAllOrders}</span></div>
           </div>
         </div>}
         {menu === 10 && <div>
