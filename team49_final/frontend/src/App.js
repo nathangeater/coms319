@@ -655,9 +655,9 @@ function App() {
             <p><span className='fw-bold'>Member #2:</span> Andrew Sand (<a href='mailto:asand@iastate.edu'>asand@iastate.edu</a>)</p>
             <p><span className='fw-bold'>Course:</span> SE/ComS 319</p>
             <p><span className='fw-bold'>Instructor:</span> Dr. Abraham N. Aldaco Gastelum </p>
-            <p><span className='fw-bold'>Date:</span> 6 May 2023 </p>
+            <p><span className='fw-bold'>Date:</span> 10 May 2023 </p>
             <div style={{ width: '50%', marginLeft: '25%' }}>
-              <p style={{ textAlign: 'center' }}>This basic website was created for the final project's Phase 2 Assignment for Iowa State University's SE/ComS 319 Construction of User Interfaces course
+              <p style={{ textAlign: 'center' }}>This basic website was created for the final project for Iowa State University's SE/ComS 319 Construction of User Interfaces course
                 in the Spring 2023 semester, exclusively for educational purposes. <b>This website does NOT actually sell any products!</b> The project utilizes MongoDB,
                 Express, React, and NodeJS to create a simple website that can interface with a locally-run database. Users can use the website to create, read, update,
                 and delete data from the database, which stores information on various fictional products and orders. Furthermore, this assignment uses styling from
